@@ -1,31 +1,31 @@
 const {DataTypes}= require("sequelize")
 
-
-module.exports =(sequelize)=>{
+module.exports=(sequelize)=>{
     sequelize.define(
-        "Catering",
+        "Usuario",
         {
             id:{
                 type:DataTypes.INTEGER,
-                primaryKey: true,
                 allowNull: false,
-                autoIncrement: true
+                autoIncremet: true,
+                primaryKey:true
             },
             name:{
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            description:{
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            image:{
                 type:DataTypes.STRING,
-                allowNull: false
+                allowNull:false
+            },
+            mail:{
+                type:DataTypes.STRING,
+                allowNull:false
+            },
+            password:{
+                type:DataTypes.STRING,
+                allowNull:false
             }
         },
         {
             timestamps: false,
         }
     )
+
 }

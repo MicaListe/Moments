@@ -28,19 +28,19 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Evento, Lugar, Catering, Decoracion } = sequelize.models;
+const { Evento, Lugar, Catering, Decoracion, Usuario } = sequelize.models;
 
 Evento.belongsToMany(Lugar,{through:'evento_lugar'}),
 Lugar.belongsToMany(Evento,{through:'evento_lugar'})
 
-Evento.belongsToMany(Catering,{through:"evento_catering"})
-Catering.belongsToMany(Evento,{through:"evento_catering"})
+// Evento.belongsToMany(Catering,{through:"evento_catering"})
+// Catering.belongsToMany(Evento,{through:"evento_catering"})
 
-Lugar.belongsToMany(Decoracion,{through:"lugar_decoracion"})
-Decoracion.belongsToMany(Lugar,{through:"lugar_decoracion"})
+// Lugar.belongsToMany(Decoracion,{through:"lugar_decoracion"})
+// Decoracion.belongsToMany(Lugar,{through:"lugar_decoracion"})
 
 
 module.exports = {
-  ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+  Catering, Decoracion, Lugar, Evento, Usuario, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
 };

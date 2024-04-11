@@ -1,10 +1,13 @@
 const {Router}= require("express")
-const createEvent=require("../controllers/events")
+const events=require("./events.routes")
+
 
 const router= Router()
 
+
+router.use("/events", events)
 //Creacion de datos
-router.post("/create_events", createEvent)
+// router.post("/create_events", createEvent)
 // router.post("/create_catering")
 // router.post("/create_decoration")
 // router.post("/create_places")
@@ -28,3 +31,5 @@ router.post("/create_events", createEvent)
 
 // //Crear usuario
 // router.post("/register")
+
+module.exports= router

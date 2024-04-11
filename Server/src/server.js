@@ -1,5 +1,5 @@
 const express = require("express");
-const routes = require("./routes");
+const routes = require("./routes/index");
 const morgan = require("morgan");
 const cors = require("cors");
 
@@ -9,7 +9,7 @@ server.use(morgan("dev"));
 server.use(express.json());
 server.use(cors());
 
-server.use(routes);
+server.use("/", routes);
 
 server.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
