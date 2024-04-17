@@ -13,14 +13,14 @@ const cateringControllers={
     },
     createCatering: async(req, res) => {
         try{
-            const {name, descripcion, image}= req.body
-             if(!name, !descripcion, !image){
+            const {name, description, image}= req.body
+             if(!name, !description, !image){
                 return res.status(400).json({message: "Faltan datos"})
              }
 
              const newCatering=await Catering.create({
                 name,
-                descripcion,
+                description,
                 image
              })
              res.status(201).json(newCatering)
@@ -49,12 +49,12 @@ const cateringControllers={
     },
     updateCatering: async (req, res) => {
         try{
-            const {id}=req.params.id
-
+            const id=req.params.id
+            console.log(id,"id")
             const buscar= await Catering.findByPk(id)
 
             if(!buscar){
-                res.status(400).json({message:"Id not dound"})
+                res.status(400).json({message:"Id not found"})
             }
             await buscar.update()
 
@@ -62,6 +62,8 @@ const cateringControllers={
             return
 
         }catch(error){
+           
+            res.status(500).json({error:"Error del servidor"}) 
             console.error(error)
         }
     }

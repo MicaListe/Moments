@@ -61,7 +61,7 @@ const lugarControllers={
     },
     updatePlaces: async (req,res)=>{
         try{
-            const {id}= req.params.id
+            const id= req.params.id
 
             const modificar= await Lugar.findByPk(id)
 
@@ -78,4 +78,4 @@ const lugarControllers={
         }
     }
 }
-module.exports=lugarControllers
+module.exports= lugarControllers
