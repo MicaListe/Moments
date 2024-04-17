@@ -7,6 +7,6 @@ const router= Router()
 //LLAMAR EN POSTMAN EVENTS/CREATE_EVENTS
 router.post("/create_events", eventsControllers.createEvents)
 router.get("/events", eventsControllers.allEvents)
-router.delete("/delete_event", eventsControllers.deleteEvents)
+router.delete("/delete_event/:id", eventsControllers.deleteEvents)
 
 module.exports= router

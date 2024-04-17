@@ -30,6 +30,7 @@ const eventsControllers={
                 name
             })
             res.status(201).json(newEvent)
+         
 
         }catch(error){
             console.error(error)
@@ -37,18 +38,18 @@ const eventsControllers={
     },
 
     deleteEvents: async (req,res)=>{
-        console.log("achu")
         try{
-            console.log("hola")
             const id = req.params.id
-            console.log(id,"id")
+           
             const eliminar = await Evento.findByPk(id)
+           
             if(!eliminar){
                 res.status(400).json({message:"Id not found"})
             }
-            await eliminar.detroy()
+            await eliminar.destroy()
 
-            return "Event eliminated"
+            res.status(200).json({message:"Event eliminated"})
+            return
 
         }catch(error){
             console.error(error)
