@@ -21,6 +21,10 @@ module.exports=(sequelize)=>{
             password:{
                 type:DataTypes.STRING,
                 allowNull:false
+            }, 
+            roleId:{
+                type: DataTypes.INTEGER,
+                allowNull: false
             }
         },
         {
