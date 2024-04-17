@@ -21,7 +21,7 @@ const lugarControllers={
         try{
             const {name, city, image, description, event}= req.body
 
-            if(!name, !city, !image, !description, !event){
+            if(!name || !city || !image || !description || !event){
                 res.status(400).json({message:"Faltan datos"})
             }
 
@@ -32,7 +32,21 @@ const lugarControllers={
                 description,
                 event
             })
-            res.status(200).json(newPlace)
+            
+            const eventModels= await Evento.findAll({
+                where:{
+                    name:event
+                },
+                include:{
+                    attributes:["name"],
+                    model:Lugar,
+                    through:{
+                        attributes:[]
+                    }
+                }
+            })
+            await newPlace.addEventos(eventModels)
+            res.status(200).json({message:"Lugar creado exitosamente", newPlace})
 
         }catch(error){
             res.status(500).json({error:"Error interno del servidor"})
@@ -43,7 +57,7 @@ const lugarControllers={
     deletePlace: async(req,res)=>{
         try{
 
-            const id=req.params.id
+            const id = req.params.id
             const eliminar= await Lugar.findByPk(id)
 
             if(!eliminar){
@@ -62,6 +76,7 @@ const lugarControllers={
     updatePlaces: async (req,res)=>{
         try{
             const id= req.params.id
+            console.log(id,"id")
 
             const modificar= await Lugar.findByPk(id)
 

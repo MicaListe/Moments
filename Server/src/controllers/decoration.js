@@ -1,23 +1,25 @@
-const {Decoration}=require("../db")
+const {Decoracion}=require("../db")
 
 const decorationControllers={
 
     allDecoration: async (req, res) => {
         try{
-            const decorations= await Decoration.findAll()
+            const decorations= await Decoracion.findAll()
             res.status(200).json(decorations)
         }catch(error){
             res.status(500).json({error:"Error interno del servidor"})
         }
     },
+    
     createDecoration: async (req, res) => {
         try{
             const {description, image}=req.body
+            
             if(!description, !image){
                 res.status(400).json({message:"Faltan datos"})
             }
 
-            const newDecoration= Decoration.create({
+            const newDecoration= await Decoracion.create({
                 description,
                 image
             })
@@ -27,11 +29,12 @@ const decorationControllers={
             console.error(error)
         }
     },
+
     deleteDecoration: async (req, res) => {
         try{
             const id= req.params.id 
 
-            const eliminar= await Decoration.findByPk(id)
+            const eliminar= await Decoracion.findByPk(id)
 
             if(!eliminar){
                 res.status(400).json({message:"Id not found"})
@@ -45,11 +48,12 @@ const decorationControllers={
             console.error(error)
         }
     },
+
     updateDecoration: async (req, res) => {
         try{
             const id=req.params.id
 
-            const buscar= await Decoration.findByPk(id)
+            const buscar= await Decoracion.findByPk(id)
 
             if(!buscar){
                 res.status(400).json({message:"Id not found"})
@@ -67,4 +71,4 @@ const decorationControllers={
     }
 }
 
-module.exports=decorationControllers
+module.exports= decorationControllers

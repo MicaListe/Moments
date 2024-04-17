@@ -3,39 +3,17 @@ const events=require("./events.routes")
 const catering=require("./catering.routes")
 const places= require("./lugar.routes")
 const decoration=require("./decoration.routes")
-
+const users= require("./users.router")
 
 const router= Router()
-
 
 router.use("/events", events)
 router.use("/catering", catering)
 router.use("/places", places)
 router.use("/decoration", decoration)
-//Creacion de datos
-// router.post("/create_events", createEvent)
-// router.post("/create_catering")
-// router.post("/create_decoration")
-// router.post("/create_places")
-
-//Traer datos
-// router.get("/events")
-// router.get("/catering")
-// router.get("/decoration")
-// router.get("/places")
-
-//Eliminar datos
-// router.delete("/delete_event")
-// router.delete("/delete_catering")
-// router.delete("/delete_decoration")
-// router.delete("/delete_places")
-
-// //Actualizar datos
-// router.put("/update_catering")
-// router.put("/update_decoration")
-// router.put("/update_places")
+router.use("/user",users)
 
 // //Crear usuario
 // router.post("/register")
 
-module.exports= router
+module.exports = router
