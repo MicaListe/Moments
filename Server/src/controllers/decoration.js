@@ -52,16 +52,19 @@ const decorationControllers={
     updateDecoration: async (req, res) => {
         try{
             const id=req.params.id
+            const body=req.body
 
             const buscar= await Decoracion.findByPk(id)
 
             if(!buscar){
                 res.status(400).json({message:"Id not found"})
             }
-            await buscar.update()
+
+            const resultadoActualizado=await buscar.update(body)
+            
 
             res.status(200).json({message:"Decoration update"})
-            return
+            return resultadoActualizado
 
         }catch(error){
             res.status(500).json({error:"Error del servidor"}) 

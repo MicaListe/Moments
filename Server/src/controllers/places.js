@@ -76,6 +76,7 @@ const lugarControllers={
     updatePlaces: async (req,res)=>{
         try{
             const id= req.params.id
+            const body=req.body
             console.log(id,"id")
 
             const modificar= await Lugar.findByPk(id)
@@ -83,9 +84,11 @@ const lugarControllers={
             if(!modificar){
                 res.status(400).json({message:"Id not found"})
             }
-            await modificar.update()
+
+            const resultadoActualizado=await modificar.update(body)
+            
             res.status(200).json({message:"Place modificado"})
-            return
+            return resultadoActualizado
 
         }catch(error){
             res.status(500).json({message:"Error interno del servidor"})
