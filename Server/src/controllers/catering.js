@@ -51,14 +51,14 @@ const cateringControllers={
         try{
             const id=req.params.id
             const body=req.body
-            console.log(id,"id")
+
             const buscar= await Catering.findByPk(id)
 
             if(!buscar){
                 res.status(400).json({message:"Id not found"})
             }
 
-            const resultadoActualizado=await buscar.update(id,body)
+            const resultadoActualizado= await buscar.update(body)
             
             res.status(200).json({message:"Catering update"})
             return resultadoActualizado
