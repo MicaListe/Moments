@@ -50,16 +50,18 @@ const cateringControllers={
     updateCatering: async (req, res) => {
         try{
             const id=req.params.id
+            const body=req.body
             console.log(id,"id")
             const buscar= await Catering.findByPk(id)
 
             if(!buscar){
                 res.status(400).json({message:"Id not found"})
             }
-            await buscar.update()
 
+            const resultadoActualizado=await buscar.update(id,body)
+            
             res.status(200).json({message:"Catering update"})
-            return
+            return resultadoActualizado
 
         }catch(error){
            
