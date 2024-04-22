@@ -10,11 +10,11 @@ module.exports=(sequelize)=>{
                 primaryKey: true
             },
             name:{
-                type: DataTypes.STRING,
+                type: DataTypes.TEXT,
                 allowNull: false
             },
             city:{
-                type: DataTypes.STRING,
+                type: DataTypes.TEXT,
                 allowNull: false
             },
             image:{
