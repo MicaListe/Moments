@@ -22,8 +22,11 @@ module.exports=(sequelize)=>{
                 allowNull: false
             },
             description:{
-                type: DataTypes.TEXT({length:"long"}),
-                allowNull: false
+                type: DataTypes.TEXT,
+                allowNull: false,
+                validate: {
+                    len: [0, 1000], // Limita la longitud del texto
+                }
             }
         },
         {
