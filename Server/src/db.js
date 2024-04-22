@@ -4,12 +4,18 @@ const { Sequelize } = require("sequelize");
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_DATABASE,
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/multieventos`, {
+const sequelize = new Sequelize(`postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}/${POSTGRES_DATABASE}`, {
   logging: false, 
   native: false, 
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false // Esto puede variar según tu entorno, asegúrate de configurarlo correctamente
+    }
+  }
 });
 const basename = path.basename(__filename);
 
