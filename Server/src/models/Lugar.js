@@ -22,7 +22,7 @@ module.exports=(sequelize)=>{
                 allowNull: false
             },
             description:{
-                type: DataTypes.TEXT,
+                type: DataTypes.TEXT({length:"long"}),
                 allowNull: false
             }
         },
