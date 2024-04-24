@@ -13,14 +13,15 @@ const cateringControllers={
     },
     createCatering: async(req, res) => {
         try{
-            const {name, description, image}= req.body
-             if(!name, !description, !image){
+            const {name, description, image, type}= req.body
+             if(!name || !description || !type || !image){
                 return res.status(400).json({message: "Faltan datos"})
              }
 
              const newCatering=await Catering.create({
                 name,
                 description,
+                type,
                 image
              })
              res.status(201).json(newCatering)

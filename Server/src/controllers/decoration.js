@@ -13,15 +13,16 @@ const decorationControllers={
     
     createDecoration: async (req, res) => {
         try{
-            const {description, image}=req.body
+            const {description, image, type}=req.body
             
-            if(!description, !image){
+            if(!description ||!image || !type){
                 res.status(400).json({message:"Faltan datos"})
             }
 
             const newDecoration= await Decoracion.create({
                 description,
-                image
+                image,
+                type
             })
             res.status(201).json(newDecoration)
 

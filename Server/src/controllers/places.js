@@ -19,15 +19,17 @@ const lugarControllers={
 
     createPlaces: async(req,res)=>{
         try{
-            const {name, city, image, description, event}= req.body
+            const {name, city, country, type, image, description, event}= req.body
 
-            if(!name || !city || !image || !description || !event){
+            if(!name || !city || !image || !description || !country || !type || !event){
                 res.status(400).json({message:"Faltan datos"})
             }
 
             const newPlace= await Lugar.create({
                 name,
                 city,
+                type,
+                country,
                 image,
                 description,
                 event
