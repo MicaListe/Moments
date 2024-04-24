@@ -14,10 +14,17 @@ module.exports=(sequelize)=>{
                 type: DataTypes.TEXT,
                 allowNull: false
             },
+            type:{
+                type:DataTypes.STRING,
+                allowNull:false
+            },
             image:{
                 type: DataTypes.ARRAY(DataTypes.STRING),
                 allowNull:false
             }
+        },
+        {
+            timestamps: false,
         }
     )
 }

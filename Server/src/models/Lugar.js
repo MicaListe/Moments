@@ -10,12 +10,20 @@ module.exports=(sequelize)=>{
                 primaryKey: true
             },
             name:{
-                type: DataTypes.TEXT,
+                type: DataTypes.STRING,
                 allowNull: false
             },
+            type:{
+                type:DataTypes.STRING,
+                allowNull:false
+            },
             city:{
-                type: DataTypes.TEXT,
+                type: DataTypes.STRING,
                 allowNull: false
+            },
+            country:{
+                type: DataTypes.STRING,
+                allowNull:false
             },
             image:{
                 type: DataTypes.ARRAY(DataTypes.STRING),
@@ -23,10 +31,7 @@ module.exports=(sequelize)=>{
             },
             description:{
                 type: DataTypes.TEXT,
-                allowNull: false,
-                validate: {
-                    len: [0, 1000], // Limita la longitud del texto
-                }
+                allowNull: false, 
             }
         },
         {
