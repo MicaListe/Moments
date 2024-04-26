@@ -10,6 +10,21 @@ const decorationControllers={
             res.status(500).json({error:"Error interno del servidor"})
         }
     },
+    decorationById:async (req, res) => {
+        try{
+            const id=req.params.id
+            const idEncontrado= await Decoracion.findByPk(id)
+
+            if(!idEncontrado){
+                res.status(404).json({message:"Id not found"})
+            }
+            res.status(200).json(idEncontrado)
+
+        }catch(error){
+            res.status(500).json({error:"Error interno del servidor"})
+        }
+    }
+    ,
     
     createDecoration: async (req, res) => {
         try{

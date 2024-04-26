@@ -5,6 +5,7 @@ const router=Router()
 
 router.post("/create_catering", cateringControllers.createCatering)
 router.get("/catering", cateringControllers.allCatering)
+router.get("/catering/:id", cateringControllers.cateringById)
 router.delete("/delete_catering/:id", cateringControllers.deleteCatering)
 router.put("/update_catering/:id", cateringControllers.updateCatering)
 
