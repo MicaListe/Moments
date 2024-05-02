@@ -12,7 +12,7 @@ export default function Home(){
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img class="d-block w-25" src={quinta} alt="First slide"/>
+                <img class="d-block w-50" src={quinta} alt="First slide"/>
                 </div>
                 <div class="carousel-item">
                 <img class="d-block w-50" src={salon} alt="Second slide"/>
