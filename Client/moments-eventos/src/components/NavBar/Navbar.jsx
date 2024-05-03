@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import logo from "../../assets/logo.png"
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -10,7 +11,7 @@ function Navbar() {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light" >
-      <a className="navbar-brand" href="/">Logo</a>
+       <img className="navbar-brand" src={logo} style={{ width: '60px' }} alt="Logo" />
       <div className={`collapse navbar-collapse ${open ? 'show' : ''}`} id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item dropdown">
