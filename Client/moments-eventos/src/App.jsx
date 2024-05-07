@@ -4,8 +4,9 @@ import Navbar from './components/NavBar/Navbar';
 import CarouselPlaces  from './components/Carousel/carouselPlaces';
 import CarouselCatering from './components/Carousel/carouselCatering';
 import CarouselDecoration from './components/Carousel/carouselDecoration';
+import axios from "axios"
 
-
+axios.defaults.baseURL = "https://moments-6tvc7tcsg-micaela-listes-projects.vercel.app/"
 
 
 function App() {
