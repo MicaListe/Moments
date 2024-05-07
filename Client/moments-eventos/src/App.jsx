@@ -5,17 +5,26 @@ import CarouselPlaces  from './components/Carousel/carouselPlaces';
 import CarouselCatering from './components/Carousel/carouselCatering';
 import CarouselDecoration from './components/Carousel/carouselDecoration';
 import axios from "axios"
+import { useEffect } from 'react';
+import {useDispatch } from "react-redux"
+import { getEvents } from './Redux/actions';
 
-axios.defaults.baseURL = "https://moments-6tvc7tcsg-micaela-listes-projects.vercel.app/"
+axios.defaults.baseURL = "https://moments-nky3r3kw6-micaela-listes-projects.vercel.app//"
 
 
 function App() {
+  const dispatch= useDispatch()
+  useEffect(()=>{
+    dispatch(getEvents())
+  })
+
   return (
     <div className="App">
       <Navbar/>
       <CarouselPlaces/>
       <CarouselCatering/>
       <CarouselDecoration/>
+        
       {/* <Footer /> */}
     </div>
   );
