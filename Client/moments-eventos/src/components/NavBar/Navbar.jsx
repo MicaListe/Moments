@@ -16,7 +16,7 @@ function Navbar() {
       <div className={`collapse navbar-collapse ${open ? 'show' : ''}`} id="navbarSupportedContent"  style={{marginLeft:"40rem"}}>
         <ul className="navbar-nav mr-auto">
           <li className="nav-item dropdown" style={{padding: '0 10px'}}>
-            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" onClick={openDropdown} aria-haspopup="true" aria-expanded={open ? "true" : "false"} style={{color:'white'}} >
+            <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" onClick={openDropdown} aria-haspopup="true" aria-expanded={open ? "true" : "false"} style={{color:'white'}} >
               Eventos
             </a>
             <div className={`dropdown-menu ${open ? 'show' : ''}`} aria-labelledby="navbarDropdown" style={{ backgroundColor: 'black' }}>
@@ -34,7 +34,7 @@ function Navbar() {
             <a className="nav-link disabled" href="/decoracion" style={{color:'white'}}>Decoración</a>
           </li>
           <li className="nav-item" style={{padding: '0 10px'}}>
-            <a className="nav-link disabled" href="sobre nosotros" style={{color:'white'}}>Sobre Nosotros</a>
+            <a className="nav-link disabled" href="/sobre nosotros" style={{color:'white'}}>Sobre Nosotros</a>
           </li>
         </ul>
         
