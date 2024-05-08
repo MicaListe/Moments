@@ -11,7 +11,7 @@ server.use(express.json());
 server.use("/", routes);
 
 server.use(cors({
-   origin: 'https://moments-3oti-hrwioknqb-micaela-listes-projects.vercel.app',
+   origin: ['https://moments-3oti-hrwioknqb-micaela-listes-projects.vercel.app', 'http://localhost:5173'],
    credentials: true, // Permite incluir cookies en las solicitudes (si las hay)
    methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'], // Métodos HTTP permitidos
    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'], // Cabeceras permitidas
