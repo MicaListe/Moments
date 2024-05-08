@@ -9,7 +9,7 @@ import { useEffect} from 'react';
 import {useDispatch} from "react-redux"
 import { getEvents } from './Redux/actions';
 
-axios.defaults.baseURL="https://moments-d6dysl23b-micaela-listes-projects.vercel.app"
+axios.defaults.baseURL="https://moments-self.vercel.app"
 
 function App() {
   

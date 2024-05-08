@@ -3,7 +3,9 @@ const { Sequelize } = require("sequelize");
 
 const fs = require('fs');
 const path = require('path');
-const { pg } = require('pg')
+
+const { pg } = require('pg') //Hay que agregar esto para vercel ande y no putee
+
 const {
   POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_DATABASE,
 } = process.env;
@@ -12,8 +14,11 @@ const sequelize = new Sequelize(`postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD
   logging: false, 
   native: false,
   dialect: 'postgres',
+  
+  //AGREGUE ESTOS DOS DIALECTOS
   dialectModule: pg, 
   dialectOptions: {
+
     ssl: {
       require: true,
       rejectUnauthorized: false // Esto puede variar según tu entorno, asegúrate de configurarlo correctamente
