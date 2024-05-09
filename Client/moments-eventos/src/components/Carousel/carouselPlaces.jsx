@@ -28,7 +28,7 @@ export default function carouselPlaces() {
         <div className="d-flex justify-content-center align-items-center mt-5-auto">
             <div className="card w-25 p-2 rounded-0" style={{height:"300px", left:'25px',backgroundImage:`url(${fondo})`, backgroundSize:"380px"}}>
                 <div className="card-body aling-items-center mt-5">
-                    <h2 className="card-title" style={{color:"white"}}>Eventos</h2>
+                    <h2 className="card-title" style={{color:"#efc75e"}}>Eventos</h2>
                     <p className="card-text" style={{color:"white"}} >Experimenta la belleza incomparable de celebrar tu fiesta en los lugares más espectaculares y soñados.
                     Sumérgete en una experiencia inolvidable que te transportará a un mundo de encanto y alegría.</p>
                 </div>
