@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import cateringUno from "../../assets/cateringUno.png";
 import cateringDos from "../../assets/cateringDos.png";
 import cateringTres from "../../assets/cateringTres.png";
+import marmol from "../../assets/4.png"
 
 export default function CarouselCatering() {
 
@@ -50,12 +51,13 @@ export default function CarouselCatering() {
                     </a>
                 </div>
             </div>
-            <div className="w-25 p-2">
-                <h2>Catering</h2>
-                <p>Deléitate con las exquisitas creaciones culinarias preparadas por los más destacados chefs de la zona.
-                    Sumérgete en una experiencia gastronómica inigualable que elevará tu evento a otro nivel de exquisitez</p>
+            <div className="card w-25 p-2 rounded-0" style={{height:"300px", right:'24px',backgroundImage:`url(${marmol})`, backgroundSize:"380px"}}>
+                <div className="card-body aling-items-center mt-5">
+                    <h2 className="card-title" style={{color:"#efc75e"}}>Catering</h2>
+                    <p className="card-text" style={{color:"white"}} >Deléitate con las exquisitas creaciones culinarias preparadas por los más destacados chefs de la zona.
+                        Sumérgete en una experiencia gastronómica inigualable que elevará tu evento a otro nivel de exquisitez</p>
+                </div>
             </div>
-
         </div>
     );
 }

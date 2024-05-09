@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import playa from "../../assets/playa.png";
 import quinta from "../../assets/quinta.png";
 import salon from "../../assets/salon.png";
+import fondo from "../../assets/4.png"
 
 export default function carouselPlaces() {
 
@@ -25,10 +26,12 @@ export default function carouselPlaces() {
    
     return (
         <div className="d-flex justify-content-center align-items-center mt-5-auto">
-            <div className="w-25 p-2">
-                <h2>Eventos</h2>
-                <p>Experimenta la belleza incomparable de celebrar tu fiesta en los lugares más espectaculares y soñados.
+            <div className="card w-25 p-2 rounded-0" style={{height:"300px", left:'25px',backgroundImage:`url(${fondo})`, backgroundSize:"380px"}}>
+                <div className="card-body aling-items-center mt-5">
+                    <h2 className="card-title" style={{color:"white"}}>Eventos</h2>
+                    <p className="card-text" style={{color:"white"}} >Experimenta la belleza incomparable de celebrar tu fiesta en los lugares más espectaculares y soñados.
                     Sumérgete en una experiencia inolvidable que te transportará a un mundo de encanto y alegría.</p>
+                </div>
             </div>
             <div className="w-50 p-4">
                 <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
