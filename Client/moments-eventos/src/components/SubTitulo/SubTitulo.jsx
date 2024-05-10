@@ -1,5 +1,5 @@
 import React from "react";
-import subtitle from "../../assets/frase.png";
+import subtitle from "../../assets/subNuevo.png";
 
 function Subtitulo() {
   return (
