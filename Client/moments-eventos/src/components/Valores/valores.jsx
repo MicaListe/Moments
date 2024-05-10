@@ -4,8 +4,8 @@ import creatividad from "../../assets/creatividad.png"
 
 export default function valores(){
     return(
-        <div className="text-center mt-4">
-            <h2 style={{fontStyle:"italic"}}>¿Por qué elegirnos?</h2>
+        <div className="text-center mt-5">
+            <h2 style={{fontSize:"40px",fontWeight: "400", fontStyle:"italic", fontFamily:"Dancing Script, cursive" }}>¿Por qué elegirnos?</h2>
             <div className="d-flex justify-content-center mt-3">
                 <div className="card p-3 me-3" style={{width:"300px", height:"240px"}}>
                     <div className="card-body d-flex flex-column justify-content-center text-center">
