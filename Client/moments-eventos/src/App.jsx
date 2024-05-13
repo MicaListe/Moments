@@ -7,6 +7,7 @@ import CarouselDecoration from './components/Carousel/carouselDecoration';
 import Subtitulo from './components/SubTitulo/SubTitulo';
 import Valores from './components/Valores/valores';
 import axios from "axios"
+import AboutUs from './components/AboutUs/AboutUs';
 
 axios.defaults.baseURL="https://moments-self.vercel.app"
 
@@ -20,7 +21,8 @@ function App() {
       <CarouselCatering/>
       <CarouselDecoration/>
       <Valores/>
-      {/* <Footer /> */}
+
+
     </div>
   );
 }
