@@ -19,7 +19,9 @@ function Footer() {
                 </div>
                 <ul className="list-inline" style={{ padding: '0', listStyle: 'none', fontSize: '14px', lineHeight: '1.6', marginBottom: '5px' }}>
                     <li className="list-inline-item" style={{ margin: '0 10px' }}><a href="#" className="text-white" style={{ color:'inherit', textDecoration: 'none' }}>Calendario</a></li>
-                    <li className="list-inline-item" style={{ margin: '0 10px' }}><a href='/AboutUs' className="text-white" style={{ color: 'inherit', textDecoration: 'none' }}>Sobre Nosotros</a></li>
+                    <li className="list-inline-item" style={{ margin: '0 10px' }}>
+                        <a href='/AboutUs' className="text-white" style={{ color: 'inherit', textDecoration: 'none' }}>Sobre Nosotros</a>
+                    </li>
                     <li className="list-inline-item" style={{ margin: '0 10px' }}><a href="#" className="text-white" style={{ color: 'inherit', textDecoration: 'none' }}>Equipo</a></li>
                     <li className="list-inline-item" style={{ margin: '0 10px' }}><a href="#" className="text-white" style={{ color: 'inherit', textDecoration: 'none' }}>Nuestras Sucursales</a></li>
                 </ul>

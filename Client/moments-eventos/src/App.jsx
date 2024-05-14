@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Navbar from './components/NavBar/Navbar';
 import CarouselPlaces  from './components/Carousel/carouselPlaces';
@@ -12,17 +12,22 @@ import AboutUs from './components/AboutUs/AboutUs';
 axios.defaults.baseURL="https://moments-self.vercel.app"
 
 function App() {
-  
   return (
     <div className="App">
       <Navbar/>
-      <Subtitulo/>
-      <CarouselPlaces/>
-      <CarouselCatering/>
-      <CarouselDecoration/>
-      <Valores/>
-
-
+      <Routes>
+        <Route path="/" element={
+          <>
+            <Subtitulo/>
+            <CarouselPlaces/>
+            <CarouselCatering/>
+            <CarouselDecoration/>
+            <Valores/>
+          </>
+        }/>
+        <Route path="/aboutUs" element={<AboutUs/>}/>
+      </Routes>
+      <Footer/>
     </div>
   );
 }
