@@ -23,9 +23,9 @@ function Footer() {
                         <a href='/AboutUs' className="text-white" style={{ color: 'inherit', textDecoration: 'none' }}>Sobre Nosotros</a>
                     </li>
                     <li className="list-inline-item" style={{ margin: '0 10px' }}><a href="#" className="text-white" style={{ color: 'inherit', textDecoration: 'none' }}>Equipo</a></li>
-                    <li className="list-inline-item" style={{ margin: '0 10px' }}><a href="#" className="text-white" style={{ color: 'inherit', textDecoration: 'none' }}>Nuestras Sucursales</a></li>
+                    <li className="list-inline-item" style={{ margin: '0 10px' }}><a href='/Sucursales' className="text-white" style={{ color: 'inherit', textDecoration: 'none' }}>Nuestras Sucursales</a></li>
                 </ul>
-                <p className="text-center text-white" style={{ fontSize: '12px', color: '#fff', marginBottom: '0' }}>Moments Events © 2024</p>
+                <p className="text-center text-white" style={{ fontSize: '12px', color: '#fff', marginBottom: '0' }}>Moments Events © 2019</p>
             </footer>
         </div>
     );

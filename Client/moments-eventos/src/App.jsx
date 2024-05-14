@@ -8,6 +8,7 @@ import Subtitulo from './components/SubTitulo/SubTitulo';
 import Valores from './components/Valores/valores';
 import axios from "axios"
 import AboutUs from './components/AboutUs/AboutUs';
+import Sucursales from './components/Sucursales/Sucursales';
 
 axios.defaults.baseURL="https://moments-self.vercel.app"
 
@@ -26,6 +27,7 @@ function App() {
           </>
         }/>
         <Route path="/aboutUs" element={<AboutUs/>}/>
+        <Route path="/Sucursales" element={<Sucursales/>}/>
       </Routes>
       <Footer/>
     </div>
