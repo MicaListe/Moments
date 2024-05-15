@@ -1,7 +1,8 @@
 import { GET_EVENTS } from "./actions";
 
 const initialState={
-    events:[]
+    events:[],
+    filtered:[]
 }
 
 const reducer = (state = initialState, action) => {
@@ -9,7 +10,8 @@ const reducer = (state = initialState, action) => {
         case GET_EVENTS:
             return{
                 ...state,
-                events: action.payload
+                events: action.payload,
+                filtered: action.payload
             }
     }
 }
