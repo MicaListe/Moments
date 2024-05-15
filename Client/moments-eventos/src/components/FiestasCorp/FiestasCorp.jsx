@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getEvents } from "../../Redux/actions";
 import Salones from "./Salones";
 import Fcorp from '../../assets/Fcorp.jpg';
+import Dorado from "../ramaDorada/rama";
 
 export default function FiestasCorp() {
     const dispatch = useDispatch();
@@ -12,20 +13,17 @@ export default function FiestasCorp() {
     }, [dispatch]);
 
     const eventos = useSelector((state) => state.filtered);
-    const fiestasCorpo = eventos ? eventos.filter((evento) => evento.name === 'Fiestas Corporativas') : [];
-
-    if (!eventos) {
-        return <div>Loading...</div>;
-    }
-
+    const fiestasCorpo = eventos.filter((evento) => evento.name === 'Fiestas Corporativas') ;
+    
     return (
         <div>
-                       <h1 style={{ textAlign: "center", marginTop: "50px" }}>Fiestas Corporativas</h1>
+            <Dorado/>
+            {/* <h1 style={{ textAlign: "center", marginTop: "50px" }}>Fiestas Corporativas</h1> */}
             <div className="row">
                 <div className="col-md-6 mt-5">
-                    <img src={Fcorp} style={{ width: "450px", marginLeft: "200px", height:"300px", borderRadius:"22px" }} alt="Fcorp" />
+                    <img src={Fcorp} style={{ width: "450px", marginLeft: "200px", height:"300px", borderRadius:"10px" }} alt="Fcorp" />
                 </div>
-                <div className="col-md-4 position-absolute" style={{ marginTop: "70px", right: "300px", fontSize: "18px" }}>
+                <div className="col-md-4 position-absolute" style={{ marginTop: "83px", right: "300px", fontSize: "18px" }}>
                     <p>
                         Nada iguala la elegancia de una celebración corporativa en un salón de eventos.
                         El ambiente cuidadosamente diseñado, la iluminación perfecta y el espacio acogedor
@@ -38,22 +36,19 @@ export default function FiestasCorp() {
                 </div>
             </div>
             <div className="row mb-5" style={{ marginLeft: "200px", marginTop: "100px" }}>
-                {fiestasCorpo && fiestasCorpo.length > 0 ? (
-                    fiestasCorpo.map((evento) => (
+                {fiestasCorpo && fiestasCorpo.map((evento) => (
                         evento.Lugars.map((element) => (
                             <div className="card p-3 me-3 mb-4" style={{ width: "350px", height: "300px" }} key={element.id}>
                                 <div className="card-body d-flex flex-column justify-content-center">
                                     <Salones
                                         name={element.name}
-                                        image={element.image ? element.image[0] : null}
+                                        image={element.image[0]}
                                     />
                                 </div>
                             </div>
                         ))
                     ))
-                ) : (
-                    <div></div>
-                )}
+                }
             </div>
         </div>
     );

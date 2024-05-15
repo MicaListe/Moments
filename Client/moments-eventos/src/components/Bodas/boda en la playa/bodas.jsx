@@ -1,7 +1,7 @@
 import React from "react"
-import playa from "../../assets/boda en playa.jpg"
-import quinta from "../../assets/boda en quinta.jpg"
-import salon from "../../assets/boda en salon.jpg"
+import playa from "../../../assets/boda en playa.jpg"
+import quinta from "../../../assets/boda en quinta.jpg"
+import salon from "../../../assets/boda en salon.jpg"
 import { Link } from "react-router-dom"
 
 export default function Bodas(){
