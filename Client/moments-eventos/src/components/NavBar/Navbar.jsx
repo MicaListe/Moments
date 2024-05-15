@@ -22,9 +22,9 @@ function Navbar() {
             </a>
             <div className={`dropdown-menu ${open ? 'show' : ''}`} aria-labelledby="navbarDropdown" style={{backgroundColor: 'black'}}>
               <a className="dropdown-item" href="/bodas" style={{color:'white'}}>Bodas</a>
-              <a className="dropdown-item" href="/fiestas de xv" style={{color:'white'}}>Fiestas de XV</a>
-              <a className="dropdown-item" href="/fiestas corporativas" style={{color:'white'}}>Fiestas Corporativas</a>
-              <a className="dropdown-item" href="/fiestas de egresados" style={{color:'white'}}>Fiestas de Egresados</a>
+              <a className="dropdown-item" href="/fiestasXv" style={{color:'white'}}>Fiestas de XV</a>
+              <a className="dropdown-item" href="/FiestasCorp" style={{color:'white'}}>Fiestas Corporativas</a>
+              <a className="dropdown-item" href="/fiestasEgresados" style={{color:'white'}}>Fiestas de Egresados</a>
               <a className="dropdown-item" href="/bautismos" style={{color:'white'}}>Baustimos</a>
             </div>
           </li>
