@@ -5,24 +5,26 @@ import Playas from "./playas";
 import casamiento from "../../assets/casamiento.jpg"
 
 export default function BodaPlaya() {
-    const eventos = useSelector((state) => state.filtered);
+    
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getEvents());
     }, []);
-
+    const eventos = useSelector((state) => state.filtered);
     //eventos.map(evento => evento.Lugars) obtiene todas las matrices de lugares de cada evento.
     //.flat() aplana estas matrices en una sola matriz.
-    const bodasYPlayas =  eventos.map(evento => evento.Lugars).flat().filter(lugar => lugar.type === 'Playa');
-
+    //const bodasYPlayas =  eventos.map(evento => evento.Lugars).flat().filter(lugar => lugar.type === 'Playa');
+    if (!eventos) {
+        return <div>Loading...</div>; // O maneja de otra manera el estado inicial
+    }
     return (
         <div>
             <div className="row">
                 <div className="col-md-6 mt-5">
                     <img src={casamiento} style={{ width: "300px", marginLeft:"200px" }} alt="Casamiento" />
                 </div>
-                <div className="col-md-4 position-absolute" style={{marginTop:"150px",right:"450px", fontSize:"18px"}}>
+                <div className="col-md-4 position-absolute" style={{marginTop:"150px",right:"450px", fontSize:"15px"}}>
                     <p>
                         Nada supera la belleza natural de una ceremonia en la playa. 
                         El sonido suave de las olas, la brisa y un horizonte infinito 
@@ -34,7 +36,7 @@ export default function BodaPlaya() {
                 </div>
             </div>
             <div className="row mb-5" style={{marginLeft:"200px", marginTop:"100px"}}>
-                {bodasYPlayas.map((element) => (
+                {eventos.map((element) => (
                     <div className="card p-3 me-3 mb-4" style={{width:"350px", height:"300px",}}>
                         <div className=" card-body d-flex flex-column justify-content-center" key={element.id}>
                             <Playas
