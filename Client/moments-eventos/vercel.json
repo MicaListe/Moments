@@ -4,7 +4,7 @@
       { "src": "/playas", "dest": "/" },
       { "src": "/quintas", "dest": "/" },
       { "src": "/FiestasCorp", "dest": "/" },
-      { "src": "/aboutUs", "dest": "/" },
+      { "src": "/AboutUs", "dest": "/" },
       { "src": "/Sucursales", "dest": "/" }
     ]
 }    
