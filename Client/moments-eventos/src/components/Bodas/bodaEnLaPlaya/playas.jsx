@@ -1,5 +1,3 @@
-
-
 export default function Playas({ name, image}) {
     return (
         <div>

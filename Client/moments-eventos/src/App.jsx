@@ -9,9 +9,10 @@ import Valores from './components/Valores/valores';
 import axios from "axios"
 import AboutUs from './components/AboutUs/AboutUs';
 import Sucursales from './components/Sucursales/Sucursales';
-import Bodas from './components/Bodas/boda en la playa/bodas';
-import BodaPlaya from './components/Bodas/boda en la playa/bodaPlaya';
+import Bodas from './components/Bodas/bodaEnLaPlaya/bodas';
+import BodaPlaya from './components/Bodas/bodaEnLaPlaya/bodaPlaya';
 import FiestasCorp from "./components/FiestasCorp/FiestasCorp"
+import BodaQuinta from './components/Bodas/bodaEnLaquinta/bodaQuinta';
 
 axios.defaults.baseURL="https://moments-self.vercel.app"
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/Sucursales" element={<Sucursales/>}/>
         <Route path="/bodas" element={<Bodas/>}/>
         <Route path="/playas" element={<BodaPlaya/>}/>
+        <Route path='/quintas' element={<BodaQuinta/>}/>
         <Route path="/FiestasCorp" element={<FiestasCorp/>}/>
       </Routes>
       <Footer/>
