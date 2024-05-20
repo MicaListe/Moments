@@ -24,7 +24,7 @@ function Navbar() {
               <a className="dropdown-item" href="/bodas" style={{color:'white'}}>Bodas</a>
               <a className="dropdown-item" href="/fiestasXv" style={{color:'white'}}>Fiestas de XV</a>
               <a className="dropdown-item" href="/FiestasCorp" style={{color:'white'}}>Fiestas Corporativas</a>
-              <a className="dropdown-item" href="/fiestasEgresados" style={{color:'white'}}>Fiestas de Egresados</a>
+              <a className="dropdown-item" href="/FiestasEgre" style={{color:'white'}}>Fiestas de Egresados</a>
               <a className="dropdown-item" href="/bautismos" style={{color:'white'}}>Baustimos</a>
             </div>
           </li>
