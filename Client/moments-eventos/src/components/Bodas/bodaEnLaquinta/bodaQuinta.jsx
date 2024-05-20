@@ -21,11 +21,11 @@ export default function BodaQuinta(){
     return(
         <div>
             <Dorado/>
-            <div className="row">
+            <div className="">
                 <div className="col-md-6 mt-5">
                     <img src={casamiento} style={{width:"300px", marginLeft:"200px", borderRadius:"10px"}} alt="imagen no encontrada"/>
                 </div>
-                <div className="col-md-6 position-absolute" style={{marginTop:"165px", }}>
+                <div className="col-md-4 position-absolute" style={{top:"300px", marginLeft:"580px", fontSize:"18px"}}>
                     <p>
                         Nada supera la belleza natural de una ceremonia en una quinta. 
                         El encanto rústico del entorno, rodeado de exuberante vegetación 
@@ -37,18 +37,21 @@ export default function BodaQuinta(){
                         simplemente espectacular y quede grabado en tus recuerdos para siempre.
                     </p>
                 </div>
-                
-
             </div>
-            {bodaYQuintas && bodaYQuintas.map((element)=>(
-                <div key={element.id}>
-                    <Quintas
-                        name={element.name}
-                        image={element.image[0]}
-                    />  
-                </div>
-                
-            ))}
+            <div className="row mb-5 " style={{marginLeft:"200px", marginTop:"100px"}}>
+                {bodaYQuintas && bodaYQuintas.map((element)=>(
+                    <div className="card p-3 me-3 mb-4" style={{width:"350px", height:"300px"}}>
+                       <div className="card-body  justify-content-center" key={element.id}>
+                            <Quintas
+                                name={element.name}
+                                image={element.image[0]}
+                            />  
+                        </div>   
+                    </div>
+                    
+                ))}
+            </div>
+           
         </div>
     )
 }
