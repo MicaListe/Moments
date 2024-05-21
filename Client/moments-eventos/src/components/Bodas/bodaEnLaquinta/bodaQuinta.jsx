@@ -15,9 +15,12 @@ export default function BodaQuinta(){
 
     const lugares= useSelector((state)=>state.filtered)
    
-
     const bodaYQuintas= lugares.map(evento=>evento.Lugars).flat().filter(lugar=>lugar.type==="Quinta")
-    console.log(bodaYQuintas)
+    
+    //Se hace un nuevo set (array) de lo que contiene bodas y quintas (solo id), pero se mapea para encontrar 
+    //el elemento que coincida con el id duplicado y se almacenan los NO duplicados
+    const uniqueBodaYQuintas = [...new Set(bodaYQuintas.map(element => element.id))].map(id => bodaYQuintas.find(element => element.id === id));
+
     return(
         <div>
             <Dorado/>
@@ -39,9 +42,9 @@ export default function BodaQuinta(){
                 </div>
             </div>
             <div className="row mb-5 " style={{marginLeft:"200px", marginTop:"100px"}}>
-                {bodaYQuintas && bodaYQuintas.map((element)=>(
-                    <div className="card p-3 me-3 mb-4" style={{width:"350px", height:"300px"}}>
-                       <div className="card-body  justify-content-center" key={element.id}>
+                {uniqueBodaYQuintas && uniqueBodaYQuintas.map((element)=>(
+                    <div className="card p-3 me-3 mb-4" key={element.id} style={{width:"350px", height:"300px"}}>
+                       <div className="card-body  justify-content-center" >
                             <Quintas
                                 name={element.name}
                                 image={element.image[0]}

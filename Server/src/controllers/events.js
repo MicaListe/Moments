@@ -40,11 +40,12 @@ const eventsControllers={
     deleteEvents: async (req,res)=>{
         try{
             const id = req.params.id
-           
+           console.log("id",id)
             const eliminar = await Evento.findByPk(id)
+            console.log("e",eliminar)
            
             if(!eliminar){
-                res.status(400).json({message:"Id not found"})
+               return res.status(404).json({message:"Id not found"})
             }
             await eliminar.destroy()
 
@@ -52,7 +53,7 @@ const eventsControllers={
             return
 
         }catch(error){
-            console.error(error)
+            res.status(500).json({message:"Error del servidor"})
         }
     }
 }

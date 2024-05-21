@@ -13,6 +13,7 @@ import Bodas from './components/Bodas/bodaEnLaPlaya/bodas';
 import BodaPlaya from './components/Bodas/bodaEnLaPlaya/bodaPlaya';
 import FiestasCorp from "./components/FiestasCorp/FiestasCorp"
 import BodaQuinta from './components/Bodas/bodaEnLaquinta/bodaQuinta';
+import BodaEnSalon from './components/Bodas/bodaEnElSalon/bodaSalon';
 import FiestasEgre from './components/FiestasEgre/FiestasEgre';
 import Bautismos from './components/Bautismos/BautismosEnElSalon/Bautismos';
 
@@ -40,6 +41,7 @@ function App() {
         <Route path="/FiestasCorp" element={<FiestasCorp/>}/>
         <Route path="/FiestasEgre" element={<FiestasEgre/>}/>
         <Route path="/Bautismos" element={<Bautismos/>}/>
+        <Route path='/salones' element={<BodaEnSalon/>}/>
       </Routes>
       <Footer/>
     </div>
