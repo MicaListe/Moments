@@ -16,6 +16,9 @@ import BodaQuinta from './components/Bodas/bodaEnLaquinta/bodaQuinta';
 import BodaEnSalon from './components/Bodas/bodaEnElSalon/bodaSalon';
 import FiestasEgre from './components/FiestasEgre/FiestasEgre';
 import Bautismos from './components/Bautismos/BautismosEnElSalon/Bautismos';
+import BautismoSalon from './components/Bautismos/BautismosEnElSalon/BautismoSalon';
+import BautismoQuinta from './components/Bautismos/BautismosEnLaQuinta/BautismoQuinta'
+import Team from './components/Team/Team';
 
 axios.defaults.baseURL="https://moments-self.vercel.app"
 
@@ -35,6 +38,7 @@ function App() {
         }/>
         <Route path="/aboutUs" element={<AboutUs/>}/>
         <Route path="/Sucursales" element={<Sucursales/>}/>
+        <Route path="/Team" element={<Team/>}/>
         <Route path="/bodas" element={<Bodas/>}/>
         <Route path="/playas" element={<BodaPlaya/>}/>
         <Route path='/quintas' element={<BodaQuinta/>}/>
@@ -42,6 +46,8 @@ function App() {
         <Route path="/FiestasEgre" element={<FiestasEgre/>}/>
         <Route path="/Bautismos" element={<Bautismos/>}/>
         <Route path='/salones' element={<BodaEnSalon/>}/>
+        <Route path="/bautismosalon" element={<BautismoSalon/>}/>
+        <Route path="/bautismoquinta" element={<BautismoQuinta/>}/>
       </Routes>
       <Footer/>
     </div>
