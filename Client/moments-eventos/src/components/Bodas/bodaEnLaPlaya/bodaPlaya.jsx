@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Playas from "./playas";
 import casamiento from "../../../assets/casamiento.jpg"
 import Dorado from "../../ramaDorada/rama";
+import Back from "../../button back/back";
 
 export default function BodaPlaya() {
     
@@ -21,9 +22,10 @@ export default function BodaPlaya() {
     return (
         <div>
             <Dorado/>
+            <Back/>
             <div className="row">
                 <div className="col-md-6 mt-5">
-                    <img src={casamiento} style={{ width: "300px", marginLeft:"200px", borderRadius:"10px" }} alt="Casamiento" />
+                    <img src={casamiento} style={{boxShadow:"1px 1px 2px black" ,width: "300px", marginLeft:"200px", borderRadius:"10px" }} alt="Casamiento" />
                 </div>
                 <div className="col-md-4 position-absolute" style={{marginTop:"165px",right:"450px", fontSize:"18px"}}>
                     <p>
@@ -38,7 +40,7 @@ export default function BodaPlaya() {
             </div>
             <div className="row mb-5" style={{marginLeft:"200px", marginTop:"100px"}}>
                 {bodasYPlayas && bodasYPlayas.map((element) => (
-                    <div className="card p-3 me-3 mb-4" style={{width:"350px", height:"300px",}}>
+                    <div className="card p-3 me-5 mb-4" style={{width:"350px", height:"300px",boxShadow:"1px 1px 2px black"}}>
                         <div className=" card-body d-flex flex-column justify-content-center" key={element.id}>
                             <Playas
                                 name={element.name}

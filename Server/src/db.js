@@ -21,7 +21,7 @@ const sequelize = new Sequelize(`postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD
 
     ssl: {
       require: true,
-      rejectUnauthorized: false // Esto puede variar según tu entorno, asegúrate de configurarlo correctamente
+      rejectUnauthorized: false
     }
   }
 });

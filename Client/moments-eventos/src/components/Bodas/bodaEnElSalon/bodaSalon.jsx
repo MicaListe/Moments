@@ -4,6 +4,7 @@ import Salones from "./salones";
 import { getEvents } from "../../../Redux/actions";
 import Dorado from "../../ramaDorada/rama";
 import pareja from "../../../assets/pareja en salon.jpg"
+import Back from "../../button back/back";
 export default function BodaEnSalon(){
 
     const dispatch= useDispatch()
@@ -20,8 +21,9 @@ export default function BodaEnSalon(){
     return(
         <div>
             <Dorado/>
+            <Back/>
             <div>
-                <img src={pareja} alt="Imagen no encontada" style={{width:"300px", marginLeft:"200px", borderRadius:"10px"}} />
+                <img src={pareja} alt="Imagen no encontada" style={{boxShadow:"1px 1px 2px black", width:"300px", marginLeft:"200px", borderRadius:"10px"}} />
             </div>
             <div className="col-md-4 position-absolute" style={{top:"270px", marginLeft:"580px", fontSize:"18px"}}>
                 <p>
@@ -36,8 +38,8 @@ export default function BodaEnSalon(){
             <div className="row mb-5" style={{marginLeft:"200px", marginTop:"100px"}}>
                 {
                     bodasSalon && bodasSalon.map((element)=>(
-                        <div className="card p-3 me-3 mb-4" key={element.id} style={{width:"350px", height:"300px"}}>
-                            <div className="card-body justify-content-center">
+                        <div className="card p-3 me-5 mb-4" key={element.id} style={{width:"350px", height:"300px", boxShadow:"1px 1px 2px black"}}>
+                            <div className="card-body d-flex flex-column justify-content-center">
                                 <Salones
                                     name={element.name}
                                     image={element.image[0]}

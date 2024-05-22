@@ -4,7 +4,14 @@
       { "src": "/playas", "dest": "/" },
       { "src": "/quintas", "dest": "/" },
       { "src": "/FiestasCorp", "dest": "/" },
-      { "src": "/AboutUs", "dest": "/" },
-      { "src": "/Sucursales", "dest": "/" }
+      { "src": "/aboutUs", "dest": "/" },
+      { "src": "/Sucursales", "dest": "/" },
+      { "src": "/Team", "dest": "/" },
+      { "src": "/FiestasEgre", "dest": "/" },
+      { "src": "/Bautismos", "dest": "/" },
+      { "src": "/salones", "dest": "/" },
+      { "src": "/bautismosalon", "dest": "/" },
+      { "src": "/bautismoquinta", "dest": "/" },
+      { "src": "/fiestasXv", "dest": "/" }
     ]
 }    

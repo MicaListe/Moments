@@ -1,7 +1,7 @@
 export default function Quintas({name, image}){
 
     return(
-        <div>
+        <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", height:"100%"}}>
             {/* {image.map((element,index)=>(
                  <img src={element} key={index} style={{borderRadius:"5px", width:"300px"}} /> 
             ))} */}

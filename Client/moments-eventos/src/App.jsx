@@ -49,7 +49,7 @@ function App() {
         <Route path='/salones' element={<BodaEnSalon/>}/>
         <Route path="/bautismosalon" element={<BautismoSalon/>}/>
         <Route path="/bautismoquinta" element={<BautismoQuinta/>}/>
-        <Route path="fiestasXv" element={<FiestaDeXv/>}/>
+        <Route path="/fiestasXv" element={<FiestaDeXv/>}/>
       </Routes>
       <Footer/>
     </div>
