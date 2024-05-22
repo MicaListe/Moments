@@ -15,7 +15,8 @@ export default function BodaPlaya() {
     const eventos = useSelector((state) => state.filtered);
     //eventos.map(evento => evento.Lugars) obtiene todas las matrices de lugares de cada evento.
     //.flat() aplana estas matrices en una sola matriz.
-    const bodasYPlayas =  eventos.map(evento => evento.Lugars).flat().filter(lugar => lugar.type === 'Playa');
+    const bodas= eventos.filter((element)=>element.name==="Bodas")
+    const bodasYPlayas =  bodas.map(evento => evento.Lugars).flat().filter(lugar => lugar.type === 'Playa');
     
     return (
         <div>

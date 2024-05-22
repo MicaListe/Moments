@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getEvents } from "../../Redux/actions";
 import Salon from "./Salon";
-import Feg from '../../assets/Feg.jpg';
+import salonEgresados from '../../assets/salon egre.jpg';
 import Dorado from "../ramaDorada/rama";
 
 export default function FiestasEgre() {
@@ -18,10 +18,9 @@ export default function FiestasEgre() {
     return (
         <div>
             <Dorado/>
-            {/* <h1 style={{ textAlign: "center", marginTop: "50px" }}>Fiestas Corporativas</h1> */}
             <div className="row">
                 <div className="col-md-6 mt-5">
-                    <img src={Feg} style={{ width: "470px", marginLeft: "200px", height:"310px", borderRadius:"10px" }} alt="Fcorp" />
+                    <img  src={salonEgresados} style={{width: "400px", marginLeft: "200px", borderRadius:"10px" }} alt="Fcorp" />
                 </div>
                 <div className="col-md-4 position-absolute" style={{ marginTop: "80px", right: "300px", fontSize: "18px" }}>
                     <p>

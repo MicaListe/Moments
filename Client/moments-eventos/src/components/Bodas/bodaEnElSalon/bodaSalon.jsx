@@ -14,11 +14,9 @@ export default function BodaEnSalon(){
         dispatch(getEvents())
     },[])
 
-    
-    const bodasSalon= allSalones.map(element=>element.Lugars).flat().filter(salon=>salon.type==="Salon")
-    console.group("b", bodasSalon)
-    const uniqueBodaSalon= [...new Set(bodasSalon.map(element => element.id))].map(id =>bodasSalon.find(element => element.id===id))
-    console.log("u", uniqueBodaSalon)
+    const bodas= allSalones.filter((e)=>e.name==="Bodas")
+    const bodasSalon= bodas.map(e=>e.Lugars).flat().filter(salon=>salon.type==="Salon")
+
     return(
         <div>
             <Dorado/>
@@ -37,7 +35,7 @@ export default function BodaEnSalon(){
             </div>
             <div className="row mb-5" style={{marginLeft:"200px", marginTop:"100px"}}>
                 {
-                    uniqueBodaSalon && uniqueBodaSalon.map((element)=>(
+                    bodasSalon && bodasSalon.map((element)=>(
                         <div className="card p-3 me-3 mb-4" key={element.id} style={{width:"350px", height:"300px"}}>
                             <div className="card-body justify-content-center">
                                 <Salones
