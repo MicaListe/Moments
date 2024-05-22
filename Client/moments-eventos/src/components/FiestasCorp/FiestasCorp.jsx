@@ -13,7 +13,9 @@ export default function FiestasCorp() {
     }, [dispatch]);
 
     const eventos = useSelector((state) => state.filtered);
-    const fiestasCorpo = eventos.filter((evento) => evento.name === 'Fiestas Corporativas') ;
+    const corporativa=eventos.filter((e)=>e.name === "Fiestas Corporativas")
+    const fiestasCorpo = corporativa.filter((evento) => evento.name === 'Fiestas Corporativas') ;
+    
     
     return (
         <div>
@@ -21,9 +23,9 @@ export default function FiestasCorp() {
             {/* <h1 style={{ textAlign: "center", marginTop: "50px" }}>Fiestas Corporativas</h1> */}
             <div className="row">
                 <div className="col-md-6 mt-5">
-                    <img src={Fcorp} style={{ width: "450px", marginLeft: "200px", height:"300px", borderRadius:"10px" }} alt="Fcorp" />
+                    <img src={Fcorp} style={{ width: "450px", marginLeft: "200px", height:"300px", borderRadius:"10px", marginTop:"40px" }} alt="Fcorp" />
                 </div>
-                <div className="col-md-4 position-absolute" style={{ marginTop: "83px", right: "300px", fontSize: "18px" }}>
+                <div className="col-md-4 position-absolute" style={{ marginTop: "120px", right: "300px", fontSize: "18px" }}>
                     <p>
                         Nada iguala la elegancia de una celebración corporativa en un salón de eventos.
                         El ambiente cuidadosamente diseñado, la iluminación perfecta y el espacio acogedor

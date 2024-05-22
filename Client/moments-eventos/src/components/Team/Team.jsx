@@ -1,43 +1,112 @@
 import React from "react";
 
 
-function Team () {
-    return(
-        <div className="mt-5 mx-3 pb-5">
-            <h1 className="display-3 mb-3 text-center">
-                Nosotros
-            </h1>
+// function Team () {
+//     return(
+//         <div className="mt-5 mx-3 pb-5">
+//             <h1 className="display-3 mb-3 text-center">
+//                 Nosotros
+//             </h1>
 
-            <div className="d-flex flex-column align-items-center mb-4"> 
-                <div className="card border-light rounded-3 d-flex flex-row p-3 justify-content-between w-50 shadow-lg mb-4">
-                    <div className="d-flex flex-column me-3">
-                        <h1 className="text-center display-6"> 
-                            Micaela Liste
-                        </h1>
-                        <h2 className="text-center h4"> 
-                            Full Stack
-                        </h2>
+//             <div className="d-flex flex-column align-items-center mb-4"> 
+//                 <div className="card border-light rounded-3 d-flex flex-row p-3 justify-content-between w-50 shadow-lg mb-4">
+//                     <div className="d-flex flex-column me-3">
+//                         <h1 className="text-center display-6"> 
+//                             Micaela Liste
+//                         </h1>
+//                         <h2 className="text-center h4"> 
+//                             Full Stack
+//                         </h2>
+//                     </div>
+//                     <img src="https://github.com/micaliste.png" alt="perfil MicaJS" className="img-thumbnail" style={{ width: "8rem", height: "8rem" }} />
+//                 </div>
+//             </div>
+
+//             <div className="d-flex flex-column align-items-center"> 
+//                 <div className="card border-light rounded-3 d-flex flex-row p-3 justify-content-between w-50 shadow-lg">
+//                     <div className="d-flex flex-column me-3">
+//                         <h1 className="text-center display-6"> 
+//                             Santiago Dietrich
+//                         </h1>
+//                         <h2 className="text-center h4"> 
+//                             Full Stack
+//                         </h2>
+//                     </div>
+//                     <img src="https://github.com/santiagodietrich.png" alt="perfil SantiJS" className="img-thumbnail" style={{ width: "8rem", height: "8rem" }} />
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
+
+// export default Team;
+
+
+import { FaGithub, FaLinkedin } from 'react-icons/fa'; // Importa los íconos de FontAwesome
+
+export default function Team() {
+    return (
+        <div className="bg-light py-3 py-md-5 py-xl-8">
+            <div className="container">
+                <div className="row justify-content-md-center">
+                    <div className="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+                        <h2 className="mb-4 display-5 text-center">Nuestro Equipo</h2>
+                        <p className="text-secondary mb-5 text-center lead fs-4">
+                        Somos dos desarrolladores juniors apasionados, llenos de energía y entusiasmo por aprender
+                         y crecer en el mundo de la tecnología. Nuestra pasión y determinación nos permitirán aportar
+                          nuevas perspectivas y soluciones innovadoras
+                        </p>
+                        <hr className="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle" />
                     </div>
-                    <img src="https://github.com/micaliste.png" alt="perfil MicaJS" className="img-thumbnail" style={{ width: "8rem", height: "8rem" }} />
                 </div>
             </div>
 
-            <div className="d-flex flex-column align-items-center"> 
-                <div className="card border-light rounded-3 d-flex flex-row p-3 justify-content-between w-50 shadow-lg">
-                    <div className="d-flex flex-column me-3">
-                        <h1 className="text-center display-6"> 
-                            Santiago Dietrich
-                        </h1>
-                        <h2 className="text-center h4"> 
-                            Full Stack
-                        </h2>
+            <div className="container overflow-hidden">
+                <div className="row gy-4 gy-lg-0 gx-xxl-5 justify-content-center align-items-center">
+                    <div className="col-12 col-md-6 col-lg-3 mb-4">
+                        <div className="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
+                            <div className="card-body p-0">
+                                <figure className="m-0 p-0">
+                                    <img className="img-fluid" loading="lazy" src="https://github.com/micaliste.png" alt="Flora Nyra" />
+                                    <figcaption className="m-0 p-4">
+                                        <h4 className="mb-1">Micaela Liste</h4>
+                                        <p className="text-secondary mb-0">Full Stack</p>
+                                        <div className="d-flex justify-content-center mt-3">
+                                            <a href="https://github.com/MicaListe" className="text-decoration-none text-dark me-3" target="_blank">
+                                                <FaGithub size={24} />
+                                            </a>
+                                            <a href="https://www.linkedin.com/in/micaela-liste-b98b61251/" className="text-decoration-none text-dark" target="_blank">
+                                                <FaLinkedin size={24} />
+                                            </a>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
                     </div>
-                    <img src="https://github.com/santiagodietrich.png" alt="perfil SantiJS" className="img-thumbnail" style={{ width: "8rem", height: "8rem" }} />
+                    <div className="col-12 col-md-6 col-lg-3 mb-4">
+                        <div className="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
+                            <div className="card-body p-0">
+                                <figure className="m-0 p-0">
+                                    <img className="img-fluid" loading="lazy" src="https://github.com/santiagodietrich.png" alt="Evander Mac" />
+                                    <figcaption className="m-0 p-4">
+                                        <h4 className="mb-1">Santiago Dietrich</h4>
+                                        <p className="text-secondary mb-0">Full Stack</p>
+                                        <div className="d-flex justify-content-center mt-3">
+                                            <a href="https://github.com/Santiagodietrich" className="text-decoration-none text-dark me-3" target="_blank">
+                                                <FaGithub size={24} />
+                                            </a>
+                                            <a href="https://www.linkedin.com/in/santiago-dietrich-288413272/" className="text-decoration-none text-dark" target="_blank">
+                                                <FaLinkedin size={24} />
+                                            </a>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
-
-export default Team;
-

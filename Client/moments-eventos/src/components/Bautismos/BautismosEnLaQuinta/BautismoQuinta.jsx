@@ -15,8 +15,11 @@ export default function BautismoSalon() {
     const eventos = useSelector((state) => state.filtered);
     //eventos.map(evento => evento.Lugars) obtiene todas las matrices de lugares de cada evento.
     //.flat() aplana estas matrices en una sola matriz.
-    const bautismosyquintas =  eventos.map(evento => evento.Lugars).flat().filter(lugar => lugar.type === 'Quinta');
+    const bquinta=eventos.filter((e) => e.name === "Bautismos" )
+    const bautismosyquintas =  bquinta.map(evento => evento.Lugars).flat().filter(lugar => lugar.type === 'Quinta');
     
+    const isFewCards=bautismosyquintas.length <= 3;
+
     return (
         <div>
             <Dorado/>
@@ -34,7 +37,7 @@ export default function BautismoSalon() {
                     </p>
                 </div>
             </div>
-            <div className="row mb-5" style={{marginLeft:"200px", marginTop:"100px"}}>
+            <div className={`row mb-5 ${isFewCards ? "justify-content-center" : ""}`} style={{ marginLeft: isFewCards ? "0" : "200px", marginTop: "100px" }}>
                 {bautismosyquintas && bautismosyquintas.map((element) => (
                     <div className="card p-3 me-3 mb-4" style={{width:"350px", height:"300px",}}>
                         <div className=" card-body d-flex flex-column justify-content-center" key={element.id}>
