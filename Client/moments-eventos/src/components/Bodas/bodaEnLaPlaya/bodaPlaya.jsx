@@ -22,7 +22,9 @@ export default function BodaPlaya() {
     return (
         <div>
             <Dorado/>
-            <Back/>
+            <a href="/bodas">
+               <Back /> 
+            </a>
             <div className="row">
                 <div className="col-md-6 mt-5">
                     <img src={casamiento} style={{boxShadow:"1px 1px 2px black" ,width: "300px", marginLeft:"200px", borderRadius:"10px" }} alt="Casamiento" />

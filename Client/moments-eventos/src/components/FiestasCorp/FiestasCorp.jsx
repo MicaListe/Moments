@@ -23,9 +23,9 @@ export default function FiestasCorp() {
             {/* <h1 style={{ textAlign: "center", marginTop: "50px" }}>Fiestas Corporativas</h1> */}
             <div className="row">
                 <div className="col-md-6 mt-5">
-                    <img src={Fcorp} style={{ width: "450px", marginLeft: "200px", height:"300px", borderRadius:"10px", marginTop:"40px" }} alt="Fcorp" />
+                    <img src={Fcorp} style={{boxShadow:"1px 1px 2px black", width: "400px", boxShadow:"1.5px 1.5px 2px black", marginLeft: "200px", height:"300px", borderRadius:"10px", marginTop:"40px" }} alt="Fcorp" />
                 </div>
-                <div className="col-md-4 position-absolute" style={{ marginTop: "120px", right: "300px", fontSize: "18px" }}>
+                <div className="col-md-4 position-absolute" style={{ marginTop: "120px", right: "350px", fontSize: "18px" }}>
                     <p>
                         Nada iguala la elegancia de una celebración corporativa en un salón de eventos.
                         El ambiente cuidadosamente diseñado, la iluminación perfecta y el espacio acogedor
@@ -40,7 +40,7 @@ export default function FiestasCorp() {
             <div className="row mb-5" style={{ marginLeft: "200px", marginTop: "100px" }}>
                 {fiestasCorpo && fiestasCorpo.map((evento) => (
                         evento.Lugars.map((element) => (
-                            <div className="card p-3 me-3 mb-4" style={{ width: "350px", height: "300px" }} key={element.id}>
+                            <div className="card p-3 me-3 mb-4" style={{width: "350px", height: "300px", boxShadow:"1px 1px 2px black" }} key={element.id}>
                                 <div className="card-body d-flex flex-column justify-content-center">
                                     <Salones
                                         name={element.name}

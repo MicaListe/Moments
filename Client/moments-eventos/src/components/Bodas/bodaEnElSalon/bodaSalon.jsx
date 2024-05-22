@@ -21,7 +21,9 @@ export default function BodaEnSalon(){
     return(
         <div>
             <Dorado/>
-            <Back/>
+            <a href="/bodas">
+               <Back /> 
+            </a>
             <div>
                 <img src={pareja} alt="Imagen no encontada" style={{boxShadow:"1px 1px 2px black", width:"300px", marginLeft:"200px", borderRadius:"10px"}} />
             </div>

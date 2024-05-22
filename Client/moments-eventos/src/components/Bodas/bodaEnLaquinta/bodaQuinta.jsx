@@ -24,7 +24,9 @@ export default function BodaQuinta(){
     return(
         <div>
             <Dorado/>
-            <Back/>
+            <a href="/bodas">
+               <Back /> 
+            </a>
             <div className="">
                 <div className="col-md-6 mt-5">
                     <img src={casamiento} style={{boxShadow:"1px 1px 2px black",width:"300px", marginLeft:"200px", borderRadius:"10px"}} alt="imagen no encontrada"/>

@@ -39,7 +39,7 @@ export default function valores(){
                 </div>
             </div>
             <h2 className="mt-5" style={{fontSize:"40px",fontWeight: "400", fontStyle:"italic", fontFamily:"Dancing Script, cursive" }}>Contactate con nosotros</h2>
-            <button className="mt-4 mb-4">Ir a calendario</button>
+            <button className="mt-4">Ir a calendario</button>
         </div>
     )
 }

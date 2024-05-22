@@ -64,7 +64,7 @@ export default function Team() {
             <div className="container overflow-hidden">
                 <div className="row gy-4 gy-lg-0 gx-xxl-5 justify-content-center align-items-center">
                     <div className="col-12 col-md-6 col-lg-3 mb-4">
-                        <div className="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
+                        <div className="card border-0 border-bottom border-primary shadow-sm">
                             <div className="card-body p-0">
                                 <figure className="m-0 p-0">
                                     <img className="img-fluid" loading="lazy" src="https://github.com/micaliste.png" alt="Flora Nyra" />

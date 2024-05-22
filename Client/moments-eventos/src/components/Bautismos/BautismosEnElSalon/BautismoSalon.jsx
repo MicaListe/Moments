@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Salon from './Salon';
 import bautismoQtres from "../../../assets/bautismoQtres.jpg";
 import Dorado from "../../ramaDorada/rama";
+import Back from "../../button back/back"
 
 export default function BautismoSalon() {
     const dispatch = useDispatch();
@@ -22,11 +23,14 @@ export default function BautismoSalon() {
     return (
         <div>
             <Dorado />
+            <a href="/bautismos">
+               <Back /> 
+            </a>
             <div className="row">
                 <div className="col-md-6 mt-5">
-                    <img src={bautismoQtres} style={{ width: "350px", marginLeft: "300px", borderRadius: "10px" }} alt="Casamiento" />
+                    <img src={bautismoQtres} style={{boxShadow:"1.5px 1.5px 2px black" ,width: "300px", marginLeft: "200px", borderRadius: "10px" }} alt="Casamiento" />
                 </div>
-                <div className="col-md-4 position-absolute" style={{ marginTop: "165px", right: "450px", fontSize: "18px", marginRight: "-150px" }}>
+                <div className="col-md-4 position-absolute" style={{ marginTop: "155px", right: "600px", fontSize: "18px", marginRight: "-150px" }}>
                     <p>
                         Nada supera la elegancia y sofisticación de un bautismo en un salón de eventos. La iluminación suave,
                         la música cuidadosamente seleccionada y un espacio exquisitamente decorado crean un ambiente mágico
@@ -38,7 +42,7 @@ export default function BautismoSalon() {
             </div>
             <div className={`row mb-5 ${isFewCards ? "justify-content-center" : ""}`} style={{ marginLeft: isFewCards ? "0" : "200px", marginTop: "100px" }}>
                 {bautismosysalones && bautismosysalones.map((element) => (
-                    <div key={element.id} className="card p-3 me-3 mb-5" style={{ width: "350px", height: "300px" }}>
+                    <div key={element.id} className="card p-3 me-3 mb-5" style={{boxShadow:"1px 1px 2px black" ,width: "350px", height: "300px" }}>
                         <div className="card-body d-flex flex-column justify-content-center">
                             <Salon
                                 name={element.name}

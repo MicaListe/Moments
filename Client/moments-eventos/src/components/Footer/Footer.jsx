@@ -4,7 +4,7 @@ import React from 'react';
 function Footer() {
     return (
         <div className="footer-basic">
-            <footer className="footer-basic" style={{ position: 'relative', bottom: 0, left: 0, width: '100%', backgroundColor: 'black', color: '#4b4c4d', padding: '10px 0', textAlign: 'center' }}>
+            <footer className="footer-basic" style={{ position: 'relative', bottom: 0, left: 0, width: '100%', backgroundColor: 'black', color: '#4b4c4d', padding: '10px 0', textAlign: 'center', top:"80px" }}>
                 <div className="social text-center">
                     <a href="https://github.com/MicaListe/Moments" target='_blank' className="btn" style={{color: 'gray', marginRight: '10px'}}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-github" viewBox="0 0 16 16">

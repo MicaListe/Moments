@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Salondos from './Salondos'
 import bautismoQdos from "../../../assets/bautismoQdos.jpg"
 import Dorado from "../../ramaDorada/rama";
-
+import Back from "../../button back/back"
 export default function BautismoSalon() {
     
     const dispatch = useDispatch();
@@ -23,11 +23,14 @@ export default function BautismoSalon() {
     return (
         <div>
             <Dorado/>
+            <a href="/bautismos">
+               <Back /> 
+            </a>          
             <div className="row">
                 <div className="col-md-6 mt-5">
-                    <img src={bautismoQdos} style={{ width: "350px", marginLeft:"300px", borderRadius:"10px" }} alt="Casamiento" />
+                    <img src={bautismoQdos} style={{boxShadow:"1.5px 1.5px 2px black" ,width: "300px", marginLeft:"200px", borderRadius:"10px" }} alt="Casamiento" />
                 </div>
-                <div className="col-md-4 position-absolute" style={{marginTop:"165px",right:"450px", fontSize:"18px", marginRight:"-150px"}}>
+                <div className="col-md-4 position-absolute" style={{marginTop:"165px",right:"600px", fontSize:"18px", marginRight:"-150px"}}>
                     <p>
                     Nada supera la elegancia y el encanto de un bautismo en una quinta. La luz natural del día,
                      la música cuidadosamente seleccionada y un entorno naturalmente bello crean un ambiente mágico
@@ -39,7 +42,7 @@ export default function BautismoSalon() {
             </div>
             <div className={`row mb-5 ${isFewCards ? "justify-content-center" : ""}`} style={{ marginLeft: isFewCards ? "0" : "200px", marginTop: "100px" }}>
                 {bautismosyquintas && bautismosyquintas.map((element) => (
-                    <div className="card p-3 me-3 mb-4" style={{width:"350px", height:"300px",}}>
+                    <div className="card p-3 me-3 mb-4" style={{width:"350px", height:"300px", boxShadow:"1px 1px 2px black"}}>
                         <div className=" card-body d-flex flex-column justify-content-center" key={element.id}>
                             <Salondos
                                 name={element.name}
