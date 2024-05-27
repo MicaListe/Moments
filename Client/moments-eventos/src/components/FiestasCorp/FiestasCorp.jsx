@@ -23,7 +23,7 @@ export default function FiestasCorp() {
             {/* <h1 style={{ textAlign: "center", marginTop: "50px" }}>Fiestas Corporativas</h1> */}
             <div className="row">
                 <div className="col-md-6 mt-5">
-                    <img src={Fcorp} style={{boxShadow:"1px 1px 2px black", width: "400px", boxShadow:"1.5px 1.5px 2px black", marginLeft: "200px", height:"300px", borderRadius:"10px", marginTop:"40px" }} alt="Fcorp" />
+                    <img src={Fcorp} style={{boxShadow:"1px 1px 2px black", width: "400px", marginLeft: "200px", height:"300px", borderRadius:"10px", marginTop:"40px" }} alt="Fcorp" />
                 </div>
                 <div className="col-md-4 position-absolute" style={{ marginTop: "120px", right: "350px", fontSize: "18px" }}>
                     <p>
