@@ -1,11 +1,11 @@
 /* Estilos generales */
-.navbar {
+/* .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: black;
     padding: 1rem;
-  }
+  } */
   
   
   /* .navbar-toggler {
@@ -16,11 +16,11 @@
     color: white;
   } */
   
-  .navbar-nav {
+  /* .navbar-nav {
     display: flex;
     flex-direction: row;
     
-  }
+  } */
   
   .dropdown-item:hover {
     background-color: #efc75e;

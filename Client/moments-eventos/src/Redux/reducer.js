@@ -1,10 +1,11 @@
-import { GET_EVENTS } from "./actions";
-import { GET_CATERING } from "./actions";
+import { GET_EVENTS, GET_CATERING, GET_DECORATION } from "./actions";
+
 
 const initialState={
     events:[],
     filtered:[],
-    catering:[]
+    catering:[],
+    decoration:[]
 }
 
 const reducer = (state = initialState, action) => {
@@ -21,7 +22,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 catering:action.payload,
             }
-
+        case GET_DECORATION:
+            return{
+                ...state,
+                decoration: action.payload
+            }
         default: return state
 
 
