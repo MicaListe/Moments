@@ -31,7 +31,7 @@ function Navbar() {
             </div>
           </li>
           <li className="nav-item" style={{padding: '0 10px'}}>
-            <a className="nav-link disabled" href="/catering" style={{color:'white'}}>Catering</a>
+            <a className="" href="/catering" style={{color:'white'}}>Catering</a>
           </li>
           <li className="nav-item" style={{padding: '0 10px'}}>
             <a className="nav-link disabled" href="/decoracion" style={{color:'white'}}>Decoración</a>

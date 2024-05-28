@@ -1,4 +1,5 @@
 export const GET_EVENTS = "GET_EVENTS"
+export const GET_CATERING = "GET_CATERING"
 import axios from "axios"
 
 export function getEvents(){
@@ -14,4 +15,22 @@ export function getEvents(){
     }catch(error){
         console.error("Error al realizar la solicitud")
     }  
+}
+
+
+export function getCatering(){
+    try{
+        return async function(dispatch){
+            const respuesta=await axios.get("/catering/catering")
+            console.log("resp", respuesta)
+
+            return dispatch({
+                type:GET_CATERING,
+                payload:respuesta.data
+            })
+        }
+
+    }catch(error){
+        console.error("Error al realizar la solicitud")
+    }
 }
