@@ -13,7 +13,9 @@ function Navbar() {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'black'}} >
-      <a href="/"><img className="navbar-brand" src={logo} style={{ width: '90px', marginLeft:'30px'}} alt="Logo"/></a>
+      <a href="/">
+        <img className="navbar-brand" src={logo} style={{ width: '90px', marginLeft:'30px'}} alt="Logo"/>
+      </a>
       <div className={`collapse navbar-collapse ${open ? 'show' : ''}`} id="navbarSupportedContent"  style={{marginLeft:"40rem"}}>
         <ul className="navbar-nav mr-auto">
           <li className="nav-item dropdown" style={{padding: '0 10px'}}>
@@ -40,7 +42,12 @@ function Navbar() {
         </ul>
         
       </div>
-      <img src={avatar2} style={{width:'40px', marginRight:"70px"}}/>
+      <img className="avatar-image" src={avatar2} style={{width:'30px'}}/>
+      <button className="navbar-toggle" onClick={openDropdown} aria-label="Toggle navigation">
+        <svg data-testid="geist-icon" height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16" style={{color: "white"}}>
+          <path fillRule="evenodd" clipRule="evenodd" d="M1 2H1.75H14.25H15V3.5H14.25H1.75H1V2ZM1 12.5H1.75H14.25H15V14H14.25H1.75H1V12.5ZM1.75 7.25H1V8.75H1.75H14.25H15V7.25H14.25H1.75Z" fill="currentColor"/>
+        </svg>
+      </button>
     </nav>
   );
 }
