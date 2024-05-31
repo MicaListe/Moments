@@ -12,6 +12,8 @@
       { "src": "/salones", "dest": "/" },
       { "src": "/bautismosalon", "dest": "/" },
       { "src": "/bautismoquinta", "dest": "/" },
-      { "src": "/fiestasXv", "dest": "/" }
+      { "src": "/fiestasXv", "dest": "/" },
+      { "src": "/catering", "dest": "/" },
+      { "src": "/decoracion", "dest": "/" }
     ]
 }    

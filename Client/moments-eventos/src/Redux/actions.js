@@ -36,7 +36,7 @@ export function getCatering(){
     }
 }
 
-export function getDecorations(){
+export function getDecoration(){
     try{
         return async function(dispatch){
             const response= await axios.get("/decoration/decoration")

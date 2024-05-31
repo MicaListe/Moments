@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getCatering } from "../../Redux/actions";
 import caterin from '../../assets/caterintres.jpg';
+import video from "../../assets/video catering.mp4"
 import Dorado from "../ramaDorada/rama";
 import Comidas from "../Catering/comidas";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -30,18 +31,8 @@ export default function Catering() {
         <div>
             <Dorado />
             <div className="row">
-                <div className="col-md-6 mt-5">
-                    <img src={caterin} style={{ boxShadow: "1.5px 1.5px 2px black", width: "400px", marginLeft: "200px", borderRadius: "10px", marginTop: "40px"}} alt="Fcorp" />
-                </div>
-                <div className="col-md-4 position-absolute" style={{ marginTop: "145px", right: "350px", fontSize: "18px" }}>
-                    <p>
-                        Nada se iguala a la experiencia de una fiesta, donde el catering eleva cada momento.
-                        Nuestro equipo se dedica a cuidar cada detalle gastronómico, desde la selección de ingredientes
-                        frescos y de calidad hasta la presentación elegante de cada plato. Con una amplia variedad de
-                        opciones culinarias que satisfacen todos los gustos y dietas, transformamos cada evento en una
-                        experiencia gastronómica memorable. Desde pequeñas reuniones hasta grandes celebraciones,
-                        el catering es el ingrediente secreto que hace que cada ocasión sea especial y única.
-                    </p>
+                <div className="  d-flex justify-content-center align-items-center">
+                    <video src={video} loop autoPlay style={{width:"700px", marginTop:"100px"}}></video> 
                 </div>
             </div>
             <div className="row mb-5" style={{ marginLeft: "200px", marginTop: "100px" }}>
