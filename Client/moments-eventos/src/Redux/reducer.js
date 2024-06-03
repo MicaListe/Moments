@@ -23,22 +23,23 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 catering:action.payload,
             }
+
+        case FILTER_CATERING:
+            const cateringFilter = action.payload;
+                
+            if (cateringFilter === 'all') {
+                return state;
+            } else {
+                const filteredByCatering = state.catering.filter((item) => item.type === cateringFilter);
+                console.log("filteredBy", filteredByCatering)
+                return {...state, filtered: filteredByCatering};
+            }
+            
         case GET_DECORATION:
             return{
                 ...state,
                 decoration: action.payload
-            }
-            case FILTER_CATERING:
-                const cateringFilter = action.payload;
-                
-                if (cateringFilter === 'all') {
-                    return state;
-                } else {
-                    const filteredByCatering = state.catering.filter((item) => item.type === cateringFilter);
-                    console.log("filteredBy", filteredByCatering)
-                    return {...state, filtered: filteredByCatering};
-                }
-            
+            }  
             
         
         default: return state
