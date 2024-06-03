@@ -1,6 +1,7 @@
 export const GET_EVENTS = "GET_EVENTS"
 export const GET_CATERING = "GET_CATERING"
 export const GET_DECORATION = "GET_DECORATION"
+export const FILTER_CATERING= "FILTER_CATERING"
 import axios from "axios"
 
 export function getEvents(){
@@ -46,6 +47,14 @@ export function getDecoration(){
             })
         }
     }catch(error){
+        console.error("Error al realizar la solicitud")
+    }
+}
 
+export function filterCatering(payload) {
+    console.log("payload", payload)
+    return{
+        type:FILTER_CATERING,
+        payload:payload,
     }
 }

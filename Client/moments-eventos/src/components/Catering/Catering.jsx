@@ -6,6 +6,7 @@ import video from "../../assets/video catering.mp4"
 import Dorado from "../ramaDorada/rama";
 import Comidas from "../Catering/comidas";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import FilterCatering from "../FiltroCatering/Filtros";
 
 export default function Catering() {
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ export default function Catering() {
                     <video src={video} loop autoPlay style={{width:"700px", marginTop:"100px"}}></video> 
                 </div>
             </div>
+            <FilterCatering/>
             <div className="row mb-5" style={{ marginLeft: "200px", marginTop: "100px" }}>
                 {getCurrentPageItems().map((element) => (
                     <div className="card p-3 me-3 mb-4" style={{ boxShadow: "1px 1px 2px black", width: "350px", height: "300px" }} key={element.id}>

@@ -1,4 +1,4 @@
-import { GET_EVENTS, GET_CATERING, GET_DECORATION } from "./actions";
+import { GET_EVENTS, GET_CATERING, GET_DECORATION, FILTER_CATERING } from "./actions";
 
 
 const initialState={
@@ -7,6 +7,7 @@ const initialState={
     catering:[],
     decoration:[]
 }
+
 
 const reducer = (state = initialState, action) => {
     switch(action.type){
@@ -27,6 +28,19 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 decoration: action.payload
             }
+            case FILTER_CATERING:
+                const cateringFilter = action.payload;
+                
+                if (cateringFilter === 'all') {
+                    return state;
+                } else {
+                    const filteredByCatering = state.catering.filter((item) => item.type === cateringFilter);
+                    console.log("filteredBy", filteredByCatering)
+                    return {...state, filtered: filteredByCatering};
+                }
+            
+            
+        
         default: return state
 
 
