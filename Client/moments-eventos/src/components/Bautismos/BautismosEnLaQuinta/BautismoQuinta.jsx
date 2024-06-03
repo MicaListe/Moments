@@ -42,7 +42,7 @@ export default function BautismoSalon() {
             </div>
             <div className={`row mb-5 ${isFewCards ? "justify-content-center" : ""}`} style={{ marginLeft: isFewCards ? "0" : "200px", marginTop: "100px" }}>
                 {bautismosyquintas && bautismosyquintas.map((element) => (
-                    <div className="card p-3 me-3 mb-4" style={{width:"350px", height:"300px", boxShadow:"1px 1px 2px black"}}>
+                    <div className="card p-3 me-3 mb-4" style={{width:"350px", height:"350px", boxShadow:"1px 1px 2px black"}}>
                         <div className=" card-body d-flex flex-column justify-content-center" key={element.id}>
                             <Salondos
                                 name={element.name}

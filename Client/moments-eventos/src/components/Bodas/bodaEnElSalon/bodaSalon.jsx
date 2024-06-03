@@ -40,7 +40,7 @@ export default function BodaEnSalon(){
             <div className="row mb-5" style={{marginLeft:"200px", marginTop:"100px"}}>
                 {
                     bodasSalon && bodasSalon.map((element)=>(
-                        <div className="card p-3 me-5 mb-4" key={element.id} style={{width:"350px", height:"300px", boxShadow:"1px 1px 2px black"}}>
+                        <div className="card p-3 me-5 mb-4" key={element.id} style={{width:"350px", height:"350px", boxShadow:"1px 1px 2px black"}}>
                             <div className="card-body d-flex flex-column justify-content-center">
                                 <Salones
                                     name={element.name}

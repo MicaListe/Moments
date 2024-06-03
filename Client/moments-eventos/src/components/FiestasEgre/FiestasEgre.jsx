@@ -36,7 +36,7 @@ export default function FiestasEgre() {
             <div className="row mb-5" style={{ marginLeft: "200px", marginTop: "100px" }}>
                 {fiestasEgre && fiestasEgre.map((evento) => (
                         evento.Lugars.map((element) => (
-                            <div className="card p-3 me-3 mb-4" style={{boxShadow:"1px 1px 2px black" ,width: "350px", height: "300px" }} key={element.id}>
+                            <div className="card p-3 me-3 mb-4" style={{boxShadow:"1px 1px 2px black" ,width: "350px", height: "350px" }} key={element.id}>
                                 <div className="card-body d-flex flex-column justify-content-center">
                                     <Salon
                                         name={element.name}

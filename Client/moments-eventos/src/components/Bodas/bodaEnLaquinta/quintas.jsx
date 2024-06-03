@@ -5,7 +5,7 @@ export default function Quintas({name, image}){
             {/* {image.map((element,index)=>(
                  <img src={element} key={index} style={{borderRadius:"5px", width:"300px"}} /> 
             ))} */}
-            <img src={image} alt={name} style={{borderRadius:"5px", width:"300px"}} />
+            <img src={image} alt={name} style={{width: "100%", height: "250px", objectFit: "cover", borderRadius: "5px"}} />
             <p style={{fontSize:"17px", marginTop:"10px", textAlign:"center"}}>{name}</p>
         </div>
     )

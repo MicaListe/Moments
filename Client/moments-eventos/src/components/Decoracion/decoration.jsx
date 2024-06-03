@@ -38,8 +38,7 @@ export default function Decoration(){
                     <div className="card p-3 me-3 mb-4" key={element.id} style={{width:"350px", height:"300px", boxShadow:"1px 1px 2px black"}}>
                         <div className="card-body d-flex flex-column justify-content-center ">
                            <DecoParty
-                                image={element.image[0]}
-                                name={element.name}
+                                image={element.image}
                             /> 
                         </div>
                     </div>

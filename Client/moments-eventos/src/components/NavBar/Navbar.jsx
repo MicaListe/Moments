@@ -16,7 +16,7 @@ function Navbar() {
       <a href="/">
         <img className="navbar-brand" src={logo} style={{ width: '90px', marginLeft:'30px'}} alt="Logo"/>
       </a>
-      <div className={` collapse navbar-collapse ${open ? 'show' : ''}`} id="navbarSupportedContent"  style={{left:"800px", position:"absolute"}}>
+      <div className={` collapse navbar-collapse ${open ? 'show' : ''}`} id="navbarSupportedContent"  style={{left:"900px", position:"absolute"}}>
         <ul className="navbar-nav mr-auto">
           <li className="nav-item dropdown" style={{padding: '0 10px'}}>
             <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" onClick={openDropdown} aria-haspopup="true" aria-expanded={open ? "true" : "false"} style={{color:'white'}} >
@@ -36,13 +36,10 @@ function Navbar() {
           <li className="nav-item" style={{padding: '0 10px'}}>
             <a className="nav-link " href="/decoracion" style={{color:'white'}}>Decoración</a>
           </li>
-          <li className="nav-item" style={{padding: '0 10px'}}>
-            <a className="nav-link" href="/sobre nosotros" style={{color:'white'}}>Sobre Nosotros</a>
-          </li>
         </ul>
         
       </div>
-      <img className="avatar-image, position-absolute" src={avatar2} style={{width:'30px', left:"1400px"}}/>
+      <img className="avatar-image, position-absolute" src={avatar2} style={{width:'30px', left:"1340px"}}/>
       <button className="navbar-toggle" onClick={openDropdown} aria-label="Toggle navigation">
         <svg data-testid="geist-icon" height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16" style={{color: "white"}}>
           <path fillRule="evenodd" clipRule="evenodd" d="M1 2H1.75H14.25H15V3.5H14.25H1.75H1V2ZM1 12.5H1.75H14.25H15V14H14.25H1.75H1V12.5ZM1.75 7.25H1V8.75H1.75H14.25H15V7.25H14.25H1.75Z" fill="currentColor"/>
