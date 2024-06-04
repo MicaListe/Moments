@@ -5,6 +5,7 @@ import Dorado from "../ramaDorada/rama";
 import DecoParty from "./deco";
 import video from "../../assets/video decoracion.mp4"
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import FilterDecoration from "../FiltroDecoration/FilterDeco";
 
 export default function Decoration(){
 
@@ -33,6 +34,7 @@ export default function Decoration(){
             <div className="  d-flex justify-content-center align-items-center">
                     <video src={video} loop autoPlay style={{width:"700px", marginTop:"100px"}}></video> 
             </div>
+            <FilterDecoration/>
             <div className="row mb-5" style={{marginLeft:"200px", marginTop:"100px"}}>
                 {paginado().map((element)=>(
                     <div className="card p-3 me-3 mb-4" key={element.id} style={{width:"350px", height:"300px", boxShadow:"1px 1px 2px black"}}>

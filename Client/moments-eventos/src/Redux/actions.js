@@ -2,6 +2,9 @@ export const GET_EVENTS = "GET_EVENTS"
 export const GET_CATERING = "GET_CATERING"
 export const GET_DECORATION = "GET_DECORATION"
 export const FILTER_CATERING= "FILTER_CATERING"
+export const FILTER_DECORATION = "FILTER_DECORATION"
+export const ORDER_BY_CATERING = "ORDER_BY_CATERING"
+export const ORDER_BY_DECORATION = "ORDER_BY_DECORATION"
 import axios from "axios"
 
 export function getEvents(){
@@ -55,6 +58,27 @@ export function filterCatering(payload) {
     console.log("payload", payload)
     return{
         type:FILTER_CATERING,
+        payload:payload,
+    }
+}
+
+export function filterDecoration(payload) {
+    return{
+        type:FILTER_DECORATION,
+        payload:payload,
+    }
+}
+
+export function orderByCatering (payload) {
+    return{
+        type:ORDER_BY_CATERING,
+        payload:payload,
+    }
+}
+
+export function orderByDecoration (payload) {
+    return{
+        type:ORDER_BY_DECORATION,
         payload:payload,
     }
 }
