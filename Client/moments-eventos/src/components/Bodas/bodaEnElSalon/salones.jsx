@@ -4,6 +4,7 @@ import ModalImage from '../../BoxImage/Lightbox';
 export default function Salones({ image, name, description }) {
     
     const [modal, setModal] = useState(false);
+    
 
     const handleClose = () => setModal(false);
     const handleOpen = () => {setModal(true), console.log("abierto")};

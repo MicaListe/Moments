@@ -8,6 +8,7 @@ import Comidas from "../Catering/comidas";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import FilterCatering from "../FiltroCatering/Filtros";
 
+
 export default function Catering() {
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
@@ -43,7 +44,8 @@ export default function Catering() {
                         <div className="card-body d-flex flex-column justify-content-center">
                             <Comidas
                                 name={element.name}
-                                image={element.image[0]}
+                                image={element.image}
+                                description={element.description}
                             />
                         </div>
                     </div>
