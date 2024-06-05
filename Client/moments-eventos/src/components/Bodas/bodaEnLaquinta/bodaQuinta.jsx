@@ -50,7 +50,8 @@ export default function BodaQuinta(){
                        <div className="card-body  justify-content-center" >
                             <Quintas
                                 name={element.name}
-                                image={element.image[0]}
+                                image={element.image}
+                                description={element.description}
                             />  
                         </div>   
                     </div>
