@@ -12,13 +12,13 @@ export default function FilterCatering() {
     };
 
     const handleOrderCatering = (e) => {
-        dispatch(orderByCatering(e.target.value)); // Asegúrate de pasar el valor correcto
+        dispatch(orderByCatering(e.target.value));
     };
 
     return (
         <div className="d-flex justify-content-center align-items-center" style={{ marginTop: "-60px" }}>
-            <div className="mb-3" style={{ width: '300px', marginTop: "80px" }}>
-                <label className="form-label">FILTRAR POR CATERING:</label>
+            <div className="filter-item mb-3 mx-3" style={{ width: '300px', marginTop: "80px", textAlign: "center" }}>
+                <label className="form-label" style={{ textAlign: "center" }}>FILTRAR POR CATERING:</label>
                 <select
                     className="form-select"
                     value={selectedCatering}
@@ -31,9 +31,9 @@ export default function FilterCatering() {
                 </select>
             </div>
 
-            <div className="mb-3" style={{ width: '300px', marginTop: "80px" }}>
-                <label className="form-label">Orden Alfabetico</label>
-                <select className="form-select" onChange={(e) => handleOrderCatering(e)}>
+            <div className="filter-item mb-3 mx-3" style={{ width: '300px', marginTop: "80px", textAlign: "center" }}>
+                <label className="form-label" style={{ textAlign: "center" }}>ORDEN ALFABETICO</label>
+                <select className="form-select" onChange={handleOrderCatering}>
                     <option value="Ascendente">A-Z</option>
                     <option value="Descendente">Z-A</option>
                 </select>
@@ -41,4 +41,3 @@ export default function FilterCatering() {
         </div>
     );
 }
-

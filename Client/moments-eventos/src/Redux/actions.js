@@ -70,6 +70,7 @@ export function filterDecoration(payload) {
 }
 
 export function orderByCatering (payload) {
+    console.log("acti",payload)
     return{
         type:ORDER_BY_CATERING,
         payload:payload,

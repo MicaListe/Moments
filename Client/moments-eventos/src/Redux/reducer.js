@@ -8,7 +8,7 @@ const initialState={
     filterCat:[],
     decoration:[],
     filterDeco:[],
-    descending:[,]
+    descending:[],
 }
 
 
@@ -39,29 +39,20 @@ const reducer = (state = initialState, action) => {
                 return {...state, catering : filteredByCatering};
             }
 
-        // case ORDER_BY_CATERING:
-        //     const descending = !state.descending;
+            case ORDER_BY_CATERING:
+                const descending = !state.descending;
+                
+                const sortedCatering = [...state.filterCat].sort((a, b) => {
+                    if (descending) {
+                        return a.type.localeCompare(b.type); // Ascendente
+                    } else {
+                        return b.type.localeCompare(a.type); // Descendente
+                    }
+                });
             
-        //     const sortedCatering=[...state.filterCat].sort((a, b) => {
-        //         if(descending){
-        //             return a.type > b.type ? -1 : 1;
-        //         }else{
-        //             return a.type < b.type ? -1 : 1;
-        //         }
-        //     })
+                return { ...state, filterCat: sortedCatering, descending };
 
-        //     return{...state, filterCat : sortedCatering, descending}
 
-        case ORDER_BY_CATERING:
-            const order = action.payload;
-            const sortedCatering = [...state.filterCat].sort((a, b) => {
-                if (order === 'Ascendente') {
-                    return a.name.localeCompare(b.name);
-                } else {
-                    return b.name.localeCompare(a.name);
-                }
-            });
-            return { ...state, filterCat: sortedCatering, descending: order === 'Descendente' };
             
         case GET_DECORATION:
             return{
