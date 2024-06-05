@@ -46,8 +46,8 @@ export default function BodaPlaya() {
                         <div className=" card-body d-flex flex-column justify-content-center" key={element.id}>
                             <Playas
                                 name={element.name}
-                                image={element.image[0]}
-                                country={element.country}
+                                image={element.image}
+                                description={element.description}
                             />  
                         </div>
                     </div> 

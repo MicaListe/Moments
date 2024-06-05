@@ -44,7 +44,8 @@ export default function FiestasCorp() {
                                 <div className="card-body d-flex flex-column justify-content-center">
                                     <Salones
                                         name={element.name}
-                                        image={element.image[0]}
+                                        image={element.image}
+                                        description={element.description}
                                     />
                                 </div>
                             </div>

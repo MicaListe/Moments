@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Carousel } from 'react-bootstrap';
 import ModalImage from '../../BoxImage/Lightbox';
 export default function Salones({ image, name, description }) {
+    
     const [modal, setModal] = useState(false);
 
     const handleClose = () => setModal(false);

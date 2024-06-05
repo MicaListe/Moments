@@ -41,6 +41,7 @@ export default function Decoration(){
                         <div className="card-body d-flex flex-column justify-content-center ">
                            <DecoParty
                                 image={element.image}
+                                description={element.description}
                             /> 
                         </div>
                     </div>
