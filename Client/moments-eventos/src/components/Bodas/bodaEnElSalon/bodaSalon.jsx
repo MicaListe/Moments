@@ -46,6 +46,8 @@ export default function BodaEnSalon(){
                                     name={element.name}
                                     image={element.image}
                                     description={element.description}
+                                    country={element.country}
+                                    city={element.city}
                                 />
                             </div>
                         </div>

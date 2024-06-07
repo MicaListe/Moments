@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Carousel } from 'react-bootstrap';
 import ModalImage from '../../BoxImage/Lightbox';
-export default function Salones({ image, name, description }) {
+export default function Salones({ image, name, description, country, city }) {
     
     const [modal, setModal] = useState(false);
     
@@ -22,6 +22,8 @@ export default function Salones({ image, name, description }) {
                 name={name}
                 image={image}
                 description={description}
+                country={country}
+                city={city}
             />
         </>
     );

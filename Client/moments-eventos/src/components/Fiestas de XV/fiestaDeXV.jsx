@@ -42,7 +42,7 @@ export default function FiestaDeXv(){
                                         <div className="col-md-4" key={element.id}>
                                             <div className="card p-2 mb-4" style={{width: "350px", height: "350px", boxShadow: "1px 1px 2px black" }}>
                                                 <div className="card-body d-flex flex-column justify-content-center">
-                                                    <Xv name={element.name} image={element.image} description={element.description}/>
+                                                    <Xv name={element.name} image={element.image} description={element.description} country={element.country} city={element.city}/>
                                                 </div>
                                             </div>
                                         </div>

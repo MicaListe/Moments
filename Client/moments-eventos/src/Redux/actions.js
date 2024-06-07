@@ -3,7 +3,6 @@ export const GET_CATERING = "GET_CATERING"
 export const GET_DECORATION = "GET_DECORATION"
 export const FILTER_CATERING= "FILTER_CATERING"
 export const FILTER_DECORATION = "FILTER_DECORATION"
-export const ORDER_BY_CATERING = "ORDER_BY_CATERING"
 export const ORDER_BY_DECORATION = "ORDER_BY_DECORATION"
 import axios from "axios"
 
@@ -69,17 +68,3 @@ export function filterDecoration(payload) {
     }
 }
 
-export function orderByCatering (payload) {
-    console.log("acti",payload)
-    return{
-        type:ORDER_BY_CATERING,
-        payload:payload,
-    }
-}
-
-export function orderByDecoration (payload) {
-    return{
-        type:ORDER_BY_DECORATION,
-        payload:payload,
-    }
-}

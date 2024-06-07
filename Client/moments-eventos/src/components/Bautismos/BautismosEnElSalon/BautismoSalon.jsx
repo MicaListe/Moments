@@ -46,7 +46,10 @@ export default function BautismoSalon() {
                         <div className="card-body d-flex flex-column justify-content-center">
                             <Salon
                                 name={element.name}
-                                image={element.image[0]}
+                                image={element.image}
+                                description={element.description}
+                                country={element.country}
+                                city={element.city}
                             />
                         </div>
                     </div>

@@ -42,6 +42,8 @@ export default function FiestasEgre() {
                                         name={element.name}
                                         image={element.image}
                                         description={element.description}
+                                        country={element.country}
+                                        city={element.city}
                                     />
                                 </div>
                             </div>

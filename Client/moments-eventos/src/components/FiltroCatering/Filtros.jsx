@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { filterCatering, orderByCatering } from "../../Redux/actions";
+import { filterCatering } from "../../Redux/actions";
 
 export default function FilterCatering() {
     const dispatch = useDispatch();
@@ -11,9 +11,6 @@ export default function FilterCatering() {
         dispatch(filterCatering(e));
     };
 
-    const handleOrderCatering = (e) => {
-        dispatch(orderByCatering(e.target.value));
-    };
 
     return (
         <div className="d-flex justify-content-center align-items-center" style={{ marginTop: "-60px" }}>
@@ -28,14 +25,6 @@ export default function FilterCatering() {
                     <option value='all'>Todo</option>
                     <option value='Torta'>Torta</option>
                     <option value='Menu'>Menu</option>
-                </select>
-            </div>
-
-            <div className="filter-item mb-3 mx-3" style={{ width: '300px', marginTop: "80px", textAlign: "center" }}>
-                <label className="form-label" style={{ textAlign: "center" }}>ORDEN ALFABETICO</label>
-                <select className="form-select" onChange={handleOrderCatering}>
-                    <option value="Ascendente">A-Z</option>
-                    <option value="Descendente">Z-A</option>
                 </select>
             </div>
         </div>

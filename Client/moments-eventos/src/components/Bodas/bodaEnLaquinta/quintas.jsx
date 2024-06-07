@@ -1,7 +1,7 @@
 import { useState } from "react"
 import ModalImage from "../../BoxImage/Lightbox"
 
-export default function Quintas({name, image, description}){
+export default function Quintas({name, image, description, country, city}){
 
     const [modal, setModal]= useState(false)
 
@@ -21,6 +21,8 @@ export default function Quintas({name, image, description}){
                 name={name}
                 image={image}
                 description={description}
+                country={country}
+                city={city}
             />
         </>
         

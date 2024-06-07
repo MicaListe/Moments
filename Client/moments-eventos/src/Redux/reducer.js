@@ -1,4 +1,4 @@
-import { GET_EVENTS, GET_CATERING, GET_DECORATION, FILTER_CATERING, FILTER_DECORATION, ORDER_BY_CATERING} from "./actions";
+import { GET_EVENTS, GET_CATERING, GET_DECORATION, FILTER_CATERING, FILTER_DECORATION} from "./actions";
 
 
 const initialState={
@@ -8,7 +8,6 @@ const initialState={
     filterCat:[],
     decoration:[],
     filterDeco:[],
-    descending:[],
 }
 
 
@@ -39,18 +38,7 @@ const reducer = (state = initialState, action) => {
                 return {...state, catering : filteredByCatering};
             }
 
-            case ORDER_BY_CATERING:
-                const descending = !state.descending;
-                
-                const sortedCatering = [...state.filterCat].sort((a, b) => {
-                    if (descending) {
-                        return a.type.localeCompare(b.type); // Ascendente
-                    } else {
-                        return b.type.localeCompare(a.type); // Descendente
-                    }
-                });
-            
-                return { ...state, filterCat: sortedCatering, descending };
+
 
 
             
@@ -70,7 +58,6 @@ const reducer = (state = initialState, action) => {
                 const filteredByDecoration= state.filterDeco.filter((item) => item.type === decorationFilter);
                 return {...state, decoration : filteredByDecoration}
             }
-            
         
         default: return state
 

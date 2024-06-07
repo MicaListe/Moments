@@ -1,10 +1,10 @@
 import { Modal, Carousel } from 'react-bootstrap';
 
-export default function ModalImage({modal, image, name, description, handleClose}) {
+export default function ModalImage({modal, image, name, description, country, city, handleClose}) {
     return (
         <Modal show={modal} onHide={handleClose}>
             <Modal.Header closeButton> {/* Encabezado */}
-                <Modal.Title>{name}</Modal.Title> {/* Titulo */}
+                <Modal.Title>{name}, {city}, {country}</Modal.Title> {/* Titulo */}
             </Modal.Header>
             <Modal.Body> {/* Cuerpo*/}
                 <Carousel>

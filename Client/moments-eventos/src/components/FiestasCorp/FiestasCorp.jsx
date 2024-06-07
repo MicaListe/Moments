@@ -5,6 +5,7 @@ import Salones from "./Salones";
 import Fcorp from '../../assets/Fcorp.jpg';
 import Dorado from "../ramaDorada/rama";
 
+
 export default function FiestasCorp() {
     const dispatch = useDispatch();
 
@@ -37,6 +38,7 @@ export default function FiestasCorp() {
                     </p>
                 </div>
             </div>
+
             <div className="row mb-5" style={{ marginLeft: "200px", marginTop: "100px" }}>
                 {fiestasCorpo && fiestasCorpo.map((evento) => (
                         evento.Lugars.map((element) => (
@@ -46,6 +48,8 @@ export default function FiestasCorp() {
                                         name={element.name}
                                         image={element.image}
                                         description={element.description}
+                                        country={element.country}
+                                        city={element.city}
                                     />
                                 </div>
                             </div>

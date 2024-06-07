@@ -1,7 +1,7 @@
 import { useState } from "react"
 import ModalImage from "../BoxImage/Lightbox"
 
-export default function Xv({image,name, description}){
+export default function Xv({image,name, description, country, city}){
 
     const [modal, setModal] = useState(false)
 
@@ -21,6 +21,8 @@ export default function Xv({image,name, description}){
                 name={name}
                 description={description}
                 image={image}
+                country={country}
+                city={city}
             />
         </>
         
