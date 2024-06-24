@@ -4,6 +4,8 @@ export const GET_DECORATION = "GET_DECORATION"
 export const FILTER_CATERING= "FILTER_CATERING"
 export const FILTER_DECORATION = "FILTER_DECORATION"
 export const ORDER_BY_DECORATION = "ORDER_BY_DECORATION"
+export const FILTER_COUNTRY = "FILTER_COUNTRY"
+export const FILTER_CITY = "FILTER_CITY"
 import axios from "axios"
 
 export function getEvents(){
@@ -65,6 +67,20 @@ export function filterDecoration(payload) {
     return{
         type:FILTER_DECORATION,
         payload:payload,
+    }
+}
+
+export function filterCountry(payload){
+    return{
+        type: FILTER_COUNTRY,
+        payload: payload
+    }
+}
+
+export function filterCity(payload){
+    return{
+        type: FILTER_CITY,
+        payload: payload
     }
 }
 

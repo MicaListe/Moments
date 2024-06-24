@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { getEvents } from "../../../Redux/actions";
+import React, { useEffect, useState } from "react";
+import { filterCountry, getEvents } from "../../../Redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import Playas from "./playas";
 import casamiento from "../../../assets/casamiento.jpg"
@@ -8,6 +8,8 @@ import Back from "../../button back/back";
 
 export default function BodaPlaya() {
     
+    const [selectCountry, setSelectedCountry]=useState([])
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -18,6 +20,14 @@ export default function BodaPlaya() {
     //.flat() aplana estas matrices en una sola matriz.
     const bodas= eventos.filter((element)=>element.name==="Bodas")
     const bodasYPlayas =  bodas.map(evento => evento.Lugars).flat().filter(lugar => lugar.type === 'Playa');
+
+    const lugares= bodas.filter(element=>element.Lugars).flat()
+    const lugaresUnicos= [...new Set(lugares.map(element=>element.country))]
+
+    const handleCountry=(e)=>{
+        setSelectedCountry(e)
+        dispatch(filterCountry(e))
+    }
     
     return (
         <div>
@@ -54,6 +64,19 @@ export default function BodaPlaya() {
                         </div>
                     </div> 
                 ))}
+            </div>
+
+            <div>
+                <label htmlFor="">Seleccionar País</label>
+                <select onChange={handleCountry}>
+                    {
+                        lugaresUnicos.map(element=>(
+                            <option value={element}>{element}</option>
+                        ))
+                    }  
+                </select>
+               
+                
             </div>
         </div>
     );
