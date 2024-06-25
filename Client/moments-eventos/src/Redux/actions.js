@@ -78,6 +78,7 @@ export function filterCountry(payload){
 }
 
 export function filterCity(payload){
+    console.log("p",payload)
     return{
         type: FILTER_CITY,
         payload: payload

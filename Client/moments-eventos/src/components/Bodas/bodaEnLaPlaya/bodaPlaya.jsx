@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { filterCountry, getEvents } from "../../../Redux/actions";
+import { filterCity, filterCountry, getEvents } from "../../../Redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import Playas from "./playas";
 import casamiento from "../../../assets/casamiento.jpg"
@@ -9,6 +9,7 @@ import Back from "../../button back/back";
 export default function BodaPlaya() {
     
     const [selectCountry, setSelectedCountry]=useState([])
+    const [selectCity, setSelectCity]=useState([])
 
     const dispatch = useDispatch();
 
@@ -21,14 +22,19 @@ export default function BodaPlaya() {
     const bodas= eventos.filter((element)=>element.name==="Bodas")
     const bodasYPlayas =  bodas.map(evento => evento.Lugars).flat().filter(lugar => lugar.type === 'Playa');
 
-    const lugares= bodas.filter(element=>element.Lugars).flat()
-    const lugaresUnicos= [...new Set(lugares.map(element=>element.country))]
+    const lugares= bodas.map(element=>element.Lugars).flat()
+    const citys= [...new Set(lugares.map(element=>element.city))]
+    const countries= [... new Set(lugares.map(element=>element.country))]
 
     const handleCountry=(e)=>{
         setSelectedCountry(e)
         dispatch(filterCountry(e))
     }
-    
+
+    const handleCity = (e) =>{
+        setSelectCity(e)
+        dispatch(filterCity(e))
+    }    
     return (
         <div>
             <Dorado/>
@@ -67,16 +73,24 @@ export default function BodaPlaya() {
             </div>
 
             <div>
-                <label htmlFor="">Seleccionar País</label>
-                <select onChange={handleCountry}>
+                <label htmlFor="">Seleccionar ciudad</label>
+                <select onChange={(e)=>handleCity(e.target.value)}>
                     {
-                        lugaresUnicos.map(element=>(
+                        citys.map(element=>(
                             <option value={element}>{element}</option>
                         ))
                     }  
+                </select>  
+            </div>
+            <div>
+                <label htmlFor="">Seleccionar país</label>
+                <select onChange={(e)=>handleCountry(e.target.value)}>
+                    {
+                        countries.map(element=>(
+                            <option value={element}>{element}</option>
+                        ))
+                    }
                 </select>
-               
-                
             </div>
         </div>
     );

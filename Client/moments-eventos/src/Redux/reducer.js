@@ -56,13 +56,14 @@ const reducer = (state = initialState, action) => {
             }
         case FILTER_COUNTRY:
             const countryFilter = action.payload
-
+            console.log("e", state.events)
             if( countryFilter === "all"){
                 return{
                     ...state, filtered: state.countryFilter
                 }
             }else{
                 const filteredByCountry = state.events.filter((item)=>item.country === countryFilter)
+                console.log("f",filteredByCountry)
                 return {
                     ...state, filtered: filteredByCountry
                 }
