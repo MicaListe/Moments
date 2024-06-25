@@ -22,7 +22,7 @@ export default function Salondos({ name, image, description, country, city }) {
                     }}
                     onMouseEnter={(e) => {
                         e.currentTarget.style.transform = "scale(1.05)";
-                        e.currentTarget.style.boxShadow = "0px 4px 15px rgba(0, 0, 0, 0.2)";
+                        // e.currentTarget.style.boxShadow = "0px 4px 15px rgba(0, 0, 0, 0.2)";
                     }}
                     onMouseLeave={(e) => {
                         e.currentTarget.style.transform = "scale(1)";
