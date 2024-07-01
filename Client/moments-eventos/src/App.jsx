@@ -22,6 +22,8 @@ import FiestaDeXv from './components/Fiestas de XV/fiestaDeXV';
 import Team from './components/Team/Team';
 import Catering from './components/Catering/Catering';
 import Decoration from './components/Decoracion/decoration';
+import Calendario from './components/Calendario/Calendario';
+
 
 axios.defaults.baseURL="https://moments-self.vercel.app"
 
@@ -37,8 +39,10 @@ function App() {
             <CarouselCatering/>
             <CarouselDecoration/>
             <Valores/>
+            <Calendario/>
           </>
         }/>
+        
         <Route path="/aboutUs" element={<AboutUs/>}/>
         <Route path="/Sucursales" element={<Sucursales/>}/>
         <Route path="/Team" element={<Team/>}/>
@@ -54,6 +58,7 @@ function App() {
         <Route path="/fiestasXv" element={<FiestaDeXv/>}/>
         <Route path="/catering" element={<Catering/>}/>
         <Route path='/decoracion' element={<Decoration/>}/>
+        <Route path="/calendario" component={Calendario} />
       </Routes>
       <Footer/>
     </div>

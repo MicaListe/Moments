@@ -1,6 +1,8 @@
 import profesionalismo from "../../assets/profesionalismo.png"
 import compromiso from "../../assets/compromiso.png"
 import creatividad from "../../assets/creatividad.png"
+import { Link } from "react-router-dom"
+
 
 export default function valores(){
     return(
@@ -39,7 +41,9 @@ export default function valores(){
                 </div>
             </div>
             <h2 className="mt-5" style={{fontSize:"40px",fontWeight: "400", fontStyle:"italic", fontFamily:"Dancing Script, cursive" }}>Contactate con nosotros</h2>
-            <button className="mt-4">Ir a calendario</button>
+            <Link to="/calendario">
+                <button className="mt-4 btn btn-primary">Ir a calendario</button>
+            </Link>
         </div>
     )
 }
