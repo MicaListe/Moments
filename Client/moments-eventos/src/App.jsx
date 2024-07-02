@@ -1,4 +1,4 @@
-import { Routes, Route, } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Navbar from './components/NavBar/Navbar';
 import CarouselPlaces  from './components/Carousel/carouselPlaces';
@@ -6,26 +6,25 @@ import CarouselCatering from './components/Carousel/carouselCatering';
 import CarouselDecoration from './components/Carousel/carouselDecoration';
 import Subtitulo from './components/SubTitulo/SubTitulo';
 import Valores from './components/Valores/valores';
-import axios from "axios"
+import axios from "axios";
 import AboutUs from './components/AboutUs/AboutUs';
 import Sucursales from './components/Sucursales/Sucursales';
 import Bodas from './components/Bodas/bodaEnLaPlaya/bodas';
 import BodaPlaya from './components/Bodas/bodaEnLaPlaya/bodaPlaya';
-import FiestasCorp from "./components/FiestasCorp/FiestasCorp"
+import FiestasCorp from "./components/FiestasCorp/FiestasCorp";
 import BodaQuinta from './components/Bodas/bodaEnLaquinta/bodaQuinta';
 import BodaEnSalon from './components/Bodas/bodaEnElSalon/bodaSalon';
 import FiestasEgre from './components/FiestasEgre/FiestasEgre';
 import Bautismos from './components/Bautismos/BautismosEnElSalon/Bautismos';
 import BautismoSalon from './components/Bautismos/BautismosEnElSalon/BautismoSalon';
-import BautismoQuinta from './components/Bautismos/BautismosEnLaQuinta/BautismoQuinta'
+import BautismoQuinta from './components/Bautismos/BautismosEnLaQuinta/BautismoQuinta';
 import FiestaDeXv from './components/Fiestas de XV/fiestaDeXV';
 import Team from './components/Team/Team';
 import Catering from './components/Catering/Catering';
 import Decoration from './components/Decoracion/decoration';
 import Calendario from './components/Calendario/Calendario';
 
-
-axios.defaults.baseURL="https://moments-self.vercel.app"
+axios.defaults.baseURL = "https://moments-self.vercel.app";
 
 function App() {
   return (
@@ -39,10 +38,8 @@ function App() {
             <CarouselCatering/>
             <CarouselDecoration/>
             <Valores/>
-            <Calendario/>
           </>
         }/>
-        
         <Route path="/aboutUs" element={<AboutUs/>}/>
         <Route path="/Sucursales" element={<Sucursales/>}/>
         <Route path="/Team" element={<Team/>}/>
@@ -58,7 +55,7 @@ function App() {
         <Route path="/fiestasXv" element={<FiestaDeXv/>}/>
         <Route path="/catering" element={<Catering/>}/>
         <Route path='/decoracion' element={<Decoration/>}/>
-        <Route path="/calendario" component={Calendario} />
+        <Route path="/Calendario" element={<Calendario />} />
       </Routes>
       <Footer/>
     </div>
