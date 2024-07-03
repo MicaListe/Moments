@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom"
 import "../Login/login.css"
 import logo from "../../assets/logo.png"
 import rama from "../../assets/ramaDorada.png";
+
 export default function Login(){
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -13,7 +14,7 @@ export default function Login(){
         name: "",
         mail: "",
         password: "",
-        roleId:2
+        roleId:0
     }
     
     const [users, setUsers]= useState(initialForm)
@@ -26,10 +27,18 @@ console.log(users,"u")
         })
     }
 
+    const handleRoleId = (e)=>{
+        
+
+        setUsers({
+            ...users, roleId: parseInt(e)
+        })
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault(); // Evita que el formulario se envíe automáticamente
     
-        if (users.name === "" || users.mail === "" || users.password === "") {
+        if (users.name === "" || users.mail === "" || users.password === "" || users.roleId === 0) {
             window.alert("Usuario no creado");
         } else {
             dispatch(userRegister(users)); // Envia los datos del usuario a través de Redux
@@ -54,6 +63,13 @@ console.log(users,"u")
                 </div>
                 <div className="form-group">
                     <input type="text" className="form-control item" id="email" name="mail" value={users.mail} onChange={handleChange} placeholder="Correo"/>
+                </div>
+                <div className="form-option">
+                    <label htmlFor="">Cuenta para:</label>
+                    <select name="roleId" id="" onClick={(e)=>handleRoleId(e.target.value)}>
+                        <option value="1">Administrador</option>
+                        <option value="2">Usuario</option>
+                    </select>  
                 </div>
                 <div className="form-group">
                     <input type="password" className="form-control item" id="password" name="password" onChange={handleChange} value={users.password} placeholder="Contraseña"/>

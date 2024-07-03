@@ -48,6 +48,25 @@
     margin-top: 20px;
     margin-left:45px
 }
+.registration-form .form-option {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px; /* Espacio entre elementos */
+}
+
+.registration-form .form-option label {
+    margin-bottom: 5px; /* Espacio entre el label y el select */
+    margin-left: 5px;
+}
+
+.registration-form .form-option select {
+    width: 100%; /* Opcional: ocupa el ancho completo disponible */
+    padding: 8px; /* Opcional: ajusta el padding según tu diseño */
+    border: 1px solid #ccc; /* Opcional: estilo del borde */
+    border-radius: 30px; /* Opcional: redondea las esquinas */
+    background-color: #fff;
+    color:black
+}
 
 
 
