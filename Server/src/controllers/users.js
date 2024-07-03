@@ -23,6 +23,18 @@ const usersControllers={
             res.status(500).json({error:"Error interno del servidor"})
             console.error(error)
         }
+    },
+
+    allUsers: async (req,res)=>{
+        try{
+            const users= await Usuario.findAll()
+            console.log("users", users)
+            res.status(200).json(users)
+            
+        }catch(error){
+            res.status(500).json({error:"Error interno del servidor"})
+            console.log(error)
+        }
     }
 }
 module.exports= usersControllers

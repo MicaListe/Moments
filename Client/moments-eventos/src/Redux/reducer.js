@@ -1,4 +1,4 @@
-import { GET_EVENTS, GET_CATERING, GET_DECORATION, FILTER_CATERING, FILTER_DECORATION, FILTER_COUNTRY} from "./actions";
+import { GET_EVENTS, GET_CATERING, GET_DECORATION, FILTER_CATERING, FILTER_DECORATION, FILTER_COUNTRY, USER_REGISTER} from "./actions";
 
 
 const initialState={
@@ -8,6 +8,7 @@ const initialState={
     filterCat:[],
     decoration:[],
     filterDeco:[],
+    users:[]
 }
 
 
@@ -67,6 +68,10 @@ const reducer = (state = initialState, action) => {
                 return {
                     ...state, filtered: filteredByCountry
                 }
+            }
+        case USER_REGISTER:
+            return{
+                ...state,
             }
         default: return state
 

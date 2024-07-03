@@ -6,6 +6,7 @@ export const FILTER_DECORATION = "FILTER_DECORATION"
 export const ORDER_BY_DECORATION = "ORDER_BY_DECORATION"
 export const FILTER_COUNTRY = "FILTER_COUNTRY"
 export const FILTER_CITY = "FILTER_CITY"
+export const USER_REGISTER = "USER_REGISTER"
 import axios from "axios"
 
 export function getEvents(){
@@ -82,6 +83,18 @@ export function filterCity(payload){
     return{
         type: FILTER_CITY,
         payload: payload
+    }
+}
+
+export function userRegister(payload){
+    console.log("p", payload)
+    try{
+        return async function(){
+            const response = await axios.post("/users/register", payload)
+            return response
+        }
+    }catch(error){
+        console.error("Error al realizar la solicitud")
     }
 }
 

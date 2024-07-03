@@ -11,7 +11,7 @@ router.use("/events", events)
 router.use("/catering", catering)
 router.use("/places", places)
 router.use("/decoration", decoration)
-router.use("/user",users)
+router.use("/users",users)
 
 // //Crear usuario
 // router.post("/register")
