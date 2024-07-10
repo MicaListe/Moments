@@ -23,8 +23,9 @@ import Team from './components/Team/Team';
 import Catering from './components/Catering/Catering';
 import Decoration from './components/Decoracion/decoration';
 import Calendario from './components/Calendario/Calendario';
-import Login from './components/Login/login';
+import Register from "./components/Register/register"
 import ProtectedRoute from './components/RutaProtegida/rutaProtegida';
+import Login from './components/Login/login';
 
 axios.defaults.baseURL = "https://moments-self.vercel.app";
 
@@ -59,6 +60,7 @@ function App() {
         <Route path='/decoracion' element={<Decoration/>}/>
         {/* <Route path="/Calendario" element={<Calendario />} /> */}
         <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
         <Route element={<ProtectedRoute />}>
             <Route path="/calendario" element={<Calendario />} />
         </Route>

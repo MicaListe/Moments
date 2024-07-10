@@ -1,4 +1,4 @@
-import { GET_EVENTS, GET_CATERING, GET_DECORATION, FILTER_CATERING, FILTER_DECORATION, FILTER_COUNTRY, USER_REGISTER} from "./actions";
+import { GET_EVENTS, GET_CATERING, GET_DECORATION, FILTER_CATERING, FILTER_DECORATION, FILTER_COUNTRY, USER_REGISTER, GET_USERS} from "./actions";
 
 
 const initialState={
@@ -70,9 +70,16 @@ const reducer = (state = initialState, action) => {
                 }
             }
         case USER_REGISTER:
+            return {
+                ...state,
+                users: [...state.users, action.payload],
+            };
+        case GET_USERS:{
             return{
                 ...state,
+                users: action.payload
             }
+        }
         default: return state
 
 
