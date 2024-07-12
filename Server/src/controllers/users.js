@@ -8,6 +8,7 @@ const usersControllers={
 
             // Verificar si el correo electrónico ya está registrado
             const existingUser = await Usuario.findOne({ where: { mail } });
+    
             if (existingUser) {
                 return res.status(400).json({ message: "El correo electrónico ya está registrado." });
             }else{
@@ -19,10 +20,7 @@ const usersControllers={
                 });
     
                 res.status(200).json(createUser);
-            }
-
-            // Si no existe, crear el nuevo usuario
-           
+            }      
         } catch (error) {
             res.status(500).json({ error: "Error interno del servidor" });
             console.error(error);
@@ -35,6 +33,24 @@ const usersControllers={
             console.log("users", users)
             res.status(200).json(users)
             
+        }catch(error){
+            res.status(500).json({error:"Error interno del servidor"})
+            console.log(error)
+        }
+    },
+    deleteUser: async (req, res)=>{
+        try{
+
+            const id = req.params.id
+            const encontrado= await Usuario.findByPk(id)
+
+            if(!encontrado){
+                res.status(400).json({message:"Id not found"})
+            }
+            await encontrado.destroy()
+            res.status(200).json({message:"Id eliminado"})
+            return 
+
         }catch(error){
             res.status(500).json({error:"Error interno del servidor"})
             console.log(error)

@@ -1,21 +1,52 @@
 import { getUsers } from "../../Redux/actions"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import logo from '../../assets/logo.png';
 import rama from '../../assets/ramaDorada.png'; 
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 export default function Login (){
 
     const dispatch = useDispatch()
-    const usuarios = useSelector((state)=>state.users)
+    const navigate = useNavigate()
+
+    const usuarios = useSelector((state)=>state.users || [])
     console.log(usuarios, "u")
 
+    const initialState={
+        mail:"",
+        password:""
+    }
+
+    const [users, setUser] = useState(initialState)
+    console.log(users, "i")
     useEffect(()=>{
         dispatch(getUsers())
     },[])
 
     
 
+    const handleChange = (event) =>{
+        const {name, value}= event.target
+        setUser({
+            ...users,
+            [name]:value
+        })
+    }
+    
+    const handleSubmit = (event) =>{
+        event.preventDefault()
+    //    const userExist = usuarios.some((user)=>user.mail === users.mail && users.password === users.password)
+        const userExist = Array.isArray(usuarios) && usuarios.some((user) => user.mail === users.mail && user.password === users.password);
+        console.log(userExist, "h")
+        if(userExist){
+            navigate("/")
+        }else{
+            window.alert("Correo o contraseña incorrecta")
+        }
+    }
+    
     return(
         <div className="registration-form">
             <form>
@@ -32,7 +63,8 @@ export default function Login (){
                         className="form-control item"
                         id="email"
                         name="mail"
-                        value={""}
+                        value={users.mail}
+                        onChange={handleChange}
                         placeholder="Correo"
                     />
                 </div>
@@ -43,12 +75,13 @@ export default function Login (){
                         className="form-control item"
                         id="password"
                         name="password"
-                        value={""}
+                        value={users.password}
+                        onChange={handleChange}
                         placeholder="Contraseña"
                     />
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-block create-account" >
+                    <button type="submit" onClick={handleSubmit} className="btn btn-block create-account" >
                         Log In
                     </button>
                 </div>

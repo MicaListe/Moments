@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import logo from "../../assets/logo.png"
 import avatar2 from "../../assets/avatar2.png"
 import "../NavBar/dropdown.css"
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const [logueado, setLogueado] = useState(false)
   const [isOpenDropdownImage, setisOpenDropdownImage] = useState(false)
+  const navigate = useNavigate()
 
   const openDropdown = () => {
     setOpen(!open);
@@ -14,6 +18,15 @@ function Navbar() {
 
   const openImage = () =>{
     setisOpenDropdownImage(!isOpenDropdownImage)
+  }
+
+  useEffect(()=>{
+    setLogueado(true)
+  },[])
+
+  const handleLogOut = () =>{
+    setLogueado(false)
+    navigate("/")
   }
   return (
     <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'black' }}>
@@ -47,10 +60,22 @@ function Navbar() {
 
     {/* Dropdown del Avatar */}
     <div>
-        <img className="avatar-image position-absolute" onClick={openImage} src={avatar2} style={{ width: '30px', left: '1320px', top: '35px', cursor: 'pointer' }} alt="Avatar" />
-        <div className={`dropdown-menu ${isOpenDropdownImage ? 'show' : ''}`} style={{ position: 'absolute', top: '70px', left: '1340px', backgroundColor: 'black', zIndex: '1000' }}>
-            <a className="dropdown-item" href="/login" style={{ color: 'white' }}>Log-in</a>  
-        </div>
+      <img className="avatar-image position-absolute" onClick={openImage} src={avatar2} style={{ width: '30px', left: '1320px', top: '35px', cursor: 'pointer' }} alt="Avatar" />
+      <div
+                className={`dropdown-menu ${isOpenDropdownImage ? 'show' : ''}`}
+                style={{ position: 'absolute', top: '70px', left: '1340px', backgroundColor: 'black', zIndex: '1000' }}
+            >
+                {/* Renderizado condicional del enlace de log-in/log-out */}
+                {logueado ? (
+                    <a className="dropdown-item" onClick={handleLogOut} style={{ cursor: 'pointer', color: 'white' }}>
+                        Log-out
+                    </a>
+                ) : (
+                    <Link to="/login" className="dropdown-item" style={{ color: 'white' }}>
+                        Log-in
+                    </Link>
+                )}
+            </div>
     </div>
       
       {/* <button className="navbar-toggle" onClick={openDropdown} aria-label="Toggle navigation">

@@ -86,29 +86,57 @@ export function filterCity(payload){
     }
 }
 
-export function userRegister(payload){
-    try{
-        return async function(){
-            const response = await axios.post("/users/register", payload)
-            return response
+// export function userRegister(payload){
+//     try{
+//         return async function(){
+//             const response = await axios.post("/users/register", payload)
+//             return response
+//         }
+//     }catch(error){
+//         console.error("Error al realizar la solicitud")
+//     }
+// }
+
+// export function getUsers(){
+//     try{
+//         return async function (dispatch){
+//             const response = await axios.get ("/users/usuarios")
+//             return dispatch({
+//                 type: GET_USERS,
+//                 payload: response
+//             })
+//         }
+//     }catch(error){
+//         console.error("Error al realizar la solicitud")
+//     }
+
+// }
+export function userRegister(payload) {
+    return async function (dispatch) {
+        try {
+            const response = await axios.post('/users/register', payload);
+            dispatch({
+                type: USER_REGISTER,
+                payload: response.data
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error al realizar la solicitud', error);
         }
-    }catch(error){
-        console.error("Error al realizar la solicitud")
-    }
+    };
 }
 
-export function getUsers(){
-    try{
-        return async function (dispatch){
-            const response = await axios.get ("/users/usuarios")
-            return dispatch({
+export function getUsers() {
+    return async function (dispatch) {
+        try {
+            const response = await axios.get('/users/usuarios');
+            dispatch({
                 type: GET_USERS,
-                payload: response
-            })
+                payload: response.data
+            });
+        } catch (error) {
+            console.error('Error al realizar la solicitud', error);
         }
-    }catch(error){
-        console.error("Error al realizar la solicitud")
-    }
-
+    };
 }
 
