@@ -5,6 +5,7 @@ import logo from '../../assets/logo.png';
 import rama from '../../assets/ramaDorada.png'; 
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import ConfirmationLogin from "./modalConfirmation";
 
 export default function Login (){
 
@@ -20,12 +21,12 @@ export default function Login (){
     }
 
     const [users, setUser] = useState(initialState)
+    const [isOpenModal, setIsOpenModal] = useState(false)
+
     console.log(users, "i")
     useEffect(()=>{
         dispatch(getUsers())
     },[])
-
-    
 
     const handleChange = (event) =>{
         const {name, value}= event.target
@@ -41,12 +42,18 @@ export default function Login (){
         const userExist = Array.isArray(usuarios) && usuarios.some((user) => user.mail === users.mail && user.password === users.password);
         console.log(userExist, "h")
         if(userExist){
-            navigate("/")
+            setIsOpenModal(true)
+            const loggedUser = usuarios.find((user) => user.mail === users.mail);
+            localStorage.setItem('user', JSON.stringify(loggedUser));
         }else{
             window.alert("Correo o contraseña incorrecta")
         }
     }
     
+    const closeModal=()=>{
+        setIsOpenModal(false)
+        navigate("/")
+    }
     return(
         <div className="registration-form">
             <form>
@@ -94,6 +101,7 @@ export default function Login (){
                     </Link> 
                 </div>
             </form>
+            <ConfirmationLogin show={isOpenModal} handleClose={closeModal}/>
         </div>
     )
 }

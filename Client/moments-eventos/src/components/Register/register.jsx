@@ -15,10 +15,13 @@ export default function Register() {
         mail: '',
         password: '',
         roleId: 0,
+        adminKey: ""
     };
 
     const usuarios = useSelector((state) => state.users);
+
     const [users, setUsers] = useState(initialForm);
+    const [AdminKey, setAdminKey] = useState(false)
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -29,10 +32,12 @@ export default function Register() {
     };
 
     const handleRoleId = (e) => {
+        const roleId = parseInt(e)
         setUsers({
             ...users,
-            roleId: parseInt(e),
+            roleId: roleId,
         });
+        setAdminKey(roleId===1)
     };
 
     const handleSubmit = (e) => {
@@ -40,6 +45,8 @@ export default function Register() {
 
         if (users.name === '' || users.mail === '' || users.password === '' || users.roleId === 0) {
             window.alert('Por favor complete todos los campos.');
+        }else if(users.roleId===1 && users.adminKey !== "4534"){
+            window.alert("Clave de administrador incorrecta")
         } else {
             // Verificar si el correo electrónico ya está registrado
             const emailExist = usuarios.some(user => user.mail === users.mail);
@@ -102,6 +109,19 @@ export default function Register() {
                         <option value="2">Usuario</option>
                     </select>
                 </div>
+                {AdminKey && ( // Condicional para mostrar el input de clave de administrador
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            className="form-control item"
+                            id="adminKey"
+                            name="adminKey"
+                            value={users.adminKey}
+                            onChange={handleChange}
+                            placeholder="Clave de administrador"
+                        />
+                    </div>
+                )}
                 <div className="form-group">
                     <input
                         type="password"
