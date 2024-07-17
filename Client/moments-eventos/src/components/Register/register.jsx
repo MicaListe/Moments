@@ -21,7 +21,7 @@ export default function Register() {
     const usuarios = useSelector((state) => state.users);
 
     const [users, setUsers] = useState(initialForm);
-    const [AdminKey, setAdminKey] = useState(false)
+    const [AdminKey, setAdminKey] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -32,12 +32,12 @@ export default function Register() {
     };
 
     const handleRoleId = (e) => {
-        const roleId = parseInt(e)
+        const roleId = parseInt(e);
         setUsers({
             ...users,
             roleId: roleId,
         });
-        setAdminKey(roleId===1)
+        setAdminKey(roleId === 1);
     };
 
     const handleSubmit = (e) => {
@@ -45,23 +45,18 @@ export default function Register() {
 
         if (users.name === '' || users.mail === '' || users.password === '' || users.roleId === 0) {
             window.alert('Por favor complete todos los campos.');
-        }else if(users.roleId===1 && users.adminKey !== "4534"){
-            window.alert("Clave de administrador incorrecta")
+        } else if (users.roleId === 1 && users.adminKey !== "4534") {
+            window.alert("Clave de administrador incorrecta");
         } else {
-            // Verificar si el correo electrónico ya está registrado
             const emailExist = usuarios.some(user => user.mail === users.mail);
-    
+
             if (emailExist) {
                 window.alert('El correo electrónico ya está registrado.');
             } else {
-                
                 dispatch(userRegister(users));
-                window.alert("Usuario creado exitosamente")
+                window.alert("Usuario creado exitosamente");
 
-                // Actualizar el estado de usuarios en Redux
                 const updatedUsers = [...usuarios, users];
-
-                // Guardar usuario en localStorage
                 localStorage.setItem('registeredUsers', JSON.stringify(updatedUsers));
                 localStorage.setItem('user', JSON.stringify(users));
 
@@ -71,14 +66,19 @@ export default function Register() {
     };
 
     return (
-        <div className="registration-form">
-            <form>
+        <div className="registration-form shadow-sm p-4 rounded" style={{ transition: 'box-shadow 0.3s' }}>
+            <form
+                onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)'}
+                onMouseLeave={(e) => e.currentTarget.style.boxShadow = 'none'}
+                onSubmit={handleSubmit}
+            >
                 <img src={rama} style={{ width: '100px', position: 'absolute', left: '0px', top: '200px' }} />
                 <img src={rama} style={{ width: '100px', transform: 'rotate(180deg)', position: 'absolute', left: '1410px', top: '115px' }} />
                 <img src={rama} style={{ width: '90px', transform: 'rotate(200deg)', position: 'absolute', left: '1420px', top: '700px' }} />
                 <div className="form-icon">
                     <img src={logo} alt="" />
                 </div>
+
                 <div className="form-group">
                     <input
                         type="text"
@@ -103,13 +103,13 @@ export default function Register() {
                 </div>
                 <div className="form-option">
                     <label htmlFor="">Cuenta para:</label>
-                    <select name="roleId" id="" onChange={(e) => handleRoleId(e.target.value)}>
+                    <select name="roleId" onChange={(e) => handleRoleId(e.target.value)}>
                         <option value="0">Seleccionar Rol</option>
                         <option value="1">Administrador</option>
                         <option value="2">Usuario</option>
                     </select>
                 </div>
-                {AdminKey && ( // Condicional para mostrar el input de clave de administrador
+                {AdminKey && (
                     <div className="form-group">
                         <input
                             type="text"
@@ -134,7 +134,11 @@ export default function Register() {
                     />
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-block create-account" onClick={handleSubmit}>
+                    <button 
+                        type="submit" 
+                        className="btn btn-block create-account btn-primary"
+                        style={{ width: '60%', padding: '8px', marginBottom: '20px' }}
+                    >
                         Registrarme
                     </button>
                 </div>

@@ -2,50 +2,61 @@ import React, { useEffect, useState } from "react";
 import { filterCity, filterCountry, getEvents } from "../../../Redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import Playas from "./playas";
-import casamiento from "../../../assets/casamiento.jpg"
+import casamiento from "../../../assets/casamiento.jpg";
 import Dorado from "../../ramaDorada/rama";
 import Back from "../../button back/back";
 
 export default function BodaPlaya() {
-    
-    const [selectCountry, setSelectedCountry]=useState([])
-    const [selectCity, setSelectCity]=useState([])
+    const [selectCountry, setSelectedCountry] = useState([]);
+    const [selectCity, setSelectCity] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 6;
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getEvents());
-    }, []);
+    }, [dispatch]);
+
     const eventos = useSelector((state) => state.filtered);
-    //eventos.map(evento => evento.Lugars) obtiene todas las matrices de lugares de cada evento.
-    //.flat() aplana estas matrices en una sola matriz.
-    const bodas= eventos.filter((element)=>element.name==="Bodas")
-    const bodasYPlayas =  bodas.map(evento => evento.Lugars).flat().filter(lugar => lugar.type === 'Playa');
+    const bodas = eventos.filter((element) => element.name === "Bodas");
+    const bodasYPlayas = bodas.map(evento => evento.Lugars).flat().filter(lugar => lugar.type === 'Playa');
 
-    const lugares= bodas.map(element=>element.Lugars).flat()
-    const citys= [...new Set(lugares.map(element=>element.city))]
-    const countries= [... new Set(lugares.map(element=>element.country))]
+    const lugares = bodas.map(element => element.Lugars).flat();
+    const citys = [...new Set(lugares.map(element => element.city))];
+    const countries = [...new Set(lugares.map(element => element.country))];
 
-    const handleCountry=(e)=>{
-        setSelectedCountry(e)
-        dispatch(filterCountry(e))
-    }
+    const handleCountry = (e) => {
+        setSelectedCountry(e);
+        dispatch(filterCountry(e));
+    };
 
-    const handleCity = (e) =>{
-        setSelectCity(e)
-        dispatch(filterCity(e))
-    }    
+    const handleCity = (e) => {
+        setSelectCity(e);
+        dispatch(filterCity(e));
+    };
+
+    const getCurrentPageItems = () => {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        return bodasYPlayas.slice(startIndex, endIndex);
+    };
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
     return (
         <div>
-            <Dorado/>
+            <Dorado />
             <a href="/bodas">
-               <Back /> 
+                <Back />
             </a>
             <div className="row">
                 <div className="col-md-6 mt-5">
-                    <img src={casamiento} style={{boxShadow:"1px 1px 2px black" ,width: "300px", marginLeft:"200px", borderRadius:"10px" }} alt="Casamiento" />
+                    <img src={casamiento} style={{ boxShadow: "1px 1px 2px black", width: "300px", marginLeft: "200px", borderRadius: "10px" }} alt="Casamiento" />
                 </div>
-                <div className="col-md-4 position-absolute" style={{marginTop:"165px",right:"450px", fontSize:"18px"}}>
+                <div className="col-md-4 position-absolute" style={{ marginTop: "165px", right: "450px", fontSize: "18px" }}>
                     <p>
                         Nada supera la belleza natural de una ceremonia en la playa. 
                         El sonido suave de las olas, la brisa y un horizonte infinito 
@@ -56,42 +67,52 @@ export default function BodaPlaya() {
                     </p>
                 </div>
             </div>
-            <div className="row mb-5" style={{marginLeft:"200px", marginTop:"100px"}}>
-                {bodasYPlayas && bodasYPlayas.map((element) => (
-                    <div className="card p-3 me-5 mb-4" style={{width:"350px", height:"350px",boxShadow:"1px 1px 2px black"}}>
-                        <div className=" card-body d-flex flex-column justify-content-center" key={element.id}>
+            <div className="row mb-5" style={{ marginLeft: "200px", marginTop: "100px" }}>
+                {getCurrentPageItems().map((element) => (
+                    <div className="card p-3 me-5 mb-4" key={element.id} style={{ width: "350px", height: "350px", boxShadow: "1px 1px 2px black" }}>
+                        <div className="card-body d-flex flex-column justify-content-center">
                             <Playas
                                 name={element.name}
                                 image={element.image}
                                 description={element.description}
                                 country={element.country}
                                 city={element.city}
-                            />  
+                            />
                         </div>
-                    </div> 
+                    </div>
                 ))}
+            </div>
+
+            <div className="d-flex justify-content-center mb-4">
+                <button onClick={() => handlePageChange(currentPage - 1)} className={`btn ${currentPage === 1 ? 'btn-secondary disabled' : 'btn-primary'} mx-1`} disabled={currentPage === 1}>{"<"}</button>
+                {[...Array(Math.ceil(bodasYPlayas.length / itemsPerPage)).keys()].map((page) => (
+                    <button key={page + 1} onClick={() => handlePageChange(page + 1)} className={`btn ${currentPage === page + 1 ? 'btn-primary' : 'btn-secondary'} mx-1`}>
+                        {page + 1}
+                    </button>
+                ))}
+                <button onClick={() => handlePageChange(currentPage + 1)} className={`btn ${currentPage === Math.ceil(bodasYPlayas.length / itemsPerPage) ? 'btn-secondary disabled' : 'btn-primary'} mx-1`} disabled={currentPage === Math.ceil(bodasYPlayas.length / itemsPerPage)}>{">"}</button>
             </div>
 
             <div>
                 <label htmlFor="">Seleccionar ciudad</label>
-                <select onChange={(e)=>handleCity(e.target.value)}>
+                <select onChange={(e) => handleCity(e.target.value)}>
                     {
-                        citys.map(element=>(
-                            <option value={element}>{element}</option>
+                        citys.map(element => (
+                            <option key={element} value={element}>{element}</option>
                         ))
-                    }  
-                </select>  
+                    }
+                </select>
             </div>
             <div>
                 <label htmlFor="">Seleccionar país</label>
-                <select onChange={(e)=>handleCountry(e.target.value)}>
+                <select onChange={(e) => handleCountry(e.target.value)}>
                     {
-                        countries.map(element=>(
-                            <option value={element}>{element}</option>
+                        countries.map(element => (
+                            <option key={element} value={element}>{element}</option>
                         ))
                     }
                 </select>
             </div>
         </div>
     );
-}    
+}

@@ -1,69 +1,70 @@
-import { getUsers } from "../../Redux/actions"
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { getUsers } from "../../Redux/actions";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import logo from '../../assets/logo.png';
 import rama from '../../assets/ramaDorada.png'; 
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import ConfirmationLogin from "./modalConfirmation";
 
-export default function Login (){
+export default function Login() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const usuarios = useSelector((state) => state.users || []);
 
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const initialState = {
+        mail: "",
+        password: ""
+    };
 
-    const usuarios = useSelector((state)=>state.users || [])
-    console.log(usuarios, "u")
+    const [users, setUser] = useState(initialState);
+    const [isOpenModal, setIsOpenModal] = useState(false);
 
-    const initialState={
-        mail:"",
-        password:""
-    }
+    useEffect(() => {
+        dispatch(getUsers());
+    }, []);
 
-    const [users, setUser] = useState(initialState)
-    const [isOpenModal, setIsOpenModal] = useState(false)
-
-    console.log(users, "i")
-    useEffect(()=>{
-        dispatch(getUsers())
-    },[])
-
-    const handleChange = (event) =>{
-        const {name, value}= event.target
+    const handleChange = (event) => {
+        const { name, value } = event.target;
         setUser({
             ...users,
-            [name]:value
-        })
-    }
-    
-    const handleSubmit = (event) =>{
-        event.preventDefault()
-    //    const userExist = usuarios.some((user)=>user.mail === users.mail && users.password === users.password)
+            [name]: value
+        });
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
         const userExist = Array.isArray(usuarios) && usuarios.some((user) => user.mail === users.mail && user.password === users.password);
-        console.log(userExist, "h")
-        if(userExist){
-            setIsOpenModal(true)
+        if (userExist) {
+            setIsOpenModal(true);
             const loggedUser = usuarios.find((user) => user.mail === users.mail);
             localStorage.setItem('user', JSON.stringify(loggedUser));
-        }else{
-            window.alert("Correo o contraseña incorrecta")
+        } else {
+            window.alert("Correo o contraseña incorrecta");
         }
-    }
-    
-    const closeModal=()=>{
-        setIsOpenModal(false)
-        navigate("/")
-    }
-    return(
-        <div className="registration-form">
-            <form>
+    };
+
+    const closeModal = () => {
+        setIsOpenModal(false);
+        navigate("/");
+    };
+
+
+
+    return (
+        <div className="registration-form shadow-sm p-4 rounded" style={{ transition: 'box-shadow 0.3s' }}>
+            <form
+                onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)'}
+                onMouseLeave={(e) => e.currentTarget.style.boxShadow = 'none'}
+                onSubmit={handleSubmit}
+            >
                 <img src={rama} style={{ width: '100px', position: 'absolute', left: '0px', top: '200px' }} />
                 <img src={rama} style={{ width: '100px', transform: 'rotate(180deg)', position: 'absolute', left: '1410px', top: '115px' }} />
                 <img src={rama} style={{ width: '90px', transform: 'rotate(200deg)', position: 'absolute', left: '1420px', top: '700px' }} />
                 <div className="form-icon">
                     <img src={logo} alt="" />
                 </div>
-                
+
                 <div className="form-group">
                     <input
                         type="text"
@@ -75,7 +76,7 @@ export default function Login (){
                         placeholder="Correo"
                     />
                 </div>
-                
+
                 <div className="form-group">
                     <input
                         type="password"
@@ -87,21 +88,24 @@ export default function Login (){
                         placeholder="Contraseña"
                     />
                 </div>
+
                 <div className="form-group">
-                    <button type="submit" onClick={handleSubmit} className="btn btn-block create-account" >
+                    <button type="submit" style={{ width: '60%', padding: '8px', marginBottom: '20px' }} className="btn create-account">
                         Log In
                     </button>
                 </div>
+
                 <div className="form-group">
-                    <p>¿Aún no estás registrado?</p>
+                    <p style={{ marginLeft: '15px' }}>¿Aún no estás registrado?</p>
                     <Link to="/register">
-                        <button type="submit" className="btn btn-block create-account" >
+                        <button type="button" style={{ width: '60%', padding: '8px', marginBottom: '20px' }} className="btn create-account">
                             Registrarme
                         </button>
-                    </Link> 
+                    </Link>
                 </div>
             </form>
-            <ConfirmationLogin show={isOpenModal} handleClose={closeModal}/>
+            <ConfirmationLogin show={isOpenModal} handleClose={closeModal} />
         </div>
-    )
+    );
 }
+
