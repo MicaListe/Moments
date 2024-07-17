@@ -46,13 +46,11 @@ export default function Login() {
 
     const closeModal = () => {
         setIsOpenModal(false);
-        navigate("/");
+        // navigate("/");
     };
 
-
-
     return (
-        <div className="registration-form shadow-sm p-4 rounded" style={{ transition: 'box-shadow 0.3s' }}>
+        <div className="registration-form">
             <form
                 onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)'}
                 onMouseLeave={(e) => e.currentTarget.style.boxShadow = 'none'}

@@ -50,6 +50,9 @@ function Navbar() {
       {/* Dropdown de Eventos */}
       <div className={`collapse navbar-collapse ${open ? 'show' : ''}`} id="navbarSupportedContent" style={{ left: '900px', position: 'absolute' }}>
         <ul className="navbar-nav mr-auto">
+          <li className="nav-item" style={{ padding: '0 10px' }}>
+            <a className="nav-link" href="/" style={{ color: 'white' }}>Home</a>
+          </li>
           <li className="nav-item dropdown" style={{ padding: '0 10px' }}>
             <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" onClick={openDropdown} aria-haspopup="true" aria-expanded={open ? 'true' : 'false'} style={{ color: 'white' }}>
               Eventos
@@ -73,7 +76,7 @@ function Navbar() {
 
       {/* Dropdown del Avatar */}
       <div>
-        <img className="avatar-image position-absolute" onClick={openImage} src={avatar2} style={{ width: '30px', left: '1320px', top: '35px', cursor: 'pointer' }} alt="Avatar" />
+        <img className="avatar-image position-absolute" onClick={openImage} src={avatar2} style={{ width: '30px', left: '1370px', top: '35px', cursor: 'pointer' }} alt="Avatar" />
         <div className={`dropdown-menu ${isOpenDropdownImage ? 'show' : ''}`} style={{ position: 'absolute', top: '70px', left: '1340px', backgroundColor: 'black', zIndex: '1000' }}>
                 {/* Renderizado condicional del enlace de log-in/log-out */}
           {logueado ? (
