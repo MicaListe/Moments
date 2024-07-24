@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCatering, getDecoration, getEvents } from '../../Redux/actions';
+import rama from "../../assets/ramaDorada.png"
 
 export default function Formulario({ setIsLoggedIn }) {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ export default function Formulario({ setIsLoggedIn }) {
   const events = useSelector((state) => state.events);
   const catering = useSelector((state) => state.catering);
   const decoration = useSelector((state) => state.decoration);
-  console.log (decoration, "deco")
+
   useEffect(() => {
     dispatch(getEvents());
     dispatch(getCatering());
@@ -123,7 +124,10 @@ export default function Formulario({ setIsLoggedIn }) {
   };
   
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
+    <div className="d-flex justify-content-center align-items-center vh-100 mt-5">
+      <img src={rama} style={{ width: '100px', position: 'absolute', left: '0px', top: '200px' }} />
+      <img src={rama} style={{ width: '100px', transform: 'rotate(180deg)', position: 'absolute', left: '1410px', top: '115px' }} />
+      <img src={rama} style={{ width: '90px', transform: 'rotate(200deg)', position: 'absolute', left: '1420px', top: '700px' }} />
       <div className="card p-4 shadow-sm" style={{ maxWidth: '500px', width: '100%' }}>
         <h2 className="mb-4 text-center">Formulario de Datos</h2>
         <form onSubmit={handleSubmit}>
@@ -206,7 +210,7 @@ export default function Formulario({ setIsLoggedIn }) {
               </select>
             </div>
           )}
-          <button type="submit" className="btn btn-primary w-100">Enviar</button>
+          <button type="submit" className="btn w-100" style={{backgroundColor: "black", color: "white"}}>Enviar</button>
         </form>
       </div>
     </div>

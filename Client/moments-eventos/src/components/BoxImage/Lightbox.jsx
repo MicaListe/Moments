@@ -1,6 +1,6 @@
 import { Modal, Carousel } from 'react-bootstrap';
 
-export default function ModalImage({modal, image, name, description, country, city, handleClose, title}) {
+export default function ModalImage({modal, image, description, handleClose, title}) {
     return (
         <Modal show={modal} onHide={handleClose}>
             <Modal.Header closeButton> {/* Encabezado */}

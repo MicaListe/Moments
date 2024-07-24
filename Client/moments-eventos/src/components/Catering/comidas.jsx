@@ -6,7 +6,7 @@ export default function Comidas({ name, image, description, country, city }) {
 
     const handleClose = () => setModal(false);
     const handleOpen = () => setModal(true);
-
+    const title = `${name}`
     return (
         <>
             <div>
@@ -54,6 +54,7 @@ export default function Comidas({ name, image, description, country, city }) {
                 description={description}
                 country={country}
                 city={city}
+                title={title}
             />
         </>
     );

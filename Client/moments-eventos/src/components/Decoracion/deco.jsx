@@ -6,7 +6,7 @@ export default function DecoParty({type, image, description, id }) {
 
     const handleClose = () => setModal(false);
     const handleOpen = () => setModal(true);
-    const title = `${id} ${type}`
+    const title = `Decoración de ${type}  N° ${id}`
     return (
         <>
             <div>
@@ -40,18 +40,13 @@ export default function DecoParty({type, image, description, id }) {
                             borderRadius: "5px",
                         }}
                     />
-                    <p style={{ fontSize: "17px", marginTop: "10px", textAlign: "center" }}>
-                        {id}
-                    </p>
                 </div>
             </div>
             <ModalImage
                 modal={modal}
                 handleClose={handleClose}
-                
                 image={image}
                 description={description}
-                type={type}
                 title={title}
             />
         </>
