@@ -1,12 +1,12 @@
 import { useState } from "react";
 import ModalImage from "../BoxImage/Lightbox";
 
-export default function DecoParty({ name, image, description, country, city }) {
+export default function DecoParty({type, image, description, id }) {
     const [modal, setModal] = useState(false);
 
     const handleClose = () => setModal(false);
     const handleOpen = () => setModal(true);
-
+    const title = `${id} ${type}`
     return (
         <>
             <div>
@@ -41,19 +41,18 @@ export default function DecoParty({ name, image, description, country, city }) {
                         }}
                     />
                     <p style={{ fontSize: "17px", marginTop: "10px", textAlign: "center" }}>
-                        {name}
+                        {id}
                     </p>
                 </div>
             </div>
-
             <ModalImage
                 modal={modal}
                 handleClose={handleClose}
-                name={name}
+                
                 image={image}
                 description={description}
-                country={country}
-                city={city}
+                type={type}
+                title={title}
             />
         </>
     );

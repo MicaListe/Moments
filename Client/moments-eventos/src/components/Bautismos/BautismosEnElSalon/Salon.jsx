@@ -7,6 +7,7 @@ export default function Salon({ name, image, description, country, city }) {
     const handleClose = () => setModal(false);
     const handleOpen = () => setModal(true);
 
+    const title = `${name}, ${country}, ${city}`
     return (
         <>
             <div>
@@ -54,6 +55,7 @@ export default function Salon({ name, image, description, country, city }) {
                 description={description}
                 country={country}
                 city={city}
+                title={title}
             />
         </>
     );

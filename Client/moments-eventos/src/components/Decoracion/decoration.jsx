@@ -42,6 +42,8 @@ export default function Decoration(){
                            <DecoParty
                                 image={element.image}
                                 description={element.description}
+                                id={element.id}
+                                type={element.type}
                             /> 
                         </div>
                     </div>

@@ -10,7 +10,7 @@ export default function Formulario({ setIsLoggedIn }) {
   const events = useSelector((state) => state.events);
   const catering = useSelector((state) => state.catering);
   const decoration = useSelector((state) => state.decoration);
-
+  console.log (decoration, "deco")
   useEffect(() => {
     dispatch(getEvents());
     dispatch(getCatering());
@@ -77,26 +77,51 @@ export default function Formulario({ setIsLoggedIn }) {
   const [filteredCake, setFilteredCake] = useState([])
 
   const handleCateringChange = (e) =>{
-    setSelectedCatering
+    setSelectedCatering(e.target.value)
   }
 
-  //sin terminar
   useEffect(()=>{
-    if(selectedCatering){
-      const cat = catering.find(c => c.name === selectedCatering)
-      if(cat && catering){
-        const types = Array.from(new Set(catering.map(cater=> cater.type)))
-        set
-      }
+    const menus = catering.filter(menu => menu.type === "Menu")
+    setFilteredMenu(menus)
+  },[selectedCatering, catering])
+
+  useEffect(()=>{
+    const tortas = catering.filter(torta => torta.type === "Torta")
+    setFilteredCake(tortas)
+  },[selectedCatering, catering])
+
+
+  //Para decoracion 
+  const [selectedDecorationType, setSelectedDecorationType] = useState("")
+  const [selectedDecorationId, setSelectedDecorationId] = useState("")
+
+  const [filteredDecoType, setFilteredDecoType] = useState([])
+  const [filteredDecoId, setFilteredDecoId] = useState([])
+
+  useEffect(() => {
+    if (decoration.length > 0) {
+      const tipos = Array.from(new Set(decoration.map(dec => dec.type)));
+      setFilteredDecoType(tipos);
     }
-  },[])
-  if (selectedEvent) {
-    const event = events.find(e => e.name === selectedEvent);
-    if (event && event.Lugars) {
-      const types = Array.from(new Set(event.Lugars.map(place => place.type)));
-      setFilteredType(types);
+  }, [decoration]);
+
+  const handleDecoTypeChange = (e) => {
+    const selectedType = e.target.value;
+    setSelectedDecorationType(selectedType);
+
+    if (selectedType) {
+      const decoIds = decoration.filter(deco => deco.type === selectedType);
+      setFilteredDecoId(decoIds);
+    } else {
+      setFilteredDecoId([]);
     }
-  }
+    setSelectedDecorationId('');
+  };
+
+  const handleDecoIdChange = (e) => {
+    setSelectedDecorationId(e.target.value);
+  };
+  
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
       <div className="card p-4 shadow-sm" style={{ maxWidth: '500px', width: '100%' }}>
@@ -137,8 +162,9 @@ export default function Formulario({ setIsLoggedIn }) {
           )}
           <div className="mb-3">
             <label htmlFor="selector2" className="form-label">Catering:</label>
-            <select id="selector2" name="selector2" className="form-select">
-              {catering.map(cater => (
+            <select id="selector2" name="selector2" className="form-select" onChange={handleCateringChange} value={selectedCatering}>
+              <option value="">Seleccione un menú</option>
+              {filteredMenu.map(cater => (
                 <option key={cater.id} value={cater.id}>
                   {cater.name}
                 </option>
@@ -146,15 +172,40 @@ export default function Formulario({ setIsLoggedIn }) {
             </select>
           </div>
           <div className="mb-3">
-            <label htmlFor="selector3" className="form-label">Decoración:</label>
-            <select id="selector3" name="selector3" className="form-select">
-              {decoration.map(decor => (
-                <option key={decor.id} value={decor.id}>
-                  {decor.name}
+            <label htmlFor="selector2" className="form-label">Tortas:</label>
+            <select id="selector2" name="selector2" className="form-select" onChange={handleCateringChange} value={selectedCatering}>
+              <option value="">A elección</option>
+              {filteredCake.map(cater => (
+                <option key={cater.id} value={cater.id}>
+                  {cater.name}
                 </option>
               ))}
             </select>
           </div>
+          <div className="mb-3">
+            <label htmlFor="selector3" className="form-label">Tipo de decoración:</label>
+            <select id="selector3" name="selector3" className="form-select" onChange={handleDecoTypeChange} value={selectedDecorationType}>
+              <option value="">Seleccione un tipo de decoración</option>
+              {filteredDecoType.map((type, index) => (
+                <option key={index} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+          </div>
+          {selectedDecorationType && (
+            <div className="mb-3">
+              <label htmlFor="selector4" className="form-label">Decoración:</label>
+              <select id="selector4" name="selector4" className="form-select" onChange={handleDecoIdChange} value={selectedDecorationId}>
+                <option value="">A elección</option>
+                {filteredDecoId.map(decor => (
+                  <option key={decor.id} value={decor.id}>
+                    {decor.id}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
           <button type="submit" className="btn btn-primary w-100">Enviar</button>
         </form>
       </div>
