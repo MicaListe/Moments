@@ -8,8 +8,8 @@ const Calendario = () => {
   
     script.onload = () => {
       console.log("Calendly script loaded");
+      console.log("Calendly object:", window.Calendly);
       if (window.Calendly) {
-        console.log("Calendly object available");
         window.Calendly.initInlineWidget({
           url: 'https://calendly.com/momentsevents18/30min?primary_color=e8cd29',
           parentElement: document.querySelector('.calendly-inline-widget'),
@@ -31,6 +31,7 @@ const Calendario = () => {
       document.body.removeChild(script);
     };
   }, []);
+  
   
 
   return (
