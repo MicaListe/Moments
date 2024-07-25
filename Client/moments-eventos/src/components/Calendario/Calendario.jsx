@@ -8,15 +8,23 @@ const Calendario = () => {
     document.body.appendChild(script);
 
     script.onload = () => {
+      // Verifica si Calendly está disponible
       if (window.Calendly) {
-        window.Calendly.initInlineWidget({
-          url: 'https://calendly.com/momentsevents18/30min?primary_color=e8cd29',
-          parentElement: document.querySelector('.calendly-inline-widget'),
-          prefill: {},
-          utm: {}
-        });
+        // Verifica si el contenedor está presente en el DOM
+        const widgetContainer = document.querySelector('.calendly-inline-widget');
+        if (widgetContainer) {
+          window.Calendly.initInlineWidget({
+            url: 'https://calendly.com/momentsevents18/30min?primary_color=e8cd29',
+            parentElement: widgetContainer,
+            prefill: {},
+            utm: {}
+          });
+          console.log('Calendly widget initialized');
+        } else {
+          console.error('No se encontró el contenedor del widget de Calendly.');
+        }
       } else {
-        console.error('Calendly not found on window');
+        console.error('El objeto Calendly no está disponible.');
       }
     };
 
@@ -39,4 +47,5 @@ const Calendario = () => {
 };
 
 export default Calendario;
+
 
