@@ -12,7 +12,7 @@ const Calendario = () => {
     script.onload = () => {
       if (window.Calendly) {
         window.Calendly.initInlineWidget({
-          url: 'https://calendly.com/momentsevents18/30min?primary_color=e8cd29',
+          url: 'https://calendly.com/momentsevents18/30min',
           parentElement: document.querySelector('.calendly-inline-widget'),
           prefill: {},
           utm: {}
