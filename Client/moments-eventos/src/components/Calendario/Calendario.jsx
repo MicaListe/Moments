@@ -19,7 +19,7 @@ const Calendario = () => {
     //Inicializar el widget de Calendly una vez que el script de Calendly se haya cargado correctamente
     script.onload = () => {
       window.Calendly.initInlineWidget({
-        url: 'https://calendly.com/momentsevents18/30min?primary_color=e8cd29',
+        url: 'https://calendly.com/momentsevents18/reunion-eventos',
         parentElement: document.querySelector('.calendly-inline-widget'),
         prefill: {},
         utm: {}
