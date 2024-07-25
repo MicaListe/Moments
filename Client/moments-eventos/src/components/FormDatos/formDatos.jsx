@@ -139,7 +139,6 @@ export default function Formulario({ setIsLoggedIn }) {
           <div className="mb-3">
             <label htmlFor="selector1" className="form-label">Tipo de evento:</label>
             <select id="selector1" name="Evento" className="form-select" onChange={handleEventChange} value={selectedEvent}>
-              <option value="">Seleccione un evento</option>
               {events.map(event => (
                 <option key={event.id} value={event.name}>
                   {event.name}
@@ -151,7 +150,6 @@ export default function Formulario({ setIsLoggedIn }) {
             <div className="mb-3">
               <label htmlFor="selector2" className="form-label">Tipo de lugar:</label>
               <select id="selector2" name="Tipo de Lugar" className="form-select" onChange={handleTypeChange} value={selectedType}>
-                <option value="">Seleccione un tipo de lugar</option>
                 {filteredType.map((type, index) => (
                   <option value={type} key={index}>{type}</option>
                 ))}
@@ -162,7 +160,6 @@ export default function Formulario({ setIsLoggedIn }) {
             <div className="mb-3">
               <label htmlFor="selector3" className="form-label">Lugar:</label>
               <select id="selector3" name="Lugar" className="form-select" onChange={handleCityChange} value={selectedCity}>
-                <option value="">Seleccione un lugar</option>
                 {filteredCity.map((name, index) => (
                   <option value={name} key={index}>{name}</option>
                 ))}
@@ -172,7 +169,6 @@ export default function Formulario({ setIsLoggedIn }) {
           <div className="mb-3">
             <label htmlFor="selector4" className="form-label">Catering:</label>
             <select id="selector4" name="Catering" className="form-select" onChange={handleCateringChange} value={selectedCatering}>
-              <option value="">Seleccione un menú</option>
               {filteredMenu.map(cater => (
                 <option key={cater.id} value={cater.name}>
                   {cater.name}
@@ -194,7 +190,6 @@ export default function Formulario({ setIsLoggedIn }) {
           <div className="mb-3">
             <label htmlFor="selector6" className="form-label">Tipo de decoración:</label>
             <select id="selector6" name="Tipo de Decoración" className="form-select" onChange={handleDecoTypeChange} value={selectedDecorationType}>
-              <option value="">Seleccione un tipo de decoración</option>
               {filteredDecoType.map((type, index) => (
                 <option key={index} value={type}>
                   {type}
