@@ -8,8 +8,8 @@ const Calendario = () => {
   useEffect(() => {
     const handleCalendlyEvent = (event) => {
       if (event.data.event === 'calendly.event_scheduled') {
-        // Redirige a /formulario cuando el evento sea programado
-        navigate('/formulario');
+        // Redirige a la URL externa cuando el evento sea programado
+        window.location.href = 'https://moments-3oti.vercel.app/formulario';
       }
     };
 
@@ -40,5 +40,8 @@ const Calendario = () => {
 };
 
 export default Calendario;
+
+
+
 
 
