@@ -2,21 +2,28 @@ import React, { useEffect } from 'react';
 
 const Calendario = () => {
   useEffect(() => {
-    // Crear y cargar el script de Calendly
+    // Crear el script de Calendly
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
     document.body.appendChild(script);
 
-    // Inicializar el widget de Calendly cuando el script se cargue
+    // Inicializar el widget cuando el script se haya cargado
     script.onload = () => {
       if (window.Calendly) {
-        window.Calendly.initInlineWidget({
-          url: 'https://calendly.com/momentsevents18/30min',
-          parentElement: document.querySelector('.calendly-inline-widget'),
-          prefill: {},
-          utm: {}
-        });
+        const widgetContainer = document.querySelector('.calendly-inline-widget');
+        if (widgetContainer) {
+          window.Calendly.initInlineWidget({
+            url: 'https://calendly.com/momentsevents18/30min',
+            parentElement: widgetContainer,
+            prefill: {},
+            utm: {}
+          });
+        } else {
+          console.error('No se encontró el contenedor del widget de Calendly.');
+        }
+      } else {
+        console.error('El objeto Calendly no está disponible.');
       }
     };
 
@@ -36,5 +43,6 @@ const Calendario = () => {
 };
 
 export default Calendario;
+
 
 
