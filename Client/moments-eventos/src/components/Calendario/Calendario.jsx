@@ -5,41 +5,32 @@ const Calendario = () => {
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
-  
+    document.body.appendChild(script);
+
+    // Verifica que el script se haya cargado y el objeto Calendly esté disponible
     script.onload = () => {
-      console.log("Calendly script loaded");
-      console.log("Calendly object:", window.Calendly);
       if (window.Calendly) {
         window.Calendly.initInlineWidget({
-          url: 'https://calendly.com/momentsevents18/reunion-eventos',
+          url: 'https://calendly.com/momentsevents18/30min?primary_color=e8cd29',
           parentElement: document.querySelector('.calendly-inline-widget'),
           prefill: {},
           utm: {}
         });
       } else {
-        console.error("Calendly object is not available");
+        console.error('Calendly object is not available');
       }
     };
-  
-    script.onerror = () => {
-      console.error("Error loading Calendly script");
-    };
-  
-    document.body.appendChild(script);
-  
+
     return () => {
       document.body.removeChild(script);
     };
   }, []);
-  
-  
 
   return (
     <div className="container mt-5">
-      <div
-        className="calendly-inline-widget"
-        style={{ minWidth: '320px', height: '700px' }}
-      ></div>
+      <div className="calendly-inline-widget" 
+           style={{ minWidth: '320px', height: '700px' }}>
+      </div>
     </div>
   );
 };
