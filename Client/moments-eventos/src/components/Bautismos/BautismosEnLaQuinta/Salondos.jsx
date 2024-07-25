@@ -7,6 +7,7 @@ export default function Salondos({ name, image, description, country, city }) {
     const handleClose = () => setModal(false);
     const handleOpen = () => setModal(true);
 
+    const title = `${name}, ${city}, ${country}`
     return (
         <>
             <div>
@@ -53,6 +54,7 @@ export default function Salondos({ name, image, description, country, city }) {
                 image={image}
                 description={description}
                 country={country}
+                title={title}
                 city={city}
             />
         </>
