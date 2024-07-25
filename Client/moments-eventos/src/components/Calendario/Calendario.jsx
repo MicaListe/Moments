@@ -1,46 +1,40 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 
 const Calendario = () => {
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    document.body.appendChild(script);
-  
-    script.onload = () => {
-      console.log("Script loaded successfully");
-      setTimeout(() => {
-        if (window.Calendly) {
-          console.log("Calendly object is available");
-          window.Calendly.initInlineWidget({
-            url: 'https://calendly.com/momentsevents18/reunion-eventos',
-            parentElement: document.querySelector('.calendly-inline-widget'),
-            prefill: {},
-            utm: {}
-          });
-          console.log("Calendly widget initialized");
-        } else {
-          console.error('Calendly object is not available');
-        }
-      }, 1000); // Espera 1 segundo
+    const initCalendly = () => {
+      if (window.Calendly) {
+        window.Calendly.initInlineWidget({
+          url: 'https://calendly.com/momentsevents18/reunion-eventos',
+          parentElement: document.querySelector('.calendly-inline-widget'),
+          prefill: {},
+          utm: {}
+        });
+      } else {
+        console.error('Calendly object is not available');
+      }
     };
-  
-    script.onerror = () => {
-      console.error("Error loading Calendly script");
+
+    // Verifica si el script de Calendly está cargado y llama a la función de inicialización
+    const checkCalendlyScript = () => {
+      if (window.Calendly) {
+        initCalendly();
+      } else {
+        setTimeout(checkCalendlyScript, 100); // Reintenta después de 100ms
+      }
     };
-  
-    return () => {
-      document.body.removeChild(script);
-    };
+
+    checkCalendlyScript(); // Inicia el proceso de verificación
+
+    // No es necesario limpiar nada aquí porque el script ya está en el HTML
   }, []);
 
   return (
     <div className="container mt-5">
-      <div className="calendly-inline-widget" 
-           style={{ minWidth: '320px', height: '700px' }}>
-      </div>
+      <div className="calendly-inline-widget" style={{ minWidth: '320px', height: '700px' }}></div>
     </div>
   );
 };
 
 export default Calendario;
+
