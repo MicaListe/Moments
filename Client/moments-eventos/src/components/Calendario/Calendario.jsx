@@ -8,23 +8,20 @@ const Calendario = () => {
     document.body.appendChild(script);
 
     script.onload = () => {
-      console.log('Calendly script loaded');
       if (window.Calendly) {
-        const widgetContainer = document.querySelector('.calendly-inline-widget');
-        if (widgetContainer) {
-          window.Calendly.initInlineWidget({
-            url: 'https://calendly.com/momentsevents18/30min?primary_color=e8cd29',
-            parentElement: widgetContainer,
-            prefill: {},
-            utm: {}
-          });
-          console.log('Calendly widget initialized');
-        } else {
-          console.error('No se encontró el contenedor del widget de Calendly.');
-        }
+        window.Calendly.initInlineWidget({
+          url: 'https://calendly.com/momentsevents18/30min?primary_color=e8cd29',
+          parentElement: document.querySelector('.calendly-inline-widget'),
+          prefill: {},
+          utm: {}
+        });
       } else {
-        console.error('El objeto Calendly no está disponible.');
+        console.error('Calendly not found on window');
       }
+    };
+
+    script.onerror = () => {
+      console.error('Error loading Calendly script');
     };
 
     return () => {
