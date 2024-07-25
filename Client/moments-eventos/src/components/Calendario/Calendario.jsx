@@ -11,7 +11,7 @@ const Calendario = () => {
       console.log("Calendly object:", window.Calendly);
       if (window.Calendly) {
         window.Calendly.initInlineWidget({
-          url: 'https://calendly.com/momentsevents18/30min?primary_color=e8cd29',
+          url: 'https://calendly.com/momentsevents18/reunion-eventos',
           parentElement: document.querySelector('.calendly-inline-widget'),
           prefill: {},
           utm: {}
