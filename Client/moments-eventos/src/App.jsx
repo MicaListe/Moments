@@ -27,6 +27,7 @@ import Register from "./components/Register/register"
 import ProtectedRoute from './components/RutaProtegida/rutaProtegida';
 import Login from './components/Login/login';
 import Formulario from './components/FormDatos/formDatos';
+import CrudComponent from './components/Crud/crudComp';
 
 axios.defaults.baseURL = "https://moments-self.vercel.app";
 
@@ -66,6 +67,7 @@ function App() {
             <Route path='/decoracion' element={<Decoration/>}/>
         </Route>
         <Route path='/formulario' element={<Formulario/>}/>
+        <Route path='/crud' element={<CrudComponent/>}/>
       </Routes>
       <Footer/>
     </div>

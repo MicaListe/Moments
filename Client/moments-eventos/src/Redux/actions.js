@@ -8,6 +8,15 @@ export const FILTER_COUNTRY = "FILTER_COUNTRY"
 export const FILTER_CITY = "FILTER_CITY"
 export const USER_REGISTER = "USER_REGISTER"
 export const GET_USERS = "GET_USERS"
+export const DELETE_USER = "DELETE_USER";
+export const UPDATE_USER = "UPDATE_USER";
+export const UPDATE_CATERING="UPDATE_CATERING";
+export const DELETE_CATERING="DELETE_CATERING";
+export const UPDATE_EVENT="UPDATE_EVENT";
+export const DELETE_EVENT="DELETE_EVENT";
+export const UPDATE_DECORATION="UPDATE_DECORATION";
+export const DELETE_DECORATION="DELETE_DECORATION";
+
 import axios from "axios"
 
 export function getEvents(){
@@ -140,3 +149,131 @@ export function getUsers() {
     };
 }
 
+
+
+export function deleteUser(userId) {
+    return async function(dispatch) {
+        try {
+            await axios.delete(`/users/delete/${userId}`);
+            dispatch({
+                type: DELETE_USER,
+                payload: userId
+            });
+        } catch (error) {
+            console.error('Error al eliminar el usuario:', error);
+        }
+    };
+}
+
+
+
+export function updateUser(userId, updatedUser) {
+    return async function(dispatch) {
+        try {
+            const response = await axios.put(`/users/update/${userId}`, { name: updatedUser });
+            dispatch({
+                type: UPDATE_USER,
+                payload: response.data
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error al actualizar el usuario:', error);
+        }
+    };
+}
+
+
+
+export function deleteCatering(cateringId) {
+    return async function(dispatch) {
+        try {
+            await axios.delete(`/catering/delete/${cateringId}`);
+            dispatch({
+                type: DELETE_CATERING,
+                payload: cateringId
+            });
+        } catch (error) {
+            console.error('Error al eliminar el catering:', error);
+        }
+    };
+}
+
+
+export function updateCatering(cateringId, updatedCatering) {
+    return async function(dispatch) {
+        try {
+            const response = await axios.put(`/catering/update/${cateringId}`, updatedCatering);
+            dispatch({
+                type: UPDATE_CATERING,
+                payload: response.data
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error al actualizar el catering:', error);
+        }
+    };
+}
+
+
+
+export function deleteEvent(eventId) {
+    return async function(dispatch) {
+        try {
+            await axios.delete(`/events/delete/${eventId}`);
+            dispatch({
+                type: DELETE_EVENT,
+                payload: eventId
+            });
+        } catch (error) {
+            console.error('Error al eliminar el evento:', error);
+        }
+    };
+}
+
+
+export function updateEvent(eventId, updatedEvent) {
+    return async function(dispatch) {
+        try {
+            const response = await axios.put(`/events/update/${eventId}`, updatedEvent);
+            dispatch({
+                type: UPDATE_EVENT,
+                payload: response.data
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error al actualizar el evento:', error);
+        }
+    };
+}
+
+
+
+export function deleteDecoration(decorationId) {
+    return async function(dispatch) {
+        try {
+            await axios.delete(`/decoration/delete/${decorationId}`);
+            dispatch({
+                type: DELETE_DECORATION,
+                payload: decorationId
+            });
+        } catch (error) {
+            console.error('Error al eliminar la decoración:', error);
+        }
+    };
+}
+
+
+export function updateDecoration(decorationId, updatedDecoration) {
+    return async function(dispatch) {
+        try {
+            const response = await axios.put(`/decoration/update/${decorationId}`, updatedDecoration);
+            dispatch({
+                type: UPDATE_DECORATION,
+                payload: response.data
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error al actualizar la decoración:', error);
+        }
+    };
+}
