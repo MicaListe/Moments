@@ -82,7 +82,7 @@ function Navbar() {
           {logueado ? (
             <>
               {loggedUser && loggedUser.roleId === 1 && (
-                <Link to="/admin" className="dropdown-item" style={{ color: 'white' }}>
+                <Link to="/crud" className="dropdown-item" style={{ color: 'white' }}>
                   Admin
                 </Link>
               )}

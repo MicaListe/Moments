@@ -18,6 +18,7 @@
       { "src": "/register", "dest": "/" },
       { "src": "/login", "dest": "/" },
       { "src": "/calendario", "dest": "/" },
-      { "src": "/formulario", "dest": "/" }
+      { "src": "/formulario", "dest": "/" },
+      { "src": "/crud", "dest": "/" }
     ]
 }    

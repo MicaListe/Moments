@@ -1,4 +1,4 @@
-import { GET_EVENTS, GET_CATERING, GET_DECORATION, FILTER_CATERING, FILTER_DECORATION, FILTER_COUNTRY, USER_REGISTER, GET_USERS, DELETE_USER, UPDATE_USER, UPDATE_CATERING, DELETE_CATERING, UPDATE_EVENT, DELETE_EVENT, UPDATE_DECORATION, DELETE_DECORATION} from "./actions";
+import { GET_EVENTS, GET_CATERING, GET_DECORATION, FILTER_CATERING, FILTER_DECORATION, FILTER_COUNTRY, USER_REGISTER, GET_USERS, DELETE_USER, UPDATE_CATERING, DELETE_CATERING, UPDATE_EVENT, DELETE_EVENT, UPDATE_DECORATION, DELETE_DECORATION} from "./actions";
 
 
 const initialState={
@@ -86,13 +86,13 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.filter(user => user.id !== action.payload)
             };
-        case UPDATE_USER:
-            return {
-                ...state,
-                users: state.users.map(user =>
-                    user.id === action.payload.id ? action.payload : user
-                )
-            };
+        // case UPDATE_USER:
+        //     return {
+        //         ...state,
+        //         users: state.users.map(user =>
+        //             user.id === action.payload.id ? action.payload : user
+        //         )
+        //     };
 
             case DELETE_CATERING:
                 return {

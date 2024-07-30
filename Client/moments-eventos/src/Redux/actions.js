@@ -154,7 +154,7 @@ export function getUsers() {
 export function deleteUser(userId) {
     return async function(dispatch) {
         try {
-            await axios.delete(`/users/delete/${userId}`);
+            await axios.delete(`/users/delete_users/${userId}`);
             dispatch({
                 type: DELETE_USER,
                 payload: userId
@@ -165,29 +165,10 @@ export function deleteUser(userId) {
     };
 }
 
-
-
-export function updateUser(userId, updatedUser) {
-    return async function(dispatch) {
-        try {
-            const response = await axios.put(`/users/update/${userId}`, { name: updatedUser });
-            dispatch({
-                type: UPDATE_USER,
-                payload: response.data
-            });
-            return response.data;
-        } catch (error) {
-            console.error('Error al actualizar el usuario:', error);
-        }
-    };
-}
-
-
-
 export function deleteCatering(cateringId) {
     return async function(dispatch) {
         try {
-            await axios.delete(`/catering/delete/${cateringId}`);
+            await axios.delete(`/catering/delete_catering/${cateringId}`);
             dispatch({
                 type: DELETE_CATERING,
                 payload: cateringId
@@ -200,9 +181,10 @@ export function deleteCatering(cateringId) {
 
 
 export function updateCatering(cateringId, updatedCatering) {
+    console.log("id", cateringId, "cat", updatedCatering)
     return async function(dispatch) {
         try {
-            const response = await axios.put(`/catering/update/${cateringId}`, updatedCatering);
+            const response = await axios.put(`/catering/update_catering/${cateringId}`, updatedCatering);
             dispatch({
                 type: UPDATE_CATERING,
                 payload: response.data
@@ -219,7 +201,7 @@ export function updateCatering(cateringId, updatedCatering) {
 export function deleteEvent(eventId) {
     return async function(dispatch) {
         try {
-            await axios.delete(`/events/delete/${eventId}`);
+            await axios.delete(`/events/delete_event/${eventId}`);
             dispatch({
                 type: DELETE_EVENT,
                 payload: eventId
@@ -251,7 +233,7 @@ export function updateEvent(eventId, updatedEvent) {
 export function deleteDecoration(decorationId) {
     return async function(dispatch) {
         try {
-            await axios.delete(`/decoration/delete/${decorationId}`);
+            await axios.delete(`/decoration/delete_decoration/${decorationId}`);
             dispatch({
                 type: DELETE_DECORATION,
                 payload: decorationId
@@ -266,7 +248,7 @@ export function deleteDecoration(decorationId) {
 export function updateDecoration(decorationId, updatedDecoration) {
     return async function(dispatch) {
         try {
-            const response = await axios.put(`/decoration/update/${decorationId}`, updatedDecoration);
+            const response = await axios.put(`/decoration/update_decoration/${decorationId}`, updatedDecoration);
             dispatch({
                 type: UPDATE_DECORATION,
                 payload: response.data

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, deleteUser, updateUser, getCatering, deleteCatering, updateCatering, getEvents, updateEvent, deleteEvent, getDecoration, updateDecoration, deleteDecoration } from '../../Redux/actions';
+import { getUsers, deleteUser, getCatering, deleteCatering, updateCatering, getEvents, updateEvent, deleteEvent, getDecoration, updateDecoration, deleteDecoration } from '../../Redux/actions';
 import { Button, Form, Table, Modal } from 'react-bootstrap';
 
 export default function CrudComponent() {
@@ -8,6 +8,7 @@ export default function CrudComponent() {
   const users = useSelector((state) => state.users);
   const catering = useSelector((state) => state.catering);
   const events = useSelector((state) => state.events);
+  console.log("e", events)
   const decoration = useSelector((state) => state.decoration);
   
   const [currentUser, setCurrentUser] = useState(null);
@@ -31,31 +32,17 @@ export default function CrudComponent() {
     if (modalType === 'user' && currentUser) {
       setEditedName(currentUser.name || '');
     } else if (modalType === 'catering' && currentCatering) {
-      setEditedName(currentCatering.name || '');
+      setEditedName(currentCatering.description || '');
     } else if (modalType === 'event' && currentEvent) {
       setEditedName(currentEvent.name || '');
     } else if (modalType === 'decoration' && currentDecoration) {
-      setEditedName(currentDecoration.name || '');
+      setEditedName(currentDecoration.description || '');
     }
   }, [currentUser, currentCatering, currentEvent, currentDecoration, modalType]);
 
   const handleDeleteUser = (id) => {
     if (window.confirm("¿Estas seguro de eliminar este usuario?")) {
       dispatch(deleteUser(id));
-    }
-  };
-
-  const handleEditUser = (user) => {
-    setCurrentUser(user);
-    setModalType('user');
-    setShowModal(true);
-  };
-
-  const handleSaveUser = () => {
-    if (currentUser && editedName.trim()) {
-      dispatch(updateUser(currentUser.id, { ...currentUser, name: editedName }));
-      setShowModal(false);
-      setCurrentUser(null);
     }
   };
 
@@ -73,7 +60,7 @@ export default function CrudComponent() {
 
   const handleSaveCatering = () => {
     if (currentCatering && editedName.trim()) {
-      dispatch(updateCatering(currentCatering.id, { ...currentCatering, name: editedName }));
+      dispatch(updateCatering(currentCatering.id, { ...currentCatering, description: editedName }));
       setShowModal(false);
       setCurrentCatering(null);
     }
@@ -113,7 +100,7 @@ export default function CrudComponent() {
 
   const handleSaveDecoration = () => {
     if (currentDecoration && editedName.trim()) {
-      dispatch(updateDecoration(currentDecoration.id, { ...currentDecoration, name: editedName }));
+      dispatch(updateDecoration(currentDecoration.id, { ...currentDecoration, description: editedName }));
       setShowModal(false);
       setCurrentDecoration(null);
     }
@@ -128,7 +115,7 @@ export default function CrudComponent() {
       <Table striped bordered hover className="table-lg">
         <thead>
           <tr>
-            <th>Nro</th>
+            <th>N°</th>
             <th>ID</th>
             <th>Nombre</th>
             <th className="text-center">Acciones</th>
@@ -142,14 +129,6 @@ export default function CrudComponent() {
                 <td>{user.id}</td>
                 <td>{user.name}</td>
                 <td className="text-center text-nowrap" style={{ width: '150px' }}>
-                  <Button
-                    variant="warning"
-                    onClick={() => handleEditUser(user)}
-                    className="me-1"
-                    size="sm"
-                  >
-                    Editar
-                  </Button>
                   <Button
                     variant="danger"
                     onClick={() => handleDeleteUser(user.id)}
@@ -173,7 +152,7 @@ export default function CrudComponent() {
       <Table striped bordered hover className="table-lg">
         <thead>
           <tr>
-            <th>Nro</th>
+            <th>N°</th>
             <th>ID</th>
             <th>Nombre</th>
             <th>Descripción</th>
@@ -220,19 +199,59 @@ export default function CrudComponent() {
       <Table striped bordered hover className="table-lg">
         <thead>
           <tr>
-            <th>Nro</th>
+            <th>N°</th>
             <th>ID</th>
+            <th>Evento</th>
             <th>Nombre</th>
+            <th>Descripción</th>
             <th className="text-center">Acciones</th>
           </tr>
         </thead>
         <tbody>
           {events.length > 0 ? (
             events.map((event, index) => (
+              event.Lugars.map((lugar, lugarIndex) => (
+                <tr key={lugar.id}>
+                  <td>{index + 1}</td>
+                  <td>{lugar.id}</td>
+                  <td>{lugarIndex === 0 ? event.name : ""}</td>
+                  <td>{lugar.name}</td>
+                  <td>{lugar.description}</td>
+                  <td className="text-center text-nowrap" style={{ width: '150px' }}>
+                    <Button
+                      variant="warning"
+                      onClick={() => handleEditEvent(event)}
+                      className="me-1"
+                      size="sm"
+                    >
+                      Editar
+                    </Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDeleteEvent(event.id)}
+                      size="sm"
+                    >
+                      Eliminar
+                    </Button>
+                  </td>
+                </tr>
+              ))
+            ))
+          ) : (
+            <tr>
+              <td colSpan="5">No hay eventos disponibles</td>
+            </tr>
+          )}
+        </tbody>
+
+        {/* <tbody>
+          {events.length > 0 ? (
+            events.name.Lugars.map((event, index) => (
               <tr key={event.id}>
                 <td>{index + 1}</td>
                 <td>{event.id}</td>
                 <td>{event.name}</td>
+                <td>{event.description}</td>
                 <td className="text-center text-nowrap" style={{ width: '150px' }}>
                   <Button
                     variant="warning"
@@ -257,7 +276,7 @@ export default function CrudComponent() {
               <td colSpan="4">No events found</td>
             </tr>
           )}
-        </tbody>
+        </tbody> */}
       </Table>
 
       {/* Decoration Tabla */}
@@ -265,7 +284,7 @@ export default function CrudComponent() {
       <Table striped bordered hover className="table-lg">
         <thead>
           <tr>
-            <th>Nro</th>
+            <th>N°</th>
             <th>ID</th>
             <th>Descripción</th>
             <th className="text-center">Acciones</th>

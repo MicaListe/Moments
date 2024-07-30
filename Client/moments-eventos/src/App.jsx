@@ -58,13 +58,12 @@ function App() {
         <Route path="/bautismosalon" element={<BautismoSalon/>}/>
         <Route path="/bautismoquinta" element={<BautismoQuinta/>}/>
         <Route path="/fiestasXv" element={<FiestaDeXv/>}/>
-        {/* <Route path="/Calendario" element={<Calendario />} /> */}
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route element={<ProtectedRoute />}>
-            <Route path="/calendario" element={<Calendario />} />
-            <Route path="/catering" element={<Catering/>}/>
-            <Route path='/decoracion' element={<Decoration/>}/>
+          <Route path="/calendario" element={<Calendario />} />
+          <Route path="/catering" element={<Catering/>}/>
+          <Route path='/decoracion' element={<Decoration/>}/>
         </Route>
         <Route path='/formulario' element={<Formulario/>}/>
         <Route path='/crud' element={<CrudComponent/>}/>
