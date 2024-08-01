@@ -16,6 +16,7 @@ export const UPDATE_EVENT="UPDATE_EVENT";
 export const DELETE_EVENT="DELETE_EVENT";
 export const UPDATE_DECORATION="UPDATE_DECORATION";
 export const DELETE_DECORATION="DELETE_DECORATION";
+export const UPDATE_LUGAR = "UPDATE_LUGAR"
 
 import axios from "axios"
 
@@ -228,7 +229,21 @@ export function updateEvent(eventId, updatedEvent) {
     };
 }
 
-
+export function updateLugar(lugarId, updatedLugar){
+    console.log("id", lugarId, "mod", updatedLugar)
+    return async function(dispatch){
+        try{
+            const response = await axios.put(`/places/update_places/${lugarId}`, updatedLugar)
+            dispatch({
+                type: UPDATE_LUGAR,
+                payload: response.data
+            })
+            return response.data
+        }catch(error){
+            console.error('Error al actualizar el lugar:', error);
+        }
+    }
+}
 
 export function deleteDecoration(decorationId) {
     return async function(dispatch) {

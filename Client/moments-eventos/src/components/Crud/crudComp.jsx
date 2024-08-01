@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, deleteUser, getCatering, deleteCatering, updateCatering, getEvents, updateEvent, deleteEvent, getDecoration, updateDecoration, deleteDecoration } from '../../Redux/actions';
+import { getUsers, deleteUser, getCatering, deleteCatering, updateCatering, getEvents, updateEvent, deleteEvent, getDecoration, updateDecoration, deleteDecoration, updateLugar } from '../../Redux/actions';
 import { Button, Form, Table, Modal } from 'react-bootstrap';
 
 export default function CrudComponent() {
@@ -8,13 +8,15 @@ export default function CrudComponent() {
   const users = useSelector((state) => state.users);
   const catering = useSelector((state) => state.catering);
   const events = useSelector((state) => state.events);
-  console.log("e", events)
+  const lugares = events.flatMap(event=>event.Lugars)
+  console.log("l", events)
   const decoration = useSelector((state) => state.decoration);
   
   const [currentUser, setCurrentUser] = useState(null);
   const [currentCatering, setCurrentCatering] = useState(null);
   const [currentEvent, setCurrentEvent] = useState(null);
   const [currentDecoration, setCurrentDecoration] = useState(null);
+  const [currentLugar, setCurrentLugar] = useState(null)
   
   const [showModal, setShowModal] = useState(false);
   const [editedName, setEditedName] = useState('');
@@ -29,16 +31,16 @@ export default function CrudComponent() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (modalType === 'user' && currentUser) {
-      setEditedName(currentUser.name || '');
-    } else if (modalType === 'catering' && currentCatering) {
+    if (modalType === 'catering' && currentCatering) {
       setEditedName(currentCatering.description || '');
     } else if (modalType === 'event' && currentEvent) {
       setEditedName(currentEvent.name || '');
+    } else if (modalType === "lugar" && currentLugar){
+      setEditedName(currentLugar.description || " ")
     } else if (modalType === 'decoration' && currentDecoration) {
       setEditedName(currentDecoration.description || '');
     }
-  }, [currentUser, currentCatering, currentEvent, currentDecoration, modalType]);
+  }, [currentUser, currentCatering, currentEvent, currentDecoration, currentLugar, modalType]);
 
   const handleDeleteUser = (id) => {
     if (window.confirm("¿Estas seguro de eliminar este usuario?")) {
@@ -86,6 +88,20 @@ export default function CrudComponent() {
     }
   };
 
+  const handleEditLugar = (lugar) => {
+    setCurrentLugar(lugar);
+    setModalType('lugar');
+    setShowModal(true);
+  };
+
+  const handleSaveLugar = () =>{
+    if( currentLugar && editedName.trim()){
+      console.log("Saving lugar:", currentLugar, editedName);
+      dispatch(updateLugar(currentLugar.id,{...currentLugar, description:editedName}))
+      setShowModal(false)
+      setCurrentLugar(null)
+    }
+  }
   const handleDeleteDecoration = (id) => {
     if (window.confirm("¿Estas seguro de eliminar este decoración item?")) {
       dispatch(deleteDecoration(id));
@@ -210,17 +226,18 @@ export default function CrudComponent() {
         <tbody>
           {events.length > 0 ? (
             events.map((event, index) => (
-              event.Lugars.map((lugar, lugarIndex) => (
-                <tr key={lugar.id}>
+              lugares.map((lugar, lugarIndex) => (
+                <tr key={`${event.id}-${lugar.id}-${lugarIndex}`}>
                   <td>{index + 1}</td>
                   <td>{lugar.id}</td>
-                  <td>{lugarIndex === 0 ? event.name : ""}</td>
+                  <td>{lugarIndex===0 ? event.name : ""}</td>
+                  <td>{lugarIndex === 0 ? event.description : ""}</td>
                   <td>{lugar.name}</td>
                   <td>{lugar.description}</td>
                   <td className="text-center text-nowrap" style={{ width: '150px' }}>
                     <Button
                       variant="warning"
-                      onClick={() => handleEditEvent(event)}
+                      onClick={() => handleEditLugar(lugar)}
                       className="me-1"
                       size="sm"
                     >
@@ -243,40 +260,6 @@ export default function CrudComponent() {
             </tr>
           )}
         </tbody>
-
-        {/* <tbody>
-          {events.length > 0 ? (
-            events.name.Lugars.map((event, index) => (
-              <tr key={event.id}>
-                <td>{index + 1}</td>
-                <td>{event.id}</td>
-                <td>{event.name}</td>
-                <td>{event.description}</td>
-                <td className="text-center text-nowrap" style={{ width: '150px' }}>
-                  <Button
-                    variant="warning"
-                    onClick={() => handleEditEvent(event)}
-                    className="me-1"
-                    size="sm"
-                  >
-                    Editar
-                  </Button>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleDeleteEvent(event.id)}
-                    size="sm"
-                  >
-                    Eliminar
-                  </Button>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="4">No events found</td>
-            </tr>
-          )}
-        </tbody> */}
       </Table>
 
       {/* Decoration Tabla */}
@@ -328,9 +311,9 @@ export default function CrudComponent() {
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {modalType === 'user' && 'Edit User'}
             {modalType === 'catering' && 'Edit Catering'}
             {modalType === 'event' && 'Edit Event'}
+            {modalType === "lugar" && "Edit Lugar"}
             {modalType === 'decoration' && 'Edit Decoration'}
           </Modal.Title>
         </Modal.Header>
@@ -348,14 +331,14 @@ export default function CrudComponent() {
           <Button
             variant="primary"
             onClick={() => {
-              if (modalType === 'user') {
-                handleSaveUser();
-              } else if (modalType === 'catering') {
+              if (modalType === 'catering') {
                 handleSaveCatering();
               } else if (modalType === 'event') {
                 handleSaveEvent();
               } else if (modalType === 'decoration') {
                 handleSaveDecoration();
+              }else if (modalType === 'lugar'){
+                handleSaveLugar()
               }
             }}
           >

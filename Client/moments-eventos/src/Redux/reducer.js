@@ -1,4 +1,4 @@
-import { GET_EVENTS, GET_CATERING, GET_DECORATION, FILTER_CATERING, FILTER_DECORATION, FILTER_COUNTRY, USER_REGISTER, GET_USERS, DELETE_USER, UPDATE_CATERING, DELETE_CATERING, UPDATE_EVENT, DELETE_EVENT, UPDATE_DECORATION, DELETE_DECORATION} from "./actions";
+import { GET_EVENTS, GET_CATERING, GET_DECORATION, FILTER_CATERING, FILTER_DECORATION, FILTER_COUNTRY, USER_REGISTER, GET_USERS, DELETE_USER, UPDATE_CATERING, DELETE_CATERING, DELETE_EVENT, UPDATE_DECORATION, DELETE_DECORATION, UPDATE_LUGAR} from "./actions";
 
 
 const initialState={
@@ -86,58 +86,50 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.filter(user => user.id !== action.payload)
             };
-        // case UPDATE_USER:
-        //     return {
-        //         ...state,
-        //         users: state.users.map(user =>
-        //             user.id === action.payload.id ? action.payload : user
-        //         )
-        //     };
+        
+        case DELETE_CATERING:
+            return {
+                ...state,
+                catering: state.catering.filter(cateringItem => cateringItem.id !== action.payload)
+            };
+        case UPDATE_CATERING:
+            return {
+                ...state,
+                catering: state.catering.map(cateringItem => 
+                    cateringItem.id === action.payload.id ? action.payload : cateringItem
+                )
+            };
 
-            case DELETE_CATERING:
-                return {
-                    ...state,
-                    catering: state.catering.filter(cateringItem => cateringItem.id !== action.payload)
-                };
-            case UPDATE_CATERING:
-                return {
-                    ...state,
-                    catering: state.catering.map(cateringItem => 
-                        cateringItem.id === action.payload.id ? action.payload : cateringItem
+        case DELETE_EVENT:
+            return {
+                ...state,
+                events: state.events.filter(event => event.id !== action.payload)
+            };
+        case UPDATE_LUGAR:
+            return {
+                ...state,
+                events: state.events.map(event => ({
+                    ...event,
+                    Lugars: event.Lugars.map(lugar =>
+                        lugar.id === action.payload.id
+                            ? { ...lugar, ...action.payload }
+                            : lugar
                     )
-                };
-
-                case DELETE_EVENT:
-                    return {
-                        ...state,
-                        events: state.events.filter(event => event.id !== action.payload)
-                    };
-                case UPDATE_EVENT:
-                    return {
-                        ...state,
-                        events: state.events.map(event => 
-                            event.id === action.payload.id ? action.payload : event
-                        )
-                    };
-
-
-                    case DELETE_DECORATION:
-                        return {
-                            ...state,
-                            decoration: state.decoration.filter(decorationItem => decorationItem.id !== action.payload)
-                        };
-                    case UPDATE_DECORATION:
-                        return {
-                            ...state,
-                            decoration: state.decoration.map(decorationItem => 
-                                decorationItem.id === action.payload.id ? action.payload : decorationItem
-                            )
-                        };
-
-
+                }))
+            };
+        case DELETE_DECORATION:
+            return {
+                ...state,
+                decoration: state.decoration.filter(decorationItem => decorationItem.id !== action.payload)
+            };
+        case UPDATE_DECORATION:
+            return {
+                ...state,
+                decoration: state.decoration.map(decorationItem => 
+                    decorationItem.id === action.payload.id ? action.payload : decorationItem
+                )
+            };
         default: return state
-
-
     }
 }
 
