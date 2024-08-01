@@ -1,113 +1,144 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import logo from "../../assets/logo.png"
-import avatar2 from "../../assets/avatar2.png"
-import "../NavBar/dropdown.css"
+import React, { useEffect, useState, useRef } from "react";
+import logo from "../../assets/logo.png";
+import avatar2 from "../../assets/avatar2.png";
+import "../NavBar/dropdown.css";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-
 function Navbar() {
   const [open, setOpen] = useState(false);
-  const [logueado, setLogueado] = useState(false)
-  const [isOpenDropdownImage, setisOpenDropdownImage] = useState(false)
+  const [logueado, setLogueado] = useState(false);
+  const [isOpenDropdownImage, setisOpenDropdownImage] = useState(false);
+  const [profileImage, setProfileImage] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dropdownRef = useRef(null);
+  const imageDropDownRef = useRef(null);
 
   const openDropdown = () => {
     setOpen(!open);
   };
 
-  const openImage = () =>{
-    setisOpenDropdownImage(!isOpenDropdownImage)
-  }
+  const openImage = () => {
+    setisOpenDropdownImage(!isOpenDropdownImage);
+  };
+
+  const profileImages = [
+    "https://i.pinimg.com/564x/d0/0d/51/d00d5149e54757861fa03191da352f1f.jpg",
+    "https://i.pinimg.com/564x/bd/42/8e/bd428e6bb156d90045700dbf3e967c3e.jpg",
+    "https://i.pinimg.com/564x/a9/75/93/a975934bb378afc4ca8c133df451f56e.jpg",
+    "https://i.pinimg.com/564x/52/61/bd/5261bd492ef52666d60258a067239007.jpg",
+    "https://i.pinimg.com/564x/48/71/a3/4871a366e396e7d11dc7cc3552e892b1.jpg",
+    "https://i.pinimg.com/564x/39/35/18/3935185aa714e129a146b96e9c14453f.jpg",
+    "https://i.pinimg.com/564x/7f/b1/c8/7fb1c8775f2cffad991ca8060b653bc8.jpg",
+    "https://i.pinimg.com/564x/30/6f/d0/306fd0fb64f67ff40f81d8e37f8bf674.jpg"
+  ];
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user,"user")
+    const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
-      setLogueado(false);
+      setLogueado(true);
+      let storedImage = localStorage.getItem("profileImage");
+      if (!storedImage) {
+        const randomImage = profileImages[Math.floor(Math.random() * profileImages.length)];
+        localStorage.setItem("profileImage", randomImage);
+        storedImage = randomImage;
+      }
+      setProfileImage(storedImage);
     }
   }, []);
 
-  useEffect(()=>{
-    setLogueado(true)
-  },[])
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+      if (imageDropDownRef.current && !imageDropDownRef.current.contains(event.target)) {
+        setisOpenDropdownImage(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleLogOut = () => {
     setLogueado(false);
-    localStorage.removeItem('user');
-    navigate('/');
+    localStorage.removeItem("user");
+    localStorage.removeItem("profileImage");
+    navigate("/");
   };
 
-  const loggedUser = JSON.parse(localStorage.getItem('user'));
+  const loggedUser = JSON.parse(localStorage.getItem("user"));
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'black' }}>
+    <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: "black" }}>
       <a href="/">
-          <img className="navbar-brand" src={logo} style={{ width: '90px', marginLeft: '30px' }} alt="Logo" />
+        <img className="navbar-brand" src={logo} style={{ width: "90px", marginLeft: "30px" }} alt="Logo" />
       </a>
 
-      {/* Dropdown de Eventos */}
-      <div className={`collapse navbar-collapse ${open ? 'show' : ''}`} id="navbarSupportedContent" style={{ left: '900px', position: 'absolute' }}>
+      <div className={`collapse navbar-collapse ${open ? "show" : ""}`} id="navbarSupportedContent" style={{ left: "900px", position: "absolute" }}>
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item" style={{ padding: '0 10px' }}>
-            <a className="nav-link" href="/" style={{ color: 'white' }}>Home</a>
+          <li className="nav-item">
+            <a className="nav-link nav-button" href="/" style={{ color: "white" }}>Home</a>
           </li>
-          <li className="nav-item dropdown" style={{ padding: '0 10px' }}>
-            <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" onClick={openDropdown} aria-haspopup="true" aria-expanded={open ? 'true' : 'false'} style={{ color: 'white' }}>
+          <li className="nav-item dropdown" ref={dropdownRef}>
+            <a className="nav-link dropdown-toggle nav-button" id="navbarDropdown" role="button" onClick={openDropdown} aria-haspopup="true" aria-expanded={open ? "true" : "false"} style={{ color: "white" }}>
               Eventos
             </a>
-            <div className={`dropdown-menu ${open ? 'show' : ''}`} aria-labelledby="navbarDropdown" style={{ backgroundColor: 'black' }}>
-              <a className="dropdown-item" href="/bodas" style={{ color: 'white' }}>Bodas</a>
-              <a className="dropdown-item" href="/fiestasXv" style={{ color: 'white' }}>Fiestas de XV</a>
-              <a className="dropdown-item" href="/FiestasCorp" style={{ color: 'white' }}>Fiestas Corporativas</a>
-              <a className="dropdown-item" href="/FiestasEgre" style={{ color: 'white' }}>Fiestas de Egresados</a>
-              <a className="dropdown-item" href="/bautismos" style={{ color: 'white' }}>Bautismos</a>
+            <div className={`dropdown-menu ${open ? "show" : ""}`} aria-labelledby="navbarDropdown" style={{ backgroundColor: "black" }}>
+              <a className="dropdown-item" href="/bodas" style={{ color: "white" }}>Bodas</a>
+              <a className="dropdown-item" href="/fiestasXv" style={{ color: "white" }}>Fiestas de XV</a>
+              <a className="dropdown-item" href="/FiestasCorp" style={{ color: "white" }}>Fiestas Corporativas</a>
+              <a className="dropdown-item" href="/FiestasEgre" style={{ color: "white" }}>Fiestas de Egresados</a>
+              <a className="dropdown-item" href="/bautismos" style={{ color: "white" }}>Bautismos</a>
             </div>
           </li>
-          <li className="nav-item" style={{ padding: '0 10px' }}>
-            <a className="nav-link" href="/catering" style={{ color: 'white' }}>Catering</a>
+          <li className="nav-item">
+            <a className="nav-link nav-button" href="/catering" style={{ color: "white" }}>Catering</a>
           </li>
-          <li className="nav-item" style={{ padding: '0 10px' }}>
-            <a className="nav-link" href="/decoracion" style={{ color: 'white' }}>Decoración</a>
+          <li className="nav-item">
+            <a className="nav-link nav-button" href="/decoracion" style={{ color: "white" }}>Decoración</a>
           </li>
         </ul>
       </div>
 
-      {/* Dropdown del Avatar */}
-      <div>
-        <img className="avatar-image position-absolute" onClick={openImage} src={avatar2} style={{ width: '30px', left: '1370px', top: '35px', cursor: 'pointer' }} alt="Avatar" />
-        <div className={`dropdown-menu ${isOpenDropdownImage ? 'show' : ''}`} style={{ position: 'absolute', top: '70px', left: '1340px', backgroundColor: 'black', zIndex: '1000' }}>
-                {/* Renderizado condicional del enlace de log-in/log-out */}
+      <div ref={imageDropDownRef}>
+        <img
+          className="avatar-image position-absolute"
+          onClick={openImage}
+          src={logueado ? profileImage : avatar2}
+          style={{ width: "42px", left: "1370px", top: "35px", cursor: "pointer", borderRadius:"20px" }}
+          alt="Avatar"
+        />
+        <div className={`dropdown-menu ${isOpenDropdownImage ? "show" : ""}`}  style={{ position: "absolute", top: "70px", left: "1340px", backgroundColor: "black", zIndex: "1000" }}>
           {logueado ? (
             <>
               {loggedUser && loggedUser.roleId === 1 && (
-                <Link to="/crud" className="dropdown-item" style={{ color: 'white' }}>
+                <Link to="/crud" className="dropdown-item" style={{ color: "white" }}>
                   Admin
                 </Link>
               )}
-              <a className="dropdown-item" onClick={handleLogOut} style={{ cursor: 'pointer', color: 'white' }}>
+              <a className="dropdown-item" onClick={handleLogOut} style={{ cursor: "pointer", color: "white" }}>
                 Log-out
               </a>
             </>
           ) : (
-            <Link to="/login" className="dropdown-item" style={{ color: 'white' }}>
-              Log-in
-            </Link>
+            <>
+              <Link to="/login" className="dropdown-item" style={{ color: "white" }}>
+                Log-in
+              </Link>
+            </>
           )}
         </div>
       </div>
-      
-      {/* <button className="navbar-toggle" onClick={openDropdown} aria-label="Toggle navigation">
-        <svg data-testid="geist-icon" height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16" style={{color: "white"}}>
-          <path fillRule="evenodd" clipRule="evenodd" d="M1 2H1.75H14.25H15V3.5H14.25H1.75H1V2ZM1 12.5H1.75H14.25H15V14H14.25H1.75H1V12.5ZM1.75 7.25H1V8.75H1.75H14.25H15V7.25H14.25H1.75Z" fill="currentColor"/>
-        </svg>
-      </button> */}
     </nav>
   );
 }
 
 export default Navbar;
+
 
 
 
