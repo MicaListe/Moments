@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers, deleteUser, getCatering, deleteCatering, updateCatering, getEvents, updateEvent, deleteEvent, getDecoration, updateDecoration, deleteDecoration, updateLugar } from '../../Redux/actions';
 import { Button, Form, Table, Modal } from 'react-bootstrap';
+import {Link} from "react-router-dom"
 
 export default function CrudComponent() {
   const dispatch = useDispatch();
@@ -121,7 +122,7 @@ export default function CrudComponent() {
       setCurrentDecoration(null);
     }
   };
-
+  
   return (
     <div className="container">
       <h1 className="mt-4 text-center">Panel Administrador</h1>
@@ -131,7 +132,6 @@ export default function CrudComponent() {
       <Table striped bordered hover className="table-lg">
         <thead>
           <tr>
-            <th>N°</th>
             <th>ID</th>
             <th>Nombre</th>
             <th className="text-center">Acciones</th>
@@ -168,18 +168,23 @@ export default function CrudComponent() {
       <Table striped bordered hover className="table-lg">
         <thead>
           <tr>
-            <th>N°</th>
             <th>ID</th>
             <th>Nombre</th>
             <th>Descripción</th>
             <th className="text-center">Acciones</th>
+            <td colSpan="5" className="text-center">
+              <Link to="/createCatering">
+                <Button variant="success" size="sm">
+                  Añadir
+                </Button>
+              </Link>
+            </td>
           </tr>
         </thead>
         <tbody>
           {catering.length > 0 ? (
-            catering.map((item, index) => (
+            catering.map((item) => (
               <tr key={item.id}>
-                <td>{index + 1}</td>
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.description}</td>
@@ -215,23 +220,27 @@ export default function CrudComponent() {
       <Table striped bordered hover className="table-lg">
         <thead>
           <tr>
-            <th>N°</th>
             <th>ID</th>
             <th>Evento</th>
             <th>Nombre</th>
             <th>Descripción</th>
             <th className="text-center">Acciones</th>
+            <td colSpan="5" className="text-center">
+              <Link to="/createEvents">
+                <Button variant="success" size="sm">
+                  Añadir
+                </Button>
+              </Link>
+            </td>
           </tr>
         </thead>
         <tbody>
           {events.length > 0 ? (
-            events.map((event, index) => (
+            events.map((event) => (
               lugares.map((lugar, lugarIndex) => (
                 <tr key={`${event.id}-${lugar.id}-${lugarIndex}`}>
-                  <td>{index + 1}</td>
                   <td>{lugar.id}</td>
                   <td>{lugarIndex===0 ? event.name : ""}</td>
-                  <td>{lugarIndex === 0 ? event.description : ""}</td>
                   <td>{lugar.name}</td>
                   <td>{lugar.description}</td>
                   <td className="text-center text-nowrap" style={{ width: '150px' }}>
@@ -267,17 +276,22 @@ export default function CrudComponent() {
       <Table striped bordered hover className="table-lg">
         <thead>
           <tr>
-            <th>N°</th>
             <th>ID</th>
             <th>Descripción</th>
             <th className="text-center">Acciones</th>
+            <td colSpan="5" className="text-center">
+              <Link to="/createDecoration">
+                <Button variant="success" size="sm">
+                  Añadir
+                </Button>
+              </Link>
+            </td>
           </tr>
         </thead>
         <tbody>
           {decoration.length > 0 ? (
-            decoration.map((item, index) => (
+            decoration.map((item) => (
               <tr key={item.id}>
-                <td>{index + 1}</td>
                 <td>{item.id}</td>
                 <td>{item.description}</td>
                 <td className="text-center text-nowrap" style={{ width: '150px' }}>
@@ -304,6 +318,7 @@ export default function CrudComponent() {
               <td colSpan="5">No decorations found</td>
             </tr>
           )}
+          
         </tbody>
       </Table>
 
