@@ -1,4 +1,4 @@
-import { GET_EVENTS, GET_CATERING, GET_DECORATION, FILTER_CATERING, FILTER_DECORATION, FILTER_COUNTRY, USER_REGISTER, GET_USERS, DELETE_USER, UPDATE_CATERING, DELETE_CATERING, DELETE_EVENT, UPDATE_DECORATION, DELETE_DECORATION, UPDATE_LUGAR} from "./actions";
+import { GET_EVENTS, GET_CATERING, GET_DECORATION, FILTER_CATERING, FILTER_DECORATION, FILTER_COUNTRY, USER_REGISTER, GET_USERS, DELETE_USER, UPDATE_CATERING, DELETE_CATERING, DELETE_EVENT, UPDATE_DECORATION, DELETE_DECORATION, UPDATE_LUGAR, CREATE_CATERING, CREATE_DECORATION, CREATE_PLACE} from "./actions";
 
 
 const initialState={
@@ -20,14 +20,12 @@ const reducer = (state = initialState, action) => {
                 events: action.payload,
                 filtered:action.payload
             }
-
         case GET_CATERING:
             return{
                 ...state,
                 catering:action.payload,
                 filterCat:action.payload
             }
-
         case FILTER_CATERING:
             const cateringFilter = action.payload;
                 
@@ -38,14 +36,12 @@ const reducer = (state = initialState, action) => {
                 console.log("filteredBy", filteredByCatering)
                 return {...state, catering : filteredByCatering};
             }
-
         case GET_DECORATION:
             return{
                 ...state,
                 decoration: action.payload,
                 filterDeco: action.payload,
-            }
-            
+            }  
         case FILTER_DECORATION:
             const decorationFilter = action.payload;
             
@@ -55,38 +51,36 @@ const reducer = (state = initialState, action) => {
                 const filteredByDecoration= state.filterDeco.filter((item) => item.type === decorationFilter);
                 return {...state, decoration : filteredByDecoration}
             }
-        case FILTER_COUNTRY:
-            const countryFilter = action.payload
-            console.log("e", state.events)
-            if( countryFilter === "all"){
-                return{
-                    ...state, filtered: state.countryFilter
-                }
-            }else{
-                const filteredByCountry = state.events.filter((item)=>item.country === countryFilter)
-                console.log("f",filteredByCountry)
-                return {
-                    ...state, filtered: filteredByCountry
-                }
-            }
         case USER_REGISTER:
             return {
                 ...state,
                 users: [...state.users, action.payload],
-            };
-        case GET_USERS:{
+            }
+        case CREATE_DECORATION:
+            return{
+                ...state,
+                decoration: [...state.decoration, action.payload]
+            }
+        case CREATE_CATERING:
+            return{
+                ...state,
+                catering: [...state.catering, action.payload]
+            }
+        case CREATE_PLACE:
+            return{
+                ...state,
+                events: [...state.events, action.payload]
+            }
+        case GET_USERS:
             return{
                 ...state,
                 users: action.payload
-            }
-        }
-
+            };
         case DELETE_USER:
             return {
                 ...state,
                 users: state.users.filter(user => user.id !== action.payload)
             };
-        
         case DELETE_CATERING:
             return {
                 ...state,
@@ -99,7 +93,6 @@ const reducer = (state = initialState, action) => {
                     cateringItem.id === action.payload.id ? action.payload : cateringItem
                 )
             };
-
         case DELETE_EVENT:
             return {
                 ...state,

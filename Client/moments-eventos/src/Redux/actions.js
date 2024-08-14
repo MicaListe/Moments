@@ -17,6 +17,9 @@ export const DELETE_EVENT="DELETE_EVENT";
 export const UPDATE_DECORATION="UPDATE_DECORATION";
 export const DELETE_DECORATION="DELETE_DECORATION";
 export const UPDATE_LUGAR = "UPDATE_LUGAR"
+export const CREATE_PLACE = "CREATE_PLACE"
+export const CREATE_CATERING = "CREATE_CATERING"
+export const CREATE_DECORATION = "CREATE_DECORATION"
 
 import axios from "axios"
 
@@ -40,8 +43,6 @@ export function getCatering(){
     try{
         return async function(dispatch){
             const respuesta=await axios.get("/catering/catering")
-            console.log("resp", respuesta)
-
             return dispatch({
                 type:GET_CATERING,
                 payload:respuesta.data
@@ -68,7 +69,6 @@ export function getDecoration(){
 }
 
 export function filterCatering(payload) {
-    console.log("payload", payload)
     return{
         type:FILTER_CATERING,
         payload:payload,
@@ -96,31 +96,6 @@ export function filterCity(payload){
     }
 }
 
-// export function userRegister(payload){
-//     try{
-//         return async function(){
-//             const response = await axios.post("/users/register", payload)
-//             return response
-//         }
-//     }catch(error){
-//         console.error("Error al realizar la solicitud")
-//     }
-// }
-
-// export function getUsers(){
-//     try{
-//         return async function (dispatch){
-//             const response = await axios.get ("/users/usuarios")
-//             return dispatch({
-//                 type: GET_USERS,
-//                 payload: response
-//             })
-//         }
-//     }catch(error){
-//         console.error("Error al realizar la solicitud")
-//     }
-
-// }
 export function userRegister(payload) {
     return async function (dispatch) {
         try {
@@ -182,7 +157,6 @@ export function deleteCatering(cateringId) {
 
 
 export function updateCatering(cateringId, updatedCatering) {
-    console.log("id", cateringId, "cat", updatedCatering)
     return async function(dispatch) {
         try {
             const response = await axios.put(`/catering/update_catering/${cateringId}`, updatedCatering);
@@ -230,7 +204,6 @@ export function updateEvent(eventId, updatedEvent) {
 }
 
 export function updateLugar(lugarId, updatedLugar){
-    console.log("id", lugarId, "mod", updatedLugar)
     return async function(dispatch){
         try{
             const response = await axios.put(`/places/update_places/${lugarId}`, updatedLugar)
@@ -273,4 +246,49 @@ export function updateDecoration(decorationId, updatedDecoration) {
             console.error('Error al actualizar la decoración:', error);
         }
     };
+}
+
+export function createPlaces(payload){
+    return async function (dispatch) {
+        try{
+            const response = await axios.post("/places/create_places", payload)
+            dispatch({
+                type: CREATE_PLACE,
+                payload: response.data
+            })
+            return response.data
+        }catch(error){
+            console.error('Error al realizar la solicitud', error);
+        }
+    }
+}
+
+export function createCatering(payload){
+    return async function (dispatch) {
+        try{
+            const response = await axios.post("/catering/create_catering", payload)
+            dispatch({
+                type: CREATE_CATERING,
+                payload: response.data
+            })
+            return response.data
+        }catch(error){
+            console.error('Error al realizar la solicitud', error);
+        }
+    }
+}
+
+export function createDecoration(payload){
+    return async function (dispatch){
+        try{
+            const response = await axios.post("/decoration/create_decoration", payload)
+            dispatch({
+                type: CREATE_DECORATION,
+                payload: response.data
+            })
+            return response.data
+        }catch(error){
+            console.error('Error al realizar la solicitud', error);
+        }
+    }
 }
