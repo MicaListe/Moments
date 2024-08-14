@@ -65,7 +65,7 @@ export default function FormCatyDeco() {
         description: producto.description,
         image: res
       };
-      const response = await axios.post("http://localhost:5000/products", productData);
+      const response = await axios.post("http://localhost:5000/catering", productData); //CORREGIR!!!!!
       console.log("Producto guardado:", response.data);
       setProducto(initialForm);
       setImageUrl(null);
