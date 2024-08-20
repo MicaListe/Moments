@@ -1,19 +1,21 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import axios from "axios";
+import { createCatering } from "../../Redux/actions";
 
-export default function FormCatyDeco() {
+export default function FormCat() {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [res, setRes] = useState("");
   const [imageUrl, setImageUrl] = useState(null);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
+  const dispatch = useDispatch();
 
   const initialForm = {
     name: '',
     description: '',
     image: []
   };
-  
+
   const [producto, setProducto] = useState(initialForm);
 
   const handleChange = (e) => {
@@ -41,7 +43,7 @@ export default function FormCatyDeco() {
         "http://localhost:5000/upload",
         data
       );
-      setRes(response.data.url);
+      setProducto({ ...producto, image: response.data.url });
       setImageUrl(response.data.url);
       setShowDeleteButton(true);
     } catch (error) {
@@ -53,27 +55,16 @@ export default function FormCatyDeco() {
 
   const handleDeleteImage = () => {
     setImageUrl(null);
-    setRes("");
+    setProducto({ ...producto, image: "" });
     setShowDeleteButton(false);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const productData = {
-        name: producto.name,
-        description: producto.description,
-        image: res
-      };
-      const response = await axios.post("http://localhost:5000/catering", productData); //CORREGIR!!!!!
-      console.log("Producto guardado:", response.data);
-      setProducto(initialForm);
-      setImageUrl(null);
-      setRes("");
-      setShowDeleteButton(false);
-    } catch (error) {
-      console.error("Error al guardar el producto:", error);
-    }
+    dispatch(createCatering(producto));
+    setProducto(initialForm);
+    setImageUrl(null);
+    setShowDeleteButton(false);
   };
 
   return (
