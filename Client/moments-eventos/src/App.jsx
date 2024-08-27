@@ -30,6 +30,7 @@ import Formulario from './components/FormDatos/formDatos';
 import CrudComponent from './components/Crud/crudComp';
 import FormCat from './components/FormCreacion/formCat';
 import FormDeco from './components/FormCreacion/formDeco';
+import FormularioLugares from './components/FormCreacion/formLugares';
 
 axios.defaults.baseURL = "https://moments-self.vercel.app";
 
@@ -71,6 +72,7 @@ function App() {
         <Route path='/crud' element={<CrudComponent/>}/>
         <Route path='/createCatering' element={<FormCat/>}/>
         <Route path='/createDecoration' element={<FormDeco/>}/>
+        <Route path='/createPlaces' element={<FormularioLugares/>}/>
       </Routes>
       <Footer/>
     </div>
