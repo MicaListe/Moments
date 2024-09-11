@@ -13,11 +13,12 @@ export default function FormCat() {
   const initialForm = {
     name: '',
     description: '',
+    type: "",
     image: []
   };
 
   const [producto, setProducto] = useState(initialForm);
-
+  console.log("producto", producto)
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProducto({
@@ -32,26 +33,79 @@ export default function FormCat() {
     }
   };
 
+  // const handleUpload = async () => {
+  //   if (!file) return;
+
+  //   try {
+  //     setLoading(true);
+  //     const data = new FormData();
+  //     data.append("my_file", file);
+  //     const response = await axios.post(
+  //       "/upload/",
+  //       data,
+  //       {
+  //         headers: {
+  //             'Content-Type': 'multipart/form-data'
+  //         }
+  //     }
+  //     );
+  //     if (response.data && response.data.secure_url) {
+  //       setImageUrl(response.data.secure_url);
+  //       setShowDeleteButton(true);
+  //   } else {
+  //       console.error('La respuesta no contiene una URL.');
+  //   }
+
+  //   alert("Imagen subida");
+  //     console.log("re", response.data)
+  //     console.log("r", response.data.url)
+  //     alert("Imagen subida")
+  //     setProducto({ ...producto, image: [...producto.image, response.data.url] });
+  //     setImageUrl(response.data.url);
+  //     setShowDeleteButton(true);
+  //   } catch (error) {
+  //     alert("Error al subir la imagen.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleUpload = async () => {
     if (!file) return;
 
     try {
-      setLoading(true);
-      const data = new FormData();
-      data.append("my_file", file);
-      const response = await axios.post(
-        "http://localhost:5000/upload",
-        data
-      );
-      setProducto({ ...producto, image: response.data.url });
-      setImageUrl(response.data.url);
-      setShowDeleteButton(true);
+        setLoading(true);
+        const data = new FormData();
+        data.append("my_file", file);
+
+        const response = await axios.post(
+            `/upload/`,
+            data,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+        );
+
+        console.log("response", response);
+        console.log("response.data", response.data.secure_url);
+
+        if (response.data && response.data.secure_url) {
+            setImageUrl(response.data.secure_url);
+            setShowDeleteButton(true);
+        } else {
+            console.error('La respuesta no contiene una URL.');
+        }
+
+        alert("Imagen subida");
     } catch (error) {
-      alert("Error al subir la imagen.");
+        console.error('Error al subir la imagen:', error.response?.data || error.message);
+        alert("Error al subir la imagen.");
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
 
   const handleDeleteImage = () => {
     setImageUrl(null);
@@ -81,6 +135,19 @@ export default function FormCat() {
             name="name"
             className="form-control"
             value={producto.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        {/* Type input */}
+        <div className="form-group mb-4">
+          <label className="form-label" htmlFor="name">Tipo de catering: Menú o Torta</label>
+          <input
+            type="text"
+            id="type"
+            name="type"
+            className="form-control"
+            value={producto.type}
             onChange={handleChange}
             required
           />

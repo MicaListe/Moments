@@ -13,7 +13,7 @@ router.use("/catering", catering)
 router.use("/places", places)
 router.use("/decoration", decoration)
 router.use("/users",users)
-router.use("/upload/", upload)
+router.use("/upload", upload)
 // //Crear usuario
 // router.post("/register")
 
