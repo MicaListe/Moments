@@ -19,18 +19,13 @@ export default function FormCat() {
 
   const [producto, setProducto] = useState(initialForm);
   console.log("producto", producto)
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProducto({
       ...producto,
       [name]: value,
     });
-  };
-
-  const handleSelectFile = (e) => {
-    if (e.target.files) {
-      setFile(e.target.files[0]);
-    }
   };
 
   // const handleUpload = async () => {
@@ -93,6 +88,7 @@ export default function FormCat() {
 
         if (response.data && response.data.secure_url) {
             setImageUrl(response.data.secure_url);
+            setProducto({ ...producto, image: [...producto.image, response.data.secure_url] }); // Actualiza el array de imágenes correctamente
             setShowDeleteButton(true);
         } else {
             console.error('La respuesta no contiene una URL.');
@@ -109,7 +105,7 @@ export default function FormCat() {
 
   const handleDeleteImage = () => {
     setImageUrl(null);
-    setProducto({ ...producto, image: "" });
+    setProducto({ ...producto, image: [] });
     setShowDeleteButton(false);
   };
 
