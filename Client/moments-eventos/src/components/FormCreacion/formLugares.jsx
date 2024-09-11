@@ -2,6 +2,7 @@ import { createPlaces } from "../../Redux/actions"
 import { useDispatch } from "react-redux"
 import {useState } from "react"
 import axios from "axios";
+import config from "../../config";
 
 export default function FormularioLugares(){
 
@@ -72,62 +73,80 @@ export default function FormularioLugares(){
     };
   
     // const handleUpload = async () => {
-    //   if (!file){
-    //     console.log("No hay archivo seleccionado")
-    //     return;
-    //   } 
-        
-    //   try {
-    //     console.log("Entrando en el bloque try..")
-    //     setLoading(true);
-    //     const data = new FormData();
-    //     data.append("my_file", file);
-    //     const response = await axios.post(
-    //       "/places/create_places",
-    //       data
-    //     );
-    //     setPlaces({ ...places, image: response.data.url });
-    //     setImageUrl(response.data.url);
-    //     setShowDeleteButton(true);
-    //   } catch (error) {
-    //     alert("Error al subir la imagen.");
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
-    const handleUpload = async () => {
-        if (!file) {
-          console.log("No hay archivo seleccionado.");
-          return;
-        }
+    //     if (!file) {
+    //       console.log("No hay archivo seleccionado.");
+    //       return;
+    //     }
       
-        try {
+    //     try {
+    //       setLoading(true);
+    //       const data = new FormData();
+    //       data.append("my_file", file);
+    //       const response = await axios.post("/places/create_places", data);
+    //       console.log("Respuesta del servidor:", response);
+    //       setPlaces({ ...places, image: response.data.url });
+    //       setImageUrl(response.data.url);
+    //       setShowDeleteButton(true);
+    //     } catch (error) {
+    //       console.error("Error durante la subida:", error);
+    //       if (error.response) {
+    //         // El servidor respondió con un código de estado diferente de 2xx
+    //         console.error("Error en la respuesta del servidor:", error.response.data);
+    //         console.error("Código de estado:", error.response.status);
+    //       } else if (error.request) {
+    //         // La solicitud fue hecha pero no se recibió respuesta
+    //         console.error("No se recibió respuesta del servidor:", error.request);
+    //       } else {
+    //         // Algo ocurrió al configurar la solicitud
+    //         console.error("Error al configurar la solicitud:", error.message);
+    //       }
+    //       alert("Error al subir la imagen.");
+    //     } finally {
+    //       setLoading(false);
+    //     }
+    //   };
+
+
+    const handleUpload = async () => {
+      if (!file) return;
+  
+      try {
           setLoading(true);
           const data = new FormData();
-          data.append("my_file", file);
-          const response = await axios.post("/places/create_places", data);
-          console.log("Respuesta del servidor:", response);
-          setPlaces({ ...places, image: response.data.url });
-          setImageUrl(response.data.url);
-          setShowDeleteButton(true);
-        } catch (error) {
-          console.error("Error durante la subida:", error);
-          if (error.response) {
-            // El servidor respondió con un código de estado diferente de 2xx
-            console.error("Error en la respuesta del servidor:", error.response.data);
-            console.error("Código de estado:", error.response.status);
-          } else if (error.request) {
-            // La solicitud fue hecha pero no se recibió respuesta
-            console.error("No se recibió respuesta del servidor:", error.request);
+          data.append("file", file);
+          data.append("upload_preset", config.CLOUDINARY_UPLOAD_PRESET);
+          data.append("api_key", config.CLOUDINARY_API_KEY); 
+  
+          const response = await axios.post(
+              `https://api.cloudinary.com/v1_1/${config.CLOUDINARY_CLOUD_NAME}/image/upload/`,
+              data,
+              {
+                  headers: {
+                      'Content-Type': 'multipart/form-data'
+                  }
+              }
+          );
+  
+          console.log("response", response);
+          console.log("response.data", response.data.secure_url);
+  
+          if (response.data && response.data.secure_url) {
+              setPlaces({ ...places, image: response.data.url });
+              setImageUrl(response.data.url);
+              setPlaces({ ...places, image: [...places.image, response.data.secure_url] }); // Actualiza el array de imágenes correctamente
+              setShowDeleteButton(true);
           } else {
-            // Algo ocurrió al configurar la solicitud
-            console.error("Error al configurar la solicitud:", error.message);
+              console.error('La respuesta no contiene una URL.');
           }
+  
+          alert("Imagen subida");
+      } catch (error) {
+          console.error('Error al subir la imagen:', error.response?.data || error.message);
           alert("Error al subir la imagen.");
-        } finally {
+      } finally {
           setLoading(false);
-        }
-      };
+      }
+  };
       
     const handleDeleteImage = () => {
       setImageUrl(null);
@@ -141,6 +160,7 @@ export default function FormularioLugares(){
       setPlaces(initialForm);
       setImageUrl(null);
       setShowDeleteButton(false);
+      window.alert("Lugar creado exitosamente")
     };
   
     return (

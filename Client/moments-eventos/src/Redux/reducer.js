@@ -15,6 +15,7 @@ const initialState={
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case GET_EVENTS: 
+        console.log("event",state.events)
             return{
                 ...state,
                 events: action.payload,

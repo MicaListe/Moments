@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createDecoration } from "../../Redux/actions";
+import config from "../../config";
+import axios from "axios";
 
 export default function FormDeco() {
   const [file, setFile] = useState(null);
@@ -17,11 +19,12 @@ export default function FormDeco() {
 
   const [decoracion, setDecoracion] = useState(initialForm);
 
+  console.log("Deco", decoracion)
   const handleChange = (e) => {
-    const { type, value } = e.target;
+    const { name, value } = e.target;
     setDecoracion({
       ...decoracion,
-      [type]: value,
+      [name]: value,
     });
   };
 
@@ -35,22 +38,43 @@ export default function FormDeco() {
     if (!file) return;
 
     try {
-      setLoading(true);
-      const data = new FormData();
-      data.append("my_file", file);
-      const response = await axios.post(
-        "http://localhost:5000/upload",
-        data
-      );
-      setDecoracion({ ...decoracion, image: response.data.url });
-      setImageUrl(response.data.url);
-      setShowDeleteButton(true);
+        setLoading(true);
+        const data = new FormData();
+        data.append("file", file);
+        data.append("upload_preset", config.CLOUDINARY_UPLOAD_PRESET);
+        data.append("api_key", config.CLOUDINARY_API_KEY); 
+
+        const response = await axios.post(
+            `https://api.cloudinary.com/v1_1/${config.CLOUDINARY_CLOUD_NAME}/image/upload/`,
+            data,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+        );
+
+        console.log("response", response);
+        console.log("response.data", response.data.secure_url);
+
+        if (response.data && response.data.secure_url) {
+            setDecoracion({ ...decoracion, image: response.data.url });
+            setImageUrl(response.data.url);
+            setDecoracion({ ...decoracion, image: [...decoracion.image, response.data.secure_url] }); // Actualiza el array de imágenes correctamente
+            setShowDeleteButton(true);
+        } else {
+            console.error('La respuesta no contiene una URL.');
+        }
+
+        alert("Imagen subida");
     } catch (error) {
-      alert("Error al subir la imagen.");
+        console.error('Error al subir la imagen:', error.response?.data || error.message);
+        alert("Error al subir la imagen.");
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
+
 
   const handleDeleteImage = () => {
     setImageUrl(null);
@@ -64,6 +88,7 @@ export default function FormDeco() {
     setDecoracion(initialForm);
     setImageUrl(null);
     setShowDeleteButton(false);
+    window.alert("Decoración creada exitosamente")
   };
 
   return (
@@ -73,7 +98,7 @@ export default function FormDeco() {
 
         {/* Type input */}
         <div className="form-group mb-4">
-          <label className="form-label" htmlFor="type">Tipo</label>
+          <label className="form-label" htmlFor="type">Tipo de evento</label>
           <input
             type="text"
             id="type"

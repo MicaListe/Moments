@@ -10,6 +10,6 @@ const storage = new Multer.memoryStorage();
 
 const upload = Multer({storage});
 
-router.post("/", upload.single("my_file"),  UploadControllers.uploadImage);
+router.post("/", upload.single("file"),  UploadControllers.uploadImage);
 
 module.exports = router;

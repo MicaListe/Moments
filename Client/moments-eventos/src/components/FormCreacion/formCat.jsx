@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { createCatering } from "../../Redux/actions";
+import config from "../../config";
 
 export default function FormCat() {
   const [file, setFile] = useState(null);
@@ -28,42 +29,9 @@ export default function FormCat() {
     });
   };
 
-  // const handleUpload = async () => {
-  //   if (!file) return;
-
-  //   try {
-  //     setLoading(true);
-  //     const data = new FormData();
-  //     data.append("my_file", file);
-  //     const response = await axios.post(
-  //       "/upload/",
-  //       data,
-  //       {
-  //         headers: {
-  //             'Content-Type': 'multipart/form-data'
-  //         }
-  //     }
-  //     );
-  //     if (response.data && response.data.secure_url) {
-  //       setImageUrl(response.data.secure_url);
-  //       setShowDeleteButton(true);
-  //   } else {
-  //       console.error('La respuesta no contiene una URL.');
-  //   }
-
-  //   alert("Imagen subida");
-  //     console.log("re", response.data)
-  //     console.log("r", response.data.url)
-  //     alert("Imagen subida")
-  //     setProducto({ ...producto, image: [...producto.image, response.data.url] });
-  //     setImageUrl(response.data.url);
-  //     setShowDeleteButton(true);
-  //   } catch (error) {
-  //     alert("Error al subir la imagen.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const handleSelectFile = (e) => {
+    setFile(e.target.files[0]);
+  };
 
   const handleUpload = async () => {
     if (!file) return;
@@ -71,10 +39,12 @@ export default function FormCat() {
     try {
         setLoading(true);
         const data = new FormData();
-        data.append("my_file", file);
+        data.append("file", file);
+        data.append("upload_preset", config.CLOUDINARY_UPLOAD_PRESET);
+        data.append("api_key", config.CLOUDINARY_API_KEY); 
 
         const response = await axios.post(
-            `/upload/`,
+            `https://api.cloudinary.com/v1_1/${config.CLOUDINARY_CLOUD_NAME}/image/upload/`,
             data,
             {
                 headers: {
@@ -115,6 +85,7 @@ export default function FormCat() {
     setProducto(initialForm);
     setImageUrl(null);
     setShowDeleteButton(false);
+    window.alert("Producto creado exitosamente")
   };
 
   return (
