@@ -1,4 +1,4 @@
-import { GET_EVENTS, GET_CATERING, GET_DECORATION, FILTER_CATERING, FILTER_DECORATION, FILTER_COUNTRY, USER_REGISTER, GET_USERS, DELETE_USER, UPDATE_CATERING, DELETE_CATERING, DELETE_EVENT, UPDATE_DECORATION, DELETE_DECORATION, UPDATE_LUGAR, CREATE_CATERING, CREATE_DECORATION, CREATE_PLACE} from "./actions";
+import { GET_EVENTS, GET_CATERING, GET_DECORATION, FILTER_CATERING, FILTER_DECORATION, FILTER_COUNTRY, USER_REGISTER, GET_USERS, DELETE_USER, UPDATE_CATERING, DELETE_CATERING, UPDATE_DECORATION, DELETE_DECORATION, UPDATE_LUGAR, CREATE_CATERING, CREATE_DECORATION, CREATE_PLACE, DELETE_PLACES} from "./actions";
 
 
 const initialState={
@@ -94,10 +94,20 @@ const reducer = (state = initialState, action) => {
                     cateringItem.id === action.payload.id ? action.payload : cateringItem
                 )
             };
-        case DELETE_EVENT:
+        // case DELETE_PLACES:
+        //     return {
+        //         ...state,
+        //         events: state.events.filter(event => event.id !== action.payload)
+        //     };
+        case DELETE_PLACES:
+            
             return {
                 ...state,
-                events: state.events.filter(event => event.id !== action.payload)
+                events: state.events.map(event => 
+                    event.id === action.payload.eventId 
+                    ? { ...event, Lugars: event.Lugars.filter(place => place.id !== action.payload.placeId) }
+                    : event
+                )
             };
         case UPDATE_LUGAR:
             return {

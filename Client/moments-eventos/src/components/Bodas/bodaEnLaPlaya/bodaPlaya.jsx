@@ -19,22 +19,9 @@ export default function BodaPlaya() {
     }, [dispatch]);
 
     const eventos = useSelector((state) => state.filtered);
+    console.log(eventos)
     const bodas = eventos.filter((element) => element.name === "Bodas");
     const bodasYPlayas = bodas.map(evento => evento.Lugars).flat().filter(lugar => lugar.type === 'Playa');
-
-    const lugares = bodas.map(element => element.Lugars).flat();
-    const citys = [...new Set(lugares.map(element => element.city))];
-    const countries = [...new Set(lugares.map(element => element.country))];
-
-    const handleCountry = (e) => {
-        setSelectedCountry(e);
-        dispatch(filterCountry(e));
-    };
-
-    const handleCity = (e) => {
-        setSelectCity(e);
-        dispatch(filterCity(e));
-    };
 
     const getCurrentPageItems = () => {
         const startIndex = (currentPage - 1) * itemsPerPage;

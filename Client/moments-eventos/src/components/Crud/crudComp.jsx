@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, deleteUser, getCatering, deleteCatering, updateCatering, getEvents, updateEvent, deleteEvent, getDecoration, updateDecoration, deleteDecoration, updateLugar } from '../../Redux/actions';
+import { getUsers, deleteUser, getCatering, deleteCatering, updateCatering, getEvents, updateEvent, deletePlaces, getDecoration, updateDecoration, deleteDecoration, updateLugar } from '../../Redux/actions';
 import { Button, Form, Table, Modal } from 'react-bootstrap';
 import {Link} from "react-router-dom"
 
@@ -69,12 +69,17 @@ export default function CrudComponent() {
     }
   };
 
-  const handleDeleteEvent = (id) => {
-    if (window.confirm("¿Estas seguro de eliminar este evento?")) {
-      dispatch(deleteEvent(id));
+  // const handleDeleteEvent = (id) => {
+  //   if (window.confirm("¿Estas seguro de eliminar este evento?")) {
+  //     dispatch(deleteEvent(id));
+  //   }
+  // };
+
+  const handleDeleteLugar = (eventId, placeId) => {
+    if (window.confirm("¿Estás seguro de eliminar este lugar?")) {
+      dispatch(deletePlaces(eventId, placeId));
     }
   };
-
   const handleEditEvent = (event) => {
     setCurrentEvent(event);
     setModalType('event');
@@ -254,7 +259,7 @@ export default function CrudComponent() {
                     </Button>
                     <Button
                       variant="danger"
-                      onClick={() => handleDeleteEvent(event.id)}
+                      onClick={() => handleDeleteLugar(event.id, lugar.id)}
                       size="sm"
                     >
                       Eliminar

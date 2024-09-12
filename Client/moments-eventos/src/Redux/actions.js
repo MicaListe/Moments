@@ -13,7 +13,7 @@ export const UPDATE_USER = "UPDATE_USER";
 export const UPDATE_CATERING="UPDATE_CATERING";
 export const DELETE_CATERING="DELETE_CATERING";
 export const UPDATE_EVENT="UPDATE_EVENT";
-export const DELETE_EVENT="DELETE_EVENT";
+export const DELETE_PLACES="DELETE_PLACES";
 export const UPDATE_DECORATION="UPDATE_DECORATION";
 export const DELETE_DECORATION="DELETE_DECORATION";
 export const UPDATE_LUGAR = "UPDATE_LUGAR"
@@ -173,19 +173,37 @@ export function updateCatering(cateringId, updatedCatering) {
 
 
 
-export function deleteEvent(eventId) {
+// export function deleteEvent(placesId) {
+//     return async function(dispatch) {
+//         try {
+//             await axios.delete(`/places/delete_places/${placesId}`);
+//             dispatch({
+//                 type: DELETE_PLACES,
+//                 payload: placesId
+//             });
+//         } catch (error) {
+//             console.error('Error al eliminar el evento:', error);
+//         }
+//     };
+// }
+// Acción para eliminar un lugar específico dentro de un evento
+export function deletePlaces( eventId, placeId) {
     return async function(dispatch) {
         try {
-            await axios.delete(`/events/delete_event/${eventId}`);
+            // Aquí puedes realizar una llamada a la API si necesitas eliminar el lugar del backend
+            await axios.delete(`/places/delete_places/${placeId}`);
+
+            // Despachar la acción con el ID del evento y del lugar
             dispatch({
-                type: DELETE_EVENT,
-                payload: eventId
+                type: DELETE_PLACES,
+                payload: { eventId, placeId }
             });
         } catch (error) {
-            console.error('Error al eliminar el evento:', error);
+            console.error('Error al eliminar el lugar del evento:', error);
         }
     };
 }
+
 
 
 export function updateEvent(eventId, updatedEvent) {
