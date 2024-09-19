@@ -216,7 +216,7 @@ export default function Formulario({ setIsLoggedIn }) {
           <button type="submit" className="btn w-100" style={{backgroundColor: "black", color: "white"}}>Enviar</button>
           {/* </Link> */}
 
-          <input type="hidden" name='_next' value="http://127.0.0.1:5500/" />
+          <input type="hidden" name='_next' value="https://moments-3oti.vercel.app/" />
           <input type="hidden" name='_captcha' value="false" />
         </form>
       </div>

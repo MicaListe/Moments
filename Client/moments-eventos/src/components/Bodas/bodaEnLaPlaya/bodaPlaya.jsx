@@ -79,27 +79,6 @@ export default function BodaPlaya() {
                 ))}
                 <button onClick={() => handlePageChange(currentPage + 1)} className={`btn ${currentPage === Math.ceil(bodasYPlayas.length / itemsPerPage) ? 'btn-secondary disabled' : 'btn-primary'} mx-1`} disabled={currentPage === Math.ceil(bodasYPlayas.length / itemsPerPage)}>{">"}</button>
             </div>
-
-            {/* <div>
-                <label htmlFor="">Seleccionar ciudad</label>
-                <select onChange={(e) => handleCity(e.target.value)}>
-                    {
-                        citys.map(element => (
-                            <option key={element} value={element}>{element}</option>
-                        ))
-                    }
-                </select>
-            </div>
-            <div>
-                <label htmlFor="">Seleccionar país</label>
-                <select onChange={(e) => handleCountry(e.target.value)}>
-                    {
-                        countries.map(element => (
-                            <option key={element} value={element}>{element}</option>
-                        ))
-                    }
-                </select>
-            </div> */}
         </div>
     );
 }
