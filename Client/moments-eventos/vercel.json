@@ -19,6 +19,9 @@
       { "src": "/login", "dest": "/" },
       { "src": "/calendario", "dest": "/" },
       { "src": "/formulario", "dest": "/" },
-      { "src": "/crud", "dest": "/" }
+      { "src": "/crud", "dest": "/" },
+      { "src": "/createCatering", "dest": "/" },
+      { "src": "/createDecoration", "dest": "/" },
+      { "src": "/createPlaces", "dest": "/" }
     ]
 }    
