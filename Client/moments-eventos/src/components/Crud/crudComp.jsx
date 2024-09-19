@@ -10,6 +10,7 @@ export default function CrudComponent() {
   const catering = useSelector((state) => state.catering);
   const events = useSelector((state) => state.events);
   const lugares = events.flatMap(event=>event.Lugars)
+
   console.log("l", events)
   const decoration = useSelector((state) => state.decoration);
   
@@ -242,10 +243,11 @@ export default function CrudComponent() {
         <tbody>
           {events.length > 0 ? (
             events.map((event) => (
-              lugares.map((lugar, lugarIndex) => (
+              event.Lugars.map((lugar, lugarIndex) => (
                 <tr key={`${event.id}-${lugar.id}-${lugarIndex}`}>
                   <td>{lugar.id}</td>
-                  <td>{lugarIndex===0 ? event.name : ""}</td>
+                  {/* Mostrar el nombre del evento solo en la primera fila de cada lugar */}
+                  <td>{lugarIndex === 0 ? event.name : ""}</td>
                   <td>{lugar.name}</td>
                   <td>{lugar.description}</td>
                   <td className="text-center text-nowrap" style={{ width: '150px' }}>
@@ -291,6 +293,7 @@ export default function CrudComponent() {
                 </Button>
               </Link>
             </td>
+
           </tr>
         </thead>
         <tbody>
