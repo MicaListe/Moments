@@ -232,7 +232,7 @@ export default function CrudComponent() {
             <th>Descripción</th>
             <th className="text-center">Acciones</th>
             <td colSpan="5" className="text-center">
-              <Link to="/createEvents">
+              <Link to="/createPlaces">
                 <Button variant="success" size="sm">
                   Añadir
                 </Button>
