@@ -5,6 +5,7 @@ import { getCatering, getDecoration, getEvents } from '../../Redux/actions';
 import rama from "../../assets/ramaDorada.png"
 import emailjs from "emailjs-com"
 
+
 export default function Formulario({ setIsLoggedIn }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ export default function Formulario({ setIsLoggedIn }) {
   const events = useSelector((state) => state.events);
   const catering = useSelector((state) => state.catering);
   const decoration = useSelector((state) => state.decoration);
+ 
 
   useEffect(() => {
     dispatch(getEvents());
@@ -153,10 +155,13 @@ export default function Formulario({ setIsLoggedIn }) {
       .then((result) => {
         console.log("Resultado de EmailJS:", result);
         alert("Formulario enviado exitosamente");
+        
       }, (error) => {
         console.log("Error de EmailJS:", error);
         alert("Hubo un error al enviar el formulario");
-      });
+      }
+    );
+    
   };
   
   
@@ -249,9 +254,9 @@ export default function Formulario({ setIsLoggedIn }) {
               </select>
             </div>
           )}
-          <Link to="https://moments-3oti.vercel.app/"> 
-            <button type="submit" className="btn w-100" style={{backgroundColor: "black", color: "white"}}>Enviar</button>
-          </Link>
+          
+          <button type="submit" className="btn w-100" style={{backgroundColor: "black", color: "white"}}>Enviar</button>
+          
         </form>
       </div>
     </div>
