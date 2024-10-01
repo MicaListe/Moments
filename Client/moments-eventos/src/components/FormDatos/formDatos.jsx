@@ -155,7 +155,7 @@ export default function Formulario({ setIsLoggedIn }) {
       .then((result) => {
         console.log("Resultado de EmailJS:", result);
         alert("Formulario enviado exitosamente");
-        navigate("https://moments-3oti.vercel.app/")
+        navigate("/")
       }, (error) => {
         console.log("Error de EmailJS:", error);
         alert("Hubo un error al enviar el formulario");
