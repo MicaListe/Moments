@@ -113,7 +113,9 @@ export default function Formulario({ setIsLoggedIn }) {
 
   //Para decoracion 
   const [selectedDecorationType, setSelectedDecorationType] = useState("")
+
   const [selectedDecorationId, setSelectedDecorationId] = useState("")
+
 
   const [filteredDecoType, setFilteredDecoType] = useState([])
   const [filteredDecoId, setFilteredDecoId] = useState([])
@@ -144,36 +146,10 @@ export default function Formulario({ setIsLoggedIn }) {
 
 
   //SUBMIT PARA ENVIAR EL FORMULARIO
-  // const sendEmial = (e) => {
-  //   e.preventDefault()
-
-  //   console.log("ev", selectedEvent)
-  //   console.log("comprobando", e.target)
-  //   emailjs.sendForm("service_oqepc5k","template_a6xe5ys", e.target, "YS_6kkHcsMmTXyA_w")
-  //   .then((result)=>{
-  //     console.log(result.text)
-  //     alert("Formulario enviado exitosamente")
-  //   },(error) =>{
-  //     console.log(error.text)
-  //     alert("Hubo un error al enviar el formulario")
-  //   })
-  // }
-
   const sendEmial = (e) => {
     e.preventDefault();
   
-    const fixedData = {
-      user_email: userEmail,
-      Evento: "Fiestas de XV",
-      "Tipo de Lugar": "Al aire libre",
-      Lugar: "Playa",
-      Catering: "Buffet",
-      Tortas: "Chocolate",
-      "Tipo de Decoración": "Luces",
-      Decoración: "Bodas",
-    };
-  
-    emailjs.send("service_oqepc5k", "template_a6xe5ys", fixedData, "YS_6kkHcsMmTXyA_w")
+    emailjs.sendForm("service_oqepc5k", "template_a6xe5ys", e.target, "YS_6kkHcsMmTXyA_w")
       .then((result) => {
         console.log("Resultado de EmailJS:", result);
         alert("Formulario enviado exitosamente");
@@ -191,13 +167,12 @@ export default function Formulario({ setIsLoggedIn }) {
       <img src={rama} style={{ width: '90px', transform: 'rotate(200deg)', position: 'absolute', left: '1420px', top: '700px' }} />
       <div className="card p-4 shadow-sm" style={{ maxWidth: '500px', width: '100%' }}>
         <h2 className="mb-4 text-center">Formulario de Datos</h2>
-        {/* <form  action='https://formsubmit.co/4b3b6f32083e8a1d3cf2488871a98f06' method='POST'> */}
-
         <form onSubmit={sendEmial}>
         <input type="hidden" name="user_email" value={userEmail} />
           <div className="mb-3">
             <label htmlFor="selector1" className="form-label">Tipo de evento:</label>
             <select id="selector1" name="Evento" className="form-select" onChange={handleEventChange} value={selectedEvent}>
+              <option value="" disabled selected>Selecciona una opción</option>
               {events.map(event => (
                 <option key={event.id} value={event.name}>
                   {event.name}
@@ -209,6 +184,7 @@ export default function Formulario({ setIsLoggedIn }) {
             <div className="mb-3">
               <label htmlFor="selector2" className="form-label">Tipo de lugar:</label>
               <select id="selector2" name="Tipo de Lugar" className="form-select" onChange={handleTypeChange} value={selectedType}>
+                <option value="" disabled selected>Selecciona una opción</option>
                 {filteredType.map((type, index) => (
                   <option value={type} key={index}>{type}</option>
                 ))}
@@ -228,6 +204,7 @@ export default function Formulario({ setIsLoggedIn }) {
           <div className="mb-3">
             <label htmlFor="selector4" className="form-label">Catering:</label>
             <select id="selector4" name="Catering" className="form-select" onChange={handleCateringChange} value={selectedCatering}>
+              <option value="" disabled selected>Selecciona una opción</option>
               {filteredMenu.map(cater => (
                 <option key={cater.id} value={cater.name}>
                   {cater.name}
@@ -238,7 +215,8 @@ export default function Formulario({ setIsLoggedIn }) {
           <div className="mb-3">
             <label htmlFor="selector5" className="form-label">Tortas:</label>
             <select id="selector5" name="Tortas" className="form-select" onChange={handleCakeChange} value={selectedCake}>
-              <option value="">A elección</option>
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option value="A eleccion">A elección</option>
               {filteredCake.map(cater => (
                 <option key={cater.id} value={cater.name}>
                   {cater.name}
@@ -248,7 +226,8 @@ export default function Formulario({ setIsLoggedIn }) {
           </div>
           <div className="mb-3">
             <label htmlFor="selector6" className="form-label">Tipo de decoración:</label>
-            <select id="selector6" name="Tipo de Decoración" className="form-select" onChange={handleDecoTypeChange} value={selectedDecorationType}>
+            <select id="selector6" name="Tipo de Decoracion" className="form-select" onChange={handleDecoTypeChange} value={selectedDecorationType}>
+              <option value="" disabled selected>Selecciona una opción</option>
               {filteredDecoType.map((type, index) => (
                 <option key={index} value={type}>
                   {type}
@@ -259,8 +238,9 @@ export default function Formulario({ setIsLoggedIn }) {
           {selectedDecorationType && (
             <div className="mb-3">
               <label htmlFor="selector7" className="form-label">Decoración:</label>
-              <select id="selector7" name="Decoración" className="form-select" onChange={handleDecoIdChange} value={selectedDecorationId}>
-                <option value="">A elección</option>
+              <select id="selector7" name="Decoracion" className="form-select" onChange={handleDecoIdChange} value={selectedDecorationId}>
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="A eleccion">A elección</option>
                 {filteredDecoId.map(decor => (
                   <option key={decor.id} value={decor.id}>
                     {decor.id}
@@ -269,14 +249,9 @@ export default function Formulario({ setIsLoggedIn }) {
               </select>
             </div>
           )}
-          
-
-          {/* <Link to="/"> */}
-          <button type="submit" className="btn w-100" style={{backgroundColor: "black", color: "white"}}>Enviar</button>
-          {/* </Link> */}
-
-          {/* <input type="hidden" name='_next' value="https://moments-3oti.vercel.app/" />
-          <input type="hidden" name='_captcha' value="false" /> */}
+          <Link to="https://moments-3oti.vercel.app/"> 
+            <button type="submit" className="btn w-100" style={{backgroundColor: "black", color: "white"}}>Enviar</button>
+          </Link>
         </form>
       </div>
     </div>
