@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCatering, getDecoration, getEvents } from '../../Redux/actions';
 import rama from "../../assets/ramaDorada.png"
 import emailjs from "emailjs-com"
-
 
 export default function Formulario({ setIsLoggedIn }) {
   const navigate = useNavigate();
@@ -164,7 +163,7 @@ export default function Formulario({ setIsLoggedIn }) {
     
   };
   
-  
+
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 mt-5">
       <img src={rama} style={{ width: '100px', position: 'absolute', left: '0px', top: '200px' }} />
