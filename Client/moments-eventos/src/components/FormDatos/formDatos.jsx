@@ -3,11 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCatering, getDecoration, getEvents } from '../../Redux/actions';
 import rama from "../../assets/ramaDorada.png"
+import emailjs from "emailjs-com"
 
 export default function Formulario({ setIsLoggedIn }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+  emailjs.init("YS_6kkHcsMmTXyA_w")
+
   const events = useSelector((state) => state.events);
   const catering = useSelector((state) => state.catering);
   const decoration = useSelector((state) => state.decoration);
@@ -25,11 +27,23 @@ export default function Formulario({ setIsLoggedIn }) {
   const [filteredType, setFilteredType] = useState([]);
   const [filteredCity, setFilteredCity] = useState([]);
 
+  const [userEmail, setUserEmail] = useState("")
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      const parsedUser = JSON.parse(user); // Convertir el string a objeto
+      setUserEmail(parsedUser.mail); // Establecer el correo en el estado
+    }
+  }, []);
+  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setIsLoggedIn(true);
     navigate('/Calendario');
   };
+
 
   useEffect(() => {
     if (selectedEvent) {
@@ -127,6 +141,48 @@ export default function Formulario({ setIsLoggedIn }) {
   const handleDecoIdChange = (e) => {
     setSelectedDecorationId(e.target.value);
   };
+
+
+  //SUBMIT PARA ENVIAR EL FORMULARIO
+  // const sendEmial = (e) => {
+  //   e.preventDefault()
+
+  //   console.log("ev", selectedEvent)
+  //   console.log("comprobando", e.target)
+  //   emailjs.sendForm("service_oqepc5k","template_a6xe5ys", e.target, "YS_6kkHcsMmTXyA_w")
+  //   .then((result)=>{
+  //     console.log(result.text)
+  //     alert("Formulario enviado exitosamente")
+  //   },(error) =>{
+  //     console.log(error.text)
+  //     alert("Hubo un error al enviar el formulario")
+  //   })
+  // }
+
+  const sendEmial = (e) => {
+    e.preventDefault();
+  
+    const fixedData = {
+      user_email: userEmail,
+      Evento: "Fiestas de XV",
+      "Tipo de Lugar": "Al aire libre",
+      Lugar: "Playa",
+      Catering: "Buffet",
+      Tortas: "Chocolate",
+      "Tipo de Decoración": "Luces",
+      Decoración: "Bodas",
+    };
+  
+    emailjs.send("service_oqepc5k", "template_a6xe5ys", fixedData, "YS_6kkHcsMmTXyA_w")
+      .then((result) => {
+        console.log("Resultado de EmailJS:", result);
+        alert("Formulario enviado exitosamente");
+      }, (error) => {
+        console.log("Error de EmailJS:", error);
+        alert("Hubo un error al enviar el formulario");
+      });
+  };
+  
   
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 mt-5">
@@ -135,7 +191,10 @@ export default function Formulario({ setIsLoggedIn }) {
       <img src={rama} style={{ width: '90px', transform: 'rotate(200deg)', position: 'absolute', left: '1420px', top: '700px' }} />
       <div className="card p-4 shadow-sm" style={{ maxWidth: '500px', width: '100%' }}>
         <h2 className="mb-4 text-center">Formulario de Datos</h2>
-        <form  action='https://formsubmit.co/4b3b6f32083e8a1d3cf2488871a98f06' method='POST'>
+        {/* <form  action='https://formsubmit.co/4b3b6f32083e8a1d3cf2488871a98f06' method='POST'> */}
+
+        <form onSubmit={sendEmial}>
+        <input type="hidden" name="user_email" value={userEmail} />
           <div className="mb-3">
             <label htmlFor="selector1" className="form-label">Tipo de evento:</label>
             <select id="selector1" name="Evento" className="form-select" onChange={handleEventChange} value={selectedEvent}>
@@ -216,8 +275,8 @@ export default function Formulario({ setIsLoggedIn }) {
           <button type="submit" className="btn w-100" style={{backgroundColor: "black", color: "white"}}>Enviar</button>
           {/* </Link> */}
 
-          <input type="hidden" name='_next' value="https://moments-3oti.vercel.app/" />
-          <input type="hidden" name='_captcha' value="false" />
+          {/* <input type="hidden" name='_next' value="https://moments-3oti.vercel.app/" />
+          <input type="hidden" name='_captcha' value="false" /> */}
         </form>
       </div>
     </div>
