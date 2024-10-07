@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { createCatering } from "../../Redux/actions";
 import config from "../../config";
+import ValidationForm from "./ValidationForm";
 
 export default function FormCat() {
   const [file, setFile] = useState(null);
@@ -19,6 +20,8 @@ export default function FormCat() {
   };
 
   const [producto, setProducto] = useState(initialForm);
+  const [errors, setErrors]= useState({})
+
   console.log("producto", producto)
 
   const handleChange = (e) => {
@@ -27,6 +30,9 @@ export default function FormCat() {
       ...producto,
       [name]: value,
     });
+
+    const validationsErrors=ValidationForm({...producto, [name]:value})
+    setErrors(validationsErrors)
   };
 
   const handleSelectFile = (e) => {
@@ -81,6 +87,10 @@ export default function FormCat() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (producto.name === '' || producto.type === '' || producto.description === '' || producto.image.length === 0){
+      window.alert("Por favor complete todos los campos")
+      return
+    }
     dispatch(createCatering(producto));
     setProducto(initialForm);
     setImageUrl(null);
@@ -105,6 +115,9 @@ export default function FormCat() {
             onChange={handleChange}
             required
           />
+          <span>
+            {errors.name}
+          </span>
         </div>
         {/* Type input */}
         <div className="form-group mb-4">
@@ -118,6 +131,9 @@ export default function FormCat() {
             onChange={handleChange}
             required
           />
+          <span>
+            {errors.type}
+          </span>
         </div>
 
         {/* Description input */}
@@ -132,6 +148,9 @@ export default function FormCat() {
             onChange={handleChange}
             required
           />
+          <span>
+            {errors.description}
+          </span>
         </div>
 
         {/* File input */}

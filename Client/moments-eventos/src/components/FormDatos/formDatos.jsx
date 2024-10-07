@@ -149,7 +149,12 @@ export default function Formulario({ setIsLoggedIn }) {
   //SUBMIT PARA ENVIAR EL FORMULARIO
   const sendEmial = (e) => {
     e.preventDefault();
-  
+    
+    if(!selectedEvent || !selectedType || !selectedCity || !selectedCatering || !selectedCake || !selectedDecorationType || !selectedDecorationId){
+      window.alert("Por favor complete todos los campos")
+      return
+    }
+
     emailjs.sendForm("service_oqepc5k", "template_a6xe5ys", e.target, "YS_6kkHcsMmTXyA_w")
       .then((result) => {
         console.log("Resultado de EmailJS:", result);
@@ -199,6 +204,7 @@ export default function Formulario({ setIsLoggedIn }) {
             <div className="mb-3">
               <label htmlFor="selector3" className="form-label">Lugar:</label>
               <select id="selector3" name="Lugar" className="form-select" onChange={handleCityChange} value={selectedCity}>
+              <option value="" disabled selected>Selecciona una opción</option>
                 {filteredCity.map((name, index) => (
                   <option value={name} key={index}>{name}</option>
                 ))}

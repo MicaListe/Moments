@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import './register.css';
 import logo from '../../assets/logo.png';
 import rama from '../../assets/ramaDorada.png';
+import Validation from './validation';
 
 export default function Register() {
     const navigate = useNavigate();
@@ -22,14 +23,56 @@ export default function Register() {
 
     const [users, setUsers] = useState(initialForm);
     const [AdminKey, setAdminKey] = useState(false);
+    const [errors, setErrors]=useState({})
+    
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    const handleChangeName = (e) => {
+        const inputsValue=e.target.value
         setUsers({
             ...users,
-            [name]: value,
+            name:inputsValue,
+        });
+        const validationsErrors=Validation({...users, name:inputsValue})
+        setErrors(validationsErrors)
+
+    };
+
+
+    const handleChangeMail = (e) => {
+
+        const inputsValue=e.target.value
+
+        const validationsErrors=Validation({...users, mail:inputsValue})
+        setErrors(validationsErrors)
+
+        setUsers({
+            ...users,
+            mail:inputsValue,
         });
     };
+
+    const handleChangePassword = (e) => {
+
+        const inputsValue=e.target.value
+        setUsers({
+            ...users,
+            password:inputsValue,
+        });        
+
+        const validationsErrors=Validation({...users, password:inputsValue})
+        setErrors(validationsErrors)
+
+
+    };
+
+    const handleChangeAdminKey = (e) => {
+        const inputsValue=e.target.value
+        setUsers({
+            ...users,
+            adminKey:inputsValue,
+        });
+    };
+
 
     const handleRoleId = (e) => {
         const roleId = parseInt(e);
@@ -86,9 +129,12 @@ export default function Register() {
                         id="username"
                         name="name"
                         value={users.name}
-                        onChange={handleChange}
+                        onChange={handleChangeName}
                         placeholder="Nombre"
                     />
+                    <span>
+                        {errors.name}
+                    </span>
                 </div>
                 <div className="form-group">
                     <input
@@ -97,9 +143,12 @@ export default function Register() {
                         id="email"
                         name="mail"
                         value={users.mail}
-                        onChange={handleChange}
+                        onChange={handleChangeMail}
                         placeholder="Correo"
                     />
+                    <span>
+                        {errors.mail}
+                    </span>
                 </div>
                 <div className="form-option">
                     <label htmlFor="">Cuenta para:</label>
@@ -117,7 +166,7 @@ export default function Register() {
                             id="adminKey"
                             name="adminKey"
                             value={users.adminKey}
-                            onChange={handleChange}
+                            onChange={handleChangeAdminKey}
                             placeholder="Clave de administrador"
                         />
                     </div>
@@ -128,10 +177,13 @@ export default function Register() {
                         className="form-control item"
                         id="password"
                         name="password"
-                        onChange={handleChange}
+                        onChange={handleChangePassword}
                         value={users.password}
                         placeholder="Contraseña"
                     />
+                    <span>
+                        {errors.password}
+                    </span>
                 </div>
                 <div className="form-group">
                     <button 
