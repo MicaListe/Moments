@@ -13,13 +13,13 @@ export default function FormularioLugares(){
     const dispatch = useDispatch();
   
     const initialForm={
-        name: "",
-        type: "",
-        city: "",
-        country: "",
-        description: "",
-        image: [],
-        event: ""
+      name: "",
+      type: "",
+      city: "",
+      country: "",
+      description: "",
+      image: [],
+      event: ""
     }
     const [places, setPlaces] = useState(initialForm)
     console.log("places", places)

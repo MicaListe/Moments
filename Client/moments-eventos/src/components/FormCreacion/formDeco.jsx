@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { createDecoration } from "../../Redux/actions";
 import config from "../../config";
 import axios from "axios";
+import ValidationDeco from "./ValidationDeco";
 
 export default function FormDeco() {
   const [file, setFile] = useState(null);
@@ -18,14 +19,17 @@ export default function FormDeco() {
   };
 
   const [decoracion, setDecoracion] = useState(initialForm);
+  const [errors, setErrors]= useState({})
 
-  console.log("Deco", decoracion)
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDecoracion({
       ...decoracion,
       [name]: value,
     });
+
+    const validationsErrors=ValidationDeco({...decoracion, [name]:value})
+    setErrors(validationsErrors)
   };
 
   const handleSelectFile = (e) => {
@@ -84,6 +88,10 @@ export default function FormDeco() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (decoracion.type === '' || decoracion.description === '' || decoracion.image.length === 0){
+      window.alert("Por favor complete todos los campos")
+      return
+    }
     dispatch(createDecoration(decoracion));
     setDecoracion(initialForm);
     setImageUrl(null);
@@ -108,6 +116,9 @@ export default function FormDeco() {
             onChange={handleChange}
             required
           />
+          <span style={{fontSize:"10px", color:"red"}}>
+            {errors.type}
+          </span>
         </div>
 
         {/* Description input */}
@@ -122,6 +133,9 @@ export default function FormDeco() {
             onChange={handleChange}
             required
           />
+          <span style={{fontSize:"10px", color:"red"}}>
+            {errors.description}
+          </span>
         </div>
 
         {/* File input */}

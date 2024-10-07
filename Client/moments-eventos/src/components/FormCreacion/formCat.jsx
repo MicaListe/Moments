@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { createCatering } from "../../Redux/actions";
 import config from "../../config";
-import ValidationForm from "./ValidationForm";
+import ValidationCat from "./ValidationCat";
 
 export default function FormCat() {
   const [file, setFile] = useState(null);
@@ -22,8 +22,6 @@ export default function FormCat() {
   const [producto, setProducto] = useState(initialForm);
   const [errors, setErrors]= useState({})
 
-  console.log("producto", producto)
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProducto({
@@ -31,7 +29,7 @@ export default function FormCat() {
       [name]: value,
     });
 
-    const validationsErrors=ValidationForm({...producto, [name]:value})
+    const validationsErrors=ValidationCat({...producto, [name]:value})
     setErrors(validationsErrors)
   };
 
@@ -115,7 +113,7 @@ export default function FormCat() {
             onChange={handleChange}
             required
           />
-          <span>
+          <span style={{fontSize:"10px", color:"red"}}>
             {errors.name}
           </span>
         </div>
@@ -131,7 +129,7 @@ export default function FormCat() {
             onChange={handleChange}
             required
           />
-          <span>
+          <span style={{fontSize:"10px", color:"red"}}>
             {errors.type}
           </span>
         </div>
@@ -148,7 +146,7 @@ export default function FormCat() {
             onChange={handleChange}
             required
           />
-          <span>
+          <span style={{fontSize:"10px", color:"red"}}>
             {errors.description}
           </span>
         </div>
