@@ -8,6 +8,7 @@ import rama from '../../assets/ramaDorada.png';
 import Validation from './validation';
 
 export default function Register() {
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -28,15 +29,16 @@ export default function Register() {
 
     const handleChangeName = (e) => {
         const inputsValue=e.target.value
+
         setUsers({
             ...users,
             name:inputsValue,
         });
+
         const validationsErrors=Validation({...users, name:inputsValue})
         setErrors(validationsErrors)
 
     };
-
 
     const handleChangeMail = (e) => {
 
@@ -61,8 +63,6 @@ export default function Register() {
 
         const validationsErrors=Validation({...users, password:inputsValue})
         setErrors(validationsErrors)
-
-
     };
 
     const handleChangeAdminKey = (e) => {

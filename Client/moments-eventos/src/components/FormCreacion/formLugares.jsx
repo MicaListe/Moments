@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import {useState } from "react"
 import axios from "axios";
 import config from "../../config";
+import ValidationPlaces from "./ValidationPlaces";
 
 export default function FormularioLugares(){
 
@@ -22,131 +23,61 @@ export default function FormularioLugares(){
       event: ""
     }
     const [places, setPlaces] = useState(initialForm)
-    console.log("places", places)
-    
+    const [errors, setErrors] = useState({})
+
     const handleNameChange = (e) => {
-      const inputValue = e.target.value
+
+      const {name,value} = e.target
       setPlaces({
         ...places,
-        name: inputValue,
+        [name]: value,
       });
+
+      const validationErrors = ValidationPlaces({...places, [name]:value})
+      setErrors(validationErrors)
     };
-    const handleCityChange = (e) => {
-        const inputValue = e.target.value
-        setPlaces({
-          ...places,
-          city: inputValue,
-        });
-    };
-    const handleCountryChange = (e) => {
-        const inputValue = e.target.value
-        setPlaces({
-          ...places,
-          country: inputValue,
-        });
-    };
-    const handleTypeChange = (e) => {
-        const inputValue = e.target.value
-        setPlaces({
-          ...places,
-          type: inputValue,
-        });
-    };
-    const handleDescriptionChange = (e) => {
-        const inputValue = e.target.value
-        setPlaces({
-          ...places,
-          description: inputValue,
-        });
-    };
-    const handleEventChange = (e) => {
-        const inputValue = e.target.value
-        setPlaces({
-          ...places,
-          event: inputValue,
-        });
-    };
+
     const handleSelectFile = (e) => {
       if (e.target.files) {
         setFile(e.target.files[0]);
       }
     };
   
-    // const handleUpload = async () => {
-    //     if (!file) {
-    //       console.log("No hay archivo seleccionado.");
-    //       return;
-    //     }
-      
-    //     try {
-    //       setLoading(true);
-    //       const data = new FormData();
-    //       data.append("my_file", file);
-    //       const response = await axios.post("/places/create_places", data);
-    //       console.log("Respuesta del servidor:", response);
-    //       setPlaces({ ...places, image: response.data.url });
-    //       setImageUrl(response.data.url);
-    //       setShowDeleteButton(true);
-    //     } catch (error) {
-    //       console.error("Error durante la subida:", error);
-    //       if (error.response) {
-    //         // El servidor respondió con un código de estado diferente de 2xx
-    //         console.error("Error en la respuesta del servidor:", error.response.data);
-    //         console.error("Código de estado:", error.response.status);
-    //       } else if (error.request) {
-    //         // La solicitud fue hecha pero no se recibió respuesta
-    //         console.error("No se recibió respuesta del servidor:", error.request);
-    //       } else {
-    //         // Algo ocurrió al configurar la solicitud
-    //         console.error("Error al configurar la solicitud:", error.message);
-    //       }
-    //       alert("Error al subir la imagen.");
-    //     } finally {
-    //       setLoading(false);
-    //     }
-    //   };
-
-
     const handleUpload = async () => {
       if (!file) return;
   
       try {
-          setLoading(true);
-          const data = new FormData();
-          data.append("file", file);
-          data.append("upload_preset", config.CLOUDINARY_UPLOAD_PRESET);
-          data.append("api_key", config.CLOUDINARY_API_KEY); 
-  
-          const response = await axios.post(
-              `https://api.cloudinary.com/v1_1/${config.CLOUDINARY_CLOUD_NAME}/image/upload/`,
-              data,
-              {
-                  headers: {
-                      'Content-Type': 'multipart/form-data'
-                  }
+        setLoading(true);
+        const data = new FormData();
+        data.append("file", file);
+        data.append("upload_preset", config.CLOUDINARY_UPLOAD_PRESET);
+        data.append("api_key", config.CLOUDINARY_API_KEY); 
+
+        const response = await axios.post(`https://api.cloudinary.com/v1_1/${config.CLOUDINARY_CLOUD_NAME}/image/upload/`,
+          data,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data'
               }
-          );
+            }
+        );
   
-          console.log("response", response);
-          console.log("response.data", response.data.secure_url);
-  
-          if (response.data && response.data.secure_url) {
-              setPlaces({ ...places, image: response.data.url });
-              setImageUrl(response.data.url);
-              setPlaces({ ...places, image: [...places.image, response.data.secure_url] }); // Actualiza el array de imágenes correctamente
-              setShowDeleteButton(true);
-          } else {
-              console.error('La respuesta no contiene una URL.');
-          }
-  
+        if (response.data && response.data.secure_url) {
+          setPlaces({ ...places, image: response.data.url });
+          setImageUrl(response.data.url);
+          setPlaces({ ...places, image: [...places.image, response.data.secure_url] }); // Actualiza el array de imágenes correctamente
+          setShowDeleteButton(true);
+        } else {
+          console.error('La respuesta no contiene una URL.');
+        }
           alert("Imagen subida");
       } catch (error) {
-          console.error('Error al subir la imagen:', error.response?.data || error.message);
-          alert("Error al subir la imagen.");
+        console.error('Error al subir la imagen:', error.response?.data || error.message);
+        alert("Error al subir la imagen.");
       } finally {
-          setLoading(false);
+        setLoading(false);
       }
-  };
+    };
       
     const handleDeleteImage = () => {
       setImageUrl(null);
@@ -168,83 +99,101 @@ export default function FormularioLugares(){
         <h2 className="text-center mb-4">Crear Lugar</h2>
         <form onSubmit={handleSubmit}>
             <div className="form-group mb-4">
-                <label className="form-label" htmlFor="type">Tipo de evento</label>
-                <input
+              <label className="form-label" htmlFor="type">Tipo de evento (Ej: boda, baustismo):</label>
+              <input
                 type="text"
-                id="type"
-                name="type"
+                id="event"
+                name="event"
                 className="form-control"
                 value={places.event}
-                onChange={handleEventChange}
+                onChange={handleNameChange}
                 required
-                />
+              />
+              <span style={{fontSize:"10px", color:"red"}}>
+                {errors.event}
+              </span>
             </div>
             <div className="form-group mb-4">
                 <label className="form-label" htmlFor="type">Nombre del lugar:</label>
                 <input
-                type="text"
-                id="type"
-                name="type"
-                className="form-control"
-                value={places.name}
-                onChange={handleNameChange}
-                required
+                  type="text"
+                  id="name"
+                  name="name"
+                  className="form-control"
+                  value={places.name}
+                  onChange={handleNameChange}
+                  required
                 />
+                <span style={{fontSize:"10px", color:"red"}}>
+                  {errors.name}
+                </span>
             </div>
             <div className="form-group mb-4">
-                <label className="form-label" htmlFor="type">Tipo de lugar</label>
-                <input
+              <label className="form-label" htmlFor="type">Tipo de lugar (Ej: salón, quinta, playa):</label>
+              <input
                 type="text"
-                id="type"
+                id="places"
                 name="type"
                 className="form-control"
                 value={places.type}
-                onChange={handleTypeChange}
+                onChange={handleNameChange}
                 required
-                />
+              />
+              <span style={{fontSize:"10px", color:"red"}}>
+                {errors.type}
+              </span>
             </div>
           <div className="form-group mb-4">
-            <label className="form-label" htmlFor="type">Ciudad</label>
+            <label className="form-label" htmlFor="type">Ciudad:</label>
             <input
               type="text"
-              id="type"
-              name="type"
+              id="city"
+              name="city"
               className="form-control"
               value={places.city}
-              onChange={handleCityChange}
+              onChange={handleNameChange}
               required
             />
+            <span style={{fontSize:"10px", color:"red"}}>
+              {errors.city}
+            </span>
           </div>
           <div className="form-group mb-4">
-            <label className="form-label" htmlFor="type">País</label>
+            <label className="form-label" htmlFor="type">País:</label>
             <input
               type="text"
-              id="type"
-              name="type"
+              id="country"
+              name="country"
               className="form-control"
               value={places.country}
-              onChange={handleCountryChange}
+              onChange={handleNameChange}
               required
             />
+            <span style={{fontSize:"10px", color:"red"}}>
+              {errors.country}
+            </span>
           </div>
          
           {/* Description input */}
           <div className="form-group mb-4">
-            <label className="form-label" htmlFor="description">Descripción</label>
+            <label className="form-label" htmlFor="description">Descripción:</label>
             <textarea
               id="description"
               name="description"
               className="form-control"
               rows="4"
               value={places.description}
-              onChange={handleDescriptionChange}
+              onChange={handleNameChange}
               required
             />
+            <span style={{fontSize:"10px", color:"red"}}>
+              {errors.description}
+            </span>
           </div>
   
           {/* File input */}
           <div className="form-group mb-4">
-            <label className="form-label" htmlFor="fileUpload">Seleccionar Imagen</label>
+            <label className="form-label" htmlFor="fileUpload">Seleccionar Imagen:</label>
             <input
               type="file"
               id="fileUpload"

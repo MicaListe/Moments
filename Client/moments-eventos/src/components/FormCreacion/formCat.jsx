@@ -29,7 +29,7 @@ export default function FormCat() {
       [name]: value,
     });
 
-    const validationsErrors=ValidationCat({...producto, [name]:value})
+    const validationsErrors = ValidationCat({...producto, [name]:value})
     setErrors(validationsErrors)
   };
 
@@ -41,41 +41,37 @@ export default function FormCat() {
     if (!file) return;
 
     try {
-        setLoading(true);
-        const data = new FormData();
-        data.append("file", file);
-        data.append("upload_preset", config.CLOUDINARY_UPLOAD_PRESET);
-        data.append("api_key", config.CLOUDINARY_API_KEY); 
+      setLoading(true);
+      const data = new FormData();
+      data.append("file", file);
+      data.append("upload_preset", config.CLOUDINARY_UPLOAD_PRESET);
+      data.append("api_key", config.CLOUDINARY_API_KEY); 
 
-        const response = await axios.post(
-            `https://api.cloudinary.com/v1_1/${config.CLOUDINARY_CLOUD_NAME}/image/upload/`,
-            data,
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }
-        );
-
-        console.log("response", response);
-        console.log("response.data", response.data.secure_url);
-
-        if (response.data && response.data.secure_url) {
-            setImageUrl(response.data.secure_url);
-            setProducto({ ...producto, image: [...producto.image, response.data.secure_url] }); // Actualiza el array de imágenes correctamente
-            setShowDeleteButton(true);
-        } else {
-            console.error('La respuesta no contiene una URL.');
+      const response = await axios.post(`https://api.cloudinary.com/v1_1/${config.CLOUDINARY_CLOUD_NAME}/image/upload/`,
+        data,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
         }
+      );
 
-        alert("Imagen subida");
+      if (response.data && response.data.secure_url) {
+        setImageUrl(response.data.secure_url);
+        setProducto({ ...producto, image: [...producto.image, response.data.secure_url] }); // Actualiza el array de imágenes correctamente
+        setShowDeleteButton(true);
+      } else {
+        console.error('La respuesta no contiene una URL.');
+      }
+      alert("Imagen subida");
+
     } catch (error) {
-        console.error('Error al subir la imagen:', error.response?.data || error.message);
-        alert("Error al subir la imagen.");
+      console.error('Error al subir la imagen:', error.response?.data || error.message);
+      alert("Error al subir la imagen.");
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
+  };
 
   const handleDeleteImage = () => {
     setImageUrl(null);
@@ -89,6 +85,7 @@ export default function FormCat() {
       window.alert("Por favor complete todos los campos")
       return
     }
+    
     dispatch(createCatering(producto));
     setProducto(initialForm);
     setImageUrl(null);
