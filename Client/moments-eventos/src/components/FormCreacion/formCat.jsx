@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
+import dinosaurio from "../../assets/dinosaurioError.png"
 
 import axios from "axios";
 import { createCatering } from "../../Redux/actions";
@@ -27,7 +28,12 @@ export default function FormCat() {
   // Comprobar si el usuario tiene autorización
   const isAuthorized = location.state && location.state.fromButton;
       if (!isAuthorized) {
-          return <div>Error: No tienes permiso para acceder a esta página.</div>;
+        return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
+        Error: No tienes permiso para acceder a esta página.
+        <div>
+          <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
+        </div>
+      </div>
       }
 
   const [producto, setProducto] = useState(initialForm);

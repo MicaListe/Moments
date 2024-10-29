@@ -2,6 +2,7 @@ import React from "react";
 import Ubicacion from '../../assets/ubicacion.png';
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import dinosaurio from "../../assets/dinosaurioError.png";
 
 function Sucursales() {
 
@@ -16,7 +17,12 @@ function Sucursales() {
     }, [location.state]);
 
     if (!isAuthorized) {
-        return <div>Error: No tienes permiso para acceder a esta página.</div>;
+        return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
+            Error: No tienes permiso para acceder a esta página.
+            <div>
+              <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
+            </div>
+          </div>
     }
 
 

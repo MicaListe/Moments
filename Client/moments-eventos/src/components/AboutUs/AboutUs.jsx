@@ -1,7 +1,8 @@
 import React from 'react';
 import { useEffect, useState} from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import sobreNosotros from '../../assets/sobreNosotros.jpg'
+import sobreNosotros from '../../assets/sobreNosotros.jpg';
+import dinosaurio from "../../assets/dinosaurioError.png";
 
 function AboutUs () {
 
@@ -16,7 +17,12 @@ function AboutUs () {
     }, [location.state]);
 
     if (!isAuthorized) {
-        return <div>Error: No tienes permiso para acceder a esta página.</div>;
+      return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
+      Error: No tienes permiso para acceder a esta página.
+      <div>
+        <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
+      </div>
+    </div>
     }
 
   return (

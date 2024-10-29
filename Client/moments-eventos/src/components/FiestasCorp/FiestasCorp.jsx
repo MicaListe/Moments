@@ -5,6 +5,8 @@ import { getEvents } from "../../Redux/actions";
 import Salones from "./Salones";
 import Fcorp from '../../assets/Fcorp.jpg';
 import Dorado from "../ramaDorada/rama";
+import dinosaurio from "../../assets/dinosaurioError.png";
+
 
 export default function FiestasCorp() {
     const dispatch = useDispatch();
@@ -20,7 +22,12 @@ export default function FiestasCorp() {
     // Comprobar si el usuario tiene autorización
     const isAuthorized = location.state && location.state.fromButton;
         if (!isAuthorized) {
-            return <div>Error: No tienes permiso para acceder a esta página.</div>;
+            return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
+        Error: No tienes permiso para acceder a esta página.
+        <div>
+          <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
+        </div>
+      </div>
         }
 
     const eventos = useSelector((state) => state.filtered);

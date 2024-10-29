@@ -2,6 +2,7 @@ import React from "react";
 import { FaGithub, FaLinkedin } from 'react-icons/fa'; // Importa los íconos de FontAwesome
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import dinosaurio from "../../assets/dinosaurioError.png";
 
 
 export default function Team() {
@@ -17,7 +18,12 @@ export default function Team() {
     }, [location.state]);
 
     if (!isAuthorized) {
-        return <div>Error: No tienes permiso para acceder a esta página.</div>;
+        return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
+            Error: No tienes permiso para acceder a esta página.
+            <div>
+              <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
+            </div>
+          </div>
     }
 
     return (

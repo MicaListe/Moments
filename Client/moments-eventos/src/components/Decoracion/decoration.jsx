@@ -7,6 +7,7 @@ import DecoParty from "./deco";
 import video from "../../assets/video decoracion.mp4"
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import FilterDecoration from "../FiltroDecoration/FilterDeco";
+import dinosaurio from "../../assets/dinosaurioError.png"
 
 export default function Decoration(){
 
@@ -25,7 +26,12 @@ export default function Decoration(){
     // Comprobar si el usuario tiene autorización
     const isAuthorized = location.state && location.state.fromButton;
         if (!isAuthorized) {
-            return <div>Error: No tienes permiso para acceder a esta página. Necesitas estar logueado</div>;
+            return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
+            Error: No tienes permiso para acceder a esta página. Necesitas estar logueado.
+            <div>
+              <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
+            </div>
+          </div>
         }
 
     const paginado = () =>{

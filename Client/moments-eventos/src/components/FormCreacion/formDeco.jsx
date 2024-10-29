@@ -5,6 +5,7 @@ import { createDecoration } from "../../Redux/actions";
 import config from "../../config";
 import axios from "axios";
 import ValidationDeco from "./ValidationDeco";
+import dinosaurio from "../../assets/dinosaurioError.png"
 
 export default function FormDeco() {
   const [file, setFile] = useState(null);
@@ -25,7 +26,12 @@ export default function FormDeco() {
   // Comprobar si el usuario tiene autorización
   const isAuthorized = location.state && location.state.fromButton;
       if (!isAuthorized) {
-          return <div>Error: No tienes permiso para acceder a esta página.</div>;
+        return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
+        Error: No tienes permiso para acceder a esta página.
+        <div>
+          <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
+        </div>
+      </div>
       }
 
   const [decoracion, setDecoracion] = useState(initialForm);

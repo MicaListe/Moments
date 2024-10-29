@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import config from "../../config";
 import ValidationPlaces from "./ValidationPlaces";
+import dinosaurio from "../../assets/dinosaurioError.png"
 
 export default function FormularioLugares(){
 
@@ -30,7 +31,12 @@ export default function FormularioLugares(){
     // Comprobar si el usuario tiene autorización
     const isAuthorized = location.state && location.state.fromButton;
         if (!isAuthorized) {
-            return <div>Error: No tienes permiso para acceder a esta página.</div>;
+          return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
+          Error: No tienes permiso para acceder a esta página.
+          <div>
+            <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
+          </div>
+        </div>
         }
 
     const [places, setPlaces] = useState(initialForm)

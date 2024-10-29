@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import {useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCatering, getDecoration, getEvents } from '../../Redux/actions';
-import rama from "../../assets/ramaDorada.png"
-import emailjs from "emailjs-com"
+import rama from "../../assets/ramaDorada.png";
+import emailjs from "emailjs-com";
+import dinosaurio from "../../assets/dinosaurioError.png"
 
 export default function Formulario({ setIsLoggedIn }) {
   const navigate = useNavigate();
@@ -26,7 +27,12 @@ export default function Formulario({ setIsLoggedIn }) {
   // Comprobar si el usuario tiene autorización
   const isAuthorized = location.state && location.state.fromButton;
       if (!isAuthorized) {
-          return <div>Error: No tienes permiso para acceder a esta página.</div>;
+        return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
+        Error: No tienes permiso para acceder a esta página.
+        <div>
+          <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
+        </div>
+      </div>
       }
 
   const [selectedEvent, setSelectedEvent] = useState("");

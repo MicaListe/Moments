@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getUsers, deleteUser, getCatering, deleteCatering, updateCatering, getEvents, updateEvent, deletePlaces, getDecoration, updateDecoration, deleteDecoration, updateLugar } from '../../Redux/actions';
 import { Button, Form, Table, Modal } from 'react-bootstrap';
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
+import dinosaurio from "../../assets/dinosaurioError.png"
 
 export default function CrudComponent() {
   const dispatch = useDispatch();
@@ -39,7 +40,12 @@ export default function CrudComponent() {
   // Comprobar si el usuario tiene autorización
   const isAuthorized = location.state && location.state.fromButton;
       if (!isAuthorized) {
-          return <div>Error: No tienes permiso para acceder a esta página.</div>;
+        return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
+        Error: No tienes permiso para acceder a esta página.
+        <div>
+          <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
+        </div>
+      </div>
       }
 
   useEffect(() => {
