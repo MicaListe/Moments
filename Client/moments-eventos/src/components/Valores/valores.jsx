@@ -2,9 +2,18 @@ import React from 'react';
 import profesionalismo from "../../assets/profesionalismo.png";
 import compromiso from "../../assets/compromiso.png";
 import creatividad from "../../assets/creatividad.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 export default function Valores() {
+
+  const navigate = useNavigate()
+
+  const handleOpenCalendario = (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+    navigate("/calendario", { state: { fromButton: true } }); // Cambia aquí a 'fromButton'
+  };
+
   return (
     <div className="text-center mt-5">
       <h2 style={{fontSize:"40px",fontWeight: "400", fontStyle:"italic", fontFamily:"Dancing Script, cursive" }}>¿Por qué elegirnos?</h2>
@@ -41,7 +50,7 @@ export default function Valores() {
         </div>
       </div>
       <h2 className="mt-5" style={{fontSize:"40px",fontWeight: "400", fontStyle:"italic", fontFamily:"Dancing Script, cursive" }}>Contactate con nosotros</h2>
-      <Link to="/Calendario">
+      <Link to="" onClick={handleOpenCalendario}>
         <button className="mt-4 btn btn-primary">Ir a calendario</button>
       </Link>
     </div>

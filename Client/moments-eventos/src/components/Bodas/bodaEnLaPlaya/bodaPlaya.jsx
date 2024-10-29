@@ -1,27 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { filterCity, filterCountry, getEvents } from "../../../Redux/actions";
 import { useSelector, useDispatch } from "react-redux";
+import { getEvents } from "../../../Redux/actions";
 import Playas from "./playas";
 import casamiento from "../../../assets/casamiento.jpg";
 import Dorado from "../../ramaDorada/rama";
 import Back from "../../button back/back";
+import { useLocation } from "react-router-dom";
+import dinosaurio from "../../../assets/dinosaurioError.png"
 
 export default function BodaPlaya() {
-    const [selectCountry, setSelectedCountry] = useState([]);
-    const [selectCity, setSelectCity] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 6;
 
     const dispatch = useDispatch();
+    const location = useLocation();
+
+    // Comprobar si el usuario tiene autorización
+    const isAuthorized = location.state && location.state.fromButton;
 
     useEffect(() => {
         dispatch(getEvents());
     }, [dispatch]);
 
+    // Si no está autorizado, muestra un mensaje de error
+    if (!isAuthorized) {
+        return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
+        Error: No tienes permiso para acceder a esta página.
+        <div>
+          <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
+        </div>
+      </div>
+    }
+
     const eventos = useSelector((state) => state.filtered);
-    console.log(eventos)
     const bodas = eventos.filter((element) => element.name === "Bodas");
-    const bodasYPlayas = bodas.map(evento => evento.Lugars).flat().filter(lugar => lugar.type === 'Playa');
+    const bodasYPlayas = bodas
+        .map(evento => evento.Lugars)
+        .flat()
+        .filter(lugar => lugar.type === 'Playa');
 
     const getCurrentPageItems = () => {
         const startIndex = (currentPage - 1) * itemsPerPage;
@@ -41,7 +57,11 @@ export default function BodaPlaya() {
             </a>
             <div className="row">
                 <div className="col-md-6 mt-5">
-                    <img src={casamiento} style={{ boxShadow: "1px 1px 2px black", width: "300px", marginLeft: "200px", borderRadius: "10px" }} alt="Casamiento" />
+                    <img 
+                        src={casamiento} 
+                        style={{ boxShadow: "1px 1px 2px black", width: "300px", marginLeft: "200px", borderRadius: "10px" }} 
+                        alt="Casamiento" 
+                    />
                 </div>
                 <div className="col-md-4 position-absolute" style={{ marginTop: "165px", right: "450px", fontSize: "18px" }}>
                     <p>
@@ -71,13 +91,26 @@ export default function BodaPlaya() {
             </div>
 
             <div className="d-flex justify-content-center mb-4">
-                <button onClick={() => handlePageChange(currentPage - 1)} className={`btn ${currentPage === 1 ? 'btn-secondary disabled' : 'btn-primary'} mx-1`} disabled={currentPage === 1}>{"<"}</button>
+                <button 
+                    onClick={() => handlePageChange(currentPage - 1)} 
+                    className={`btn ${currentPage === 1 ? 'btn-secondary disabled' : 'btn-primary'} mx-1`} 
+                    disabled={currentPage === 1}>
+                    {"<"}
+                </button>
                 {[...Array(Math.ceil(bodasYPlayas.length / itemsPerPage)).keys()].map((page) => (
-                    <button key={page + 1} onClick={() => handlePageChange(page + 1)} className={`btn ${currentPage === page + 1 ? 'btn-primary' : 'btn-secondary'} mx-1`}>
+                    <button 
+                        key={page + 1} 
+                        onClick={() => handlePageChange(page + 1)} 
+                        className={`btn ${currentPage === page + 1 ? 'btn-primary' : 'btn-secondary'} mx-1`}>
                         {page + 1}
                     </button>
                 ))}
-                <button onClick={() => handlePageChange(currentPage + 1)} className={`btn ${currentPage === Math.ceil(bodasYPlayas.length / itemsPerPage) ? 'btn-secondary disabled' : 'btn-primary'} mx-1`} disabled={currentPage === Math.ceil(bodasYPlayas.length / itemsPerPage)}>{">"}</button>
+                <button 
+                    onClick={() => handlePageChange(currentPage + 1)} 
+                    className={`btn ${currentPage === Math.ceil(bodasYPlayas.length / itemsPerPage) ? 'btn-secondary disabled' : 'btn-primary'} mx-1`} 
+                    disabled={currentPage === Math.ceil(bodasYPlayas.length / itemsPerPage)}>
+                    {">"}
+                </button>
             </div>
         </div>
     );
