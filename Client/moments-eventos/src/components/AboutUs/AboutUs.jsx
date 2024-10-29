@@ -1,7 +1,24 @@
 import React from 'react';
+import { useEffect, useState} from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import sobreNosotros from '../../assets/sobreNosotros.jpg'
 
 function AboutUs () {
+
+  const location = useLocation();
+    const [isAuthorized, setIsAuthorized] = useState(false);
+
+
+    useEffect(() => {
+        if (location.state && location.state.fromButton) {
+            setIsAuthorized(true); // Acceso permitido solo si es desde el botón
+        }
+    }, [location.state]);
+
+    if (!isAuthorized) {
+        return <div>Error: No tienes permiso para acceder a esta página.</div>;
+    }
+
   return (
     <div className='container-fluid my-5'>
       <div className="container">

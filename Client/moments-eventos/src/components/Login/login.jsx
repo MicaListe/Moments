@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import logo from '../../assets/logo.png';
 import rama from '../../assets/ramaDorada.png'; 
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ConfirmationLogin from "./modalConfirmation";
 
 export default function Login() {
@@ -23,6 +23,21 @@ export default function Login() {
     useEffect(() => {
         dispatch(getUsers());
     }, []);
+
+
+    const location = useLocation();
+
+    // Comprobar si el usuario tiene autorización
+    const isAuthorized = location.state && location.state.fromButton;
+        if (!isAuthorized) {
+            return <div>Error: No tienes permiso para acceder a esta página.</div>;
+        }
+
+
+    const handleOpenRegister = (e) => {
+        e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+        navigate("/register", { state: { fromButton: true } }); // Cambia aquí a 'fromButton'
+    };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -95,8 +110,8 @@ export default function Login() {
 
                 <div className="form-group">
                     <p style={{ marginLeft: '15px' }}>¿Aún no estás registrado?</p>
-                    <Link to="/register">
-                        <button type="button" style={{ width: '60%', padding: '8px', marginBottom: '20px' }} className="btn create-account">
+                    <Link to="">
+                        <button type="button" onClick={handleOpenRegister} style={{ width: '60%', padding: '8px', marginBottom: '20px' }} className="btn create-account">
                             Registrarme
                         </button>
                     </Link>

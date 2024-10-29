@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
 import { createDecoration } from "../../Redux/actions";
 import config from "../../config";
 import axios from "axios";
@@ -11,12 +12,21 @@ export default function FormDeco() {
   const [imageUrl, setImageUrl] = useState(null);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const initialForm = {
     type: '',
     description: '',
     image: []
   };
+
+  const location = useLocation();
+
+  // Comprobar si el usuario tiene autorización
+  const isAuthorized = location.state && location.state.fromButton;
+      if (!isAuthorized) {
+          return <div>Error: No tienes permiso para acceder a esta página.</div>;
+      }
 
   const [decoracion, setDecoracion] = useState(initialForm);
   const [errors, setErrors]= useState({})

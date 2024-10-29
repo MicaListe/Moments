@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
+
 import axios from "axios";
 import { createCatering } from "../../Redux/actions";
 import config from "../../config";
@@ -11,6 +13,7 @@ export default function FormCat() {
   const [imageUrl, setImageUrl] = useState(null);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const initialForm = {
     name: '',
@@ -18,6 +21,14 @@ export default function FormCat() {
     type: "",
     image: []
   };
+
+  const location = useLocation();
+
+  // Comprobar si el usuario tiene autorización
+  const isAuthorized = location.state && location.state.fromButton;
+      if (!isAuthorized) {
+          return <div>Error: No tienes permiso para acceder a esta página.</div>;
+      }
 
   const [producto, setProducto] = useState(initialForm);
   const [errors, setErrors]= useState({})

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import  { useLocation} from "react-router-dom"
 import { getEvents } from "../../Redux/actions";
 import Salones from "./Salones";
 import Fcorp from '../../assets/Fcorp.jpg';
@@ -12,6 +13,15 @@ export default function FiestasCorp() {
     useEffect(() => {
         dispatch(getEvents());
     }, [dispatch]);
+
+
+    const location = useLocation();
+
+    // Comprobar si el usuario tiene autorización
+    const isAuthorized = location.state && location.state.fromButton;
+        if (!isAuthorized) {
+            return <div>Error: No tienes permiso para acceder a esta página.</div>;
+        }
 
     const eventos = useSelector((state) => state.filtered);
     const corporativa = eventos.filter((e) => e.name === "Fiestas Corporativas");

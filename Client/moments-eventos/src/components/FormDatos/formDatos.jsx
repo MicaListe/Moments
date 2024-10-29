@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {useNavigate } from 'react-router-dom';
+import {useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCatering, getDecoration, getEvents } from '../../Redux/actions';
 import rama from "../../assets/ramaDorada.png"
@@ -20,6 +20,14 @@ export default function Formulario({ setIsLoggedIn }) {
     dispatch(getCatering());
     dispatch(getDecoration());
   }, [dispatch]);
+
+  const location = useLocation();
+
+  // Comprobar si el usuario tiene autorización
+  const isAuthorized = location.state && location.state.fromButton;
+      if (!isAuthorized) {
+          return <div>Error: No tienes permiso para acceder a esta página.</div>;
+      }
 
   const [selectedEvent, setSelectedEvent] = useState("");
   const [selectedType, setSelectedType] = useState("");

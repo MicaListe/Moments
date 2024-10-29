@@ -1,5 +1,6 @@
 import {React, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux"
+import { useLocation } from "react-router-dom";
 import {getDecoration} from "../../Redux/actions"
 import Dorado from "../ramaDorada/rama";
 import DecoParty from "./deco";
@@ -17,6 +18,15 @@ export default function Decoration(){
     useEffect(()=>{
         dispatch(getDecoration())
     },[])
+
+
+    const location = useLocation();
+
+    // Comprobar si el usuario tiene autorización
+    const isAuthorized = location.state && location.state.fromButton;
+        if (!isAuthorized) {
+            return <div>Error: No tienes permiso para acceder a esta página. Necesitas estar logueado</div>;
+        }
 
     const paginado = () =>{
         const startIndex = (currentPage - 1) * 6

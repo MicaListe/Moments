@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import Dorado from "../ramaDorada/rama";
 import { getEvents } from "../../Redux/actions";
 import Xv from "./xv";
@@ -12,6 +13,14 @@ export default function FiestaDeXv() {
     useEffect(() => {
         dispatch(getEvents());
     }, [dispatch]);
+
+    const location = useLocation();
+
+    // Comprobar si el usuario tiene autorización
+    const isAuthorized = location.state && location.state.fromButton;
+        if (!isAuthorized) {
+            return <div>Error: No tienes permiso para acceder a esta página.</div>;
+        }
 
     const eventos = useSelector((state) => state.filtered);
     const fiestasDeXv = eventos.filter((element) => element.name === "Fiestas de XV");

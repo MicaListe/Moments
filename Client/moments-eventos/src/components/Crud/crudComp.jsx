@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { getUsers, deleteUser, getCatering, deleteCatering, updateCatering, getEvents, updateEvent, deletePlaces, getDecoration, updateDecoration, deleteDecoration, updateLugar } from '../../Redux/actions';
 import { Button, Form, Table, Modal } from 'react-bootstrap';
 import {Link} from "react-router-dom"
 
 export default function CrudComponent() {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const users = useSelector((state) => state.users);
   const catering = useSelector((state) => state.catering);
   const events = useSelector((state) => state.events);
   const lugares = events.flatMap(event=>event.Lugars)
 
-  console.log("l", events)
   const decoration = useSelector((state) => state.decoration);
   
   const [currentUser, setCurrentUser] = useState(null);
@@ -32,6 +33,15 @@ export default function CrudComponent() {
     dispatch(getDecoration());
   }, [dispatch]);
 
+
+  const location = useLocation();
+
+  // Comprobar si el usuario tiene autorización
+  const isAuthorized = location.state && location.state.fromButton;
+      if (!isAuthorized) {
+          return <div>Error: No tienes permiso para acceder a esta página.</div>;
+      }
+
   useEffect(() => {
     if (modalType === 'catering' && currentCatering) {
       setEditedName(currentCatering.description || '');
@@ -43,6 +53,23 @@ export default function CrudComponent() {
       setEditedName(currentDecoration.description || '');
     }
   }, [currentUser, currentCatering, currentEvent, currentDecoration, currentLugar, modalType]);
+
+
+  const handleOpenFormCat = (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+    navigate("/createCatering", { state: { fromButton: true } }); // Cambia aquí a 'fromButton'
+  };
+
+  const handleOpenFormDeco = (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+    navigate("/createDecoration", { state: { fromButton: true } }); // Cambia aquí a 'fromButton'
+  };
+
+  const handleOpenFormLugares = (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+    navigate("/createPlaces", { state: { fromButton: true } }); // Cambia aquí a 'fromButton'
+  };
+
 
   const handleDeleteUser = (id) => {
     if (window.confirm("¿Estas seguro de eliminar este usuario?")) {
@@ -179,7 +206,7 @@ export default function CrudComponent() {
             <th>Descripción</th>
             <th className="text-center">Acciones</th>
             <td colSpan="5" className="text-center">
-              <Link to="/createCatering">
+              <Link to="" onClick={handleOpenFormCat}>
                 <Button variant="success" size="sm">
                   Añadir
                 </Button>
@@ -232,7 +259,7 @@ export default function CrudComponent() {
             <th>Descripción</th>
             <th className="text-center">Acciones</th>
             <td colSpan="5" className="text-center">
-              <Link to="/createPlaces">
+              <Link to="" onClick={handleOpenFormLugares}>
                 <Button variant="success" size="sm">
                   Añadir
                 </Button>
@@ -287,7 +314,7 @@ export default function CrudComponent() {
             <th>Descripción</th>
             <th className="text-center">Acciones</th>
             <td colSpan="5" className="text-center">
-              <Link to="/createDecoration">
+              <Link to="/" onClick={handleOpenFormDeco}>
                 <Button variant="success" size="sm">
                   Añadir
                 </Button>

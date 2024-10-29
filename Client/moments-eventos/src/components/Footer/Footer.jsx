@@ -1,7 +1,30 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 function Footer() {
+
+
+const navigate = useNavigate();
+
+const handleOpenAbout = (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+    navigate("/AboutUs", { state: { fromButton: true } }); // Cambia aquí a 'fromButton'
+};
+
+const handleOpenSucur = (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+    navigate("/Sucursales", { state: { fromButton: true } }); // Cambia aquí a 'fromButton'
+};
+
+
+const handleOpenTeam = (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+    navigate("/Team", { state: { fromButton: true } }); // Cambia aquí a 'fromButton'
+};
+
+
+
     return (
         <div className="footer-basic">
             <footer className="footer-basic" style={{ position: 'relative', bottom: 0, left: 0, width: '100%', backgroundColor: 'black', color: '#4b4c4d', padding: '10px 0', textAlign: 'center', top:"80px" }}>
@@ -20,10 +43,10 @@ function Footer() {
                 <ul className="list-inline" style={{ padding: '0', listStyle: 'none', fontSize: '14px', lineHeight: '1.6', marginBottom: '5px' }}>
 
                     <li className="list-inline-item" style={{ margin: '0 10px' }}>
-                        <a href='/AboutUs' className="text-white" style={{ color: 'inherit', textDecoration: 'none' }}>Sobre Nosotros</a>
+                        <a onClick={handleOpenAbout} className="text-white" style={{ color: 'inherit', textDecoration: 'none' }}>Sobre Nosotros</a>
                     </li>
-                    <li className="list-inline-item" style={{ margin: '0 10px' }}><a href="/Team" className="text-white" style={{ color: 'inherit', textDecoration: 'none' }}>Equipo</a></li>
-                    <li className="list-inline-item" style={{ margin: '0 10px' }}><a href='/Sucursales' className="text-white" style={{ color: 'inherit', textDecoration: 'none' }}>Nuestras Sucursales</a></li>
+                    <li className="list-inline-item" style={{ margin: '0 10px' }}><a onClick={handleOpenTeam} className="text-white" style={{ color: 'inherit', textDecoration: 'none' }}>Equipo</a></li>
+                    <li className="list-inline-item" style={{ margin: '0 10px' }}><a onClick={handleOpenSucur} className="text-white" style={{ color: 'inherit', textDecoration: 'none' }}>Nuestras Sucursales</a></li>
                 </ul>
                 <p className="text-center text-white" style={{ fontSize: '12px', color: '#fff', marginBottom: '0' }}>Moments Events © 2019</p>
             </footer>

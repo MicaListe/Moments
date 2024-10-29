@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userRegister } from '../../Redux/actions';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation} from 'react-router-dom';
 import './register.css';
 import logo from '../../assets/logo.png';
 import rama from '../../assets/ramaDorada.png';
@@ -25,6 +25,15 @@ export default function Register() {
     const [users, setUsers] = useState(initialForm);
     const [AdminKey, setAdminKey] = useState(false);
     const [errors, setErrors]=useState({})
+
+
+    const location = useLocation();
+
+    // Comprobar si el usuario tiene autorización
+    const isAuthorized = location.state && location.state.fromButton;
+        if (!isAuthorized) {
+            return <div>Error: No tienes permiso para acceder a esta página.</div>;
+        }
     
 
     const handleChangeName = (e) => {

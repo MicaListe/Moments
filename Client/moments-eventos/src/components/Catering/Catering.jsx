@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { getCatering } from "../../Redux/actions";
 import caterin from '../../assets/caterintres.jpg';
 import video from "../../assets/video catering.mp4"
@@ -16,6 +17,15 @@ export default function Catering() {
     useEffect(() => {
         dispatch(getCatering());
     }, [dispatch]);
+
+
+    const location = useLocation();
+
+    // Comprobar si el usuario tiene autorización
+    const isAuthorized = location.state && location.state.fromButton;
+        if (!isAuthorized) {
+            return <div>Error: No tienes permiso para acceder a esta página. Necesitas estar logueado</div>;
+        }
 
     const catering = useSelector((state) => state.catering);
 

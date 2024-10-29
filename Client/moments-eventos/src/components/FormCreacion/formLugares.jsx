@@ -1,6 +1,7 @@
 import { createPlaces } from "../../Redux/actions"
 import { useDispatch } from "react-redux"
 import {useState } from "react"
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import config from "../../config";
 import ValidationPlaces from "./ValidationPlaces";
@@ -12,6 +13,7 @@ export default function FormularioLugares(){
     const [imageUrl, setImageUrl] = useState(null);
     const [showDeleteButton, setShowDeleteButton] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
   
     const initialForm={
       name: "",
@@ -22,6 +24,15 @@ export default function FormularioLugares(){
       image: [],
       event: ""
     }
+
+    const location = useLocation();
+
+    // Comprobar si el usuario tiene autorización
+    const isAuthorized = location.state && location.state.fromButton;
+        if (!isAuthorized) {
+            return <div>Error: No tienes permiso para acceder a esta página.</div>;
+        }
+
     const [places, setPlaces] = useState(initialForm)
     const [errors, setErrors] = useState({})
 

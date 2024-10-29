@@ -1,7 +1,25 @@
 import React from "react";
 import Ubicacion from '../../assets/ubicacion.png';
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function Sucursales() {
+
+    const location = useLocation();
+    const [isAuthorized, setIsAuthorized] = useState(false);
+
+
+    useEffect(() => {
+        if (location.state && location.state.fromButton) {
+            setIsAuthorized(true); // Acceso permitido solo si es desde el botón
+        }
+    }, [location.state]);
+
+    if (!isAuthorized) {
+        return <div>Error: No tienes permiso para acceder a esta página.</div>;
+    }
+
+
     const locales = [
         { name: "Argentina - Buenos Aires - Palermo", direccion: "Godoy Cruz 2793" },
         { name: "Argentina - Córdoba - Ciudad de Córdoba", direccion: "Av. Vélez Sarsfield 299" },

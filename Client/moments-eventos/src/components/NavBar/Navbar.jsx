@@ -63,6 +63,45 @@ function Navbar() {
     };
   }, []);
 
+
+  const handleOpenCorp = (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+    navigate("/FiestasCorp", { state: { fromButton: true } }); // Cambia aquí a 'fromButton'
+  };
+
+  const handleOpenXv = (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+    navigate("/fiestasXv", { state: { fromButton: true } }); // Cambia aquí a 'fromButton'
+  };
+
+  const handleOpenEgres = (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+    navigate("/FiestasEgre", { state: { fromButton: true } }); // Cambia aquí a 'fromButton'
+  };
+
+
+  const handleOpenLogin = (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+    navigate("/login", { state: { fromButton: true } }); // Cambia aquí a 'fromButton'
+  };
+
+  const handleOpenCatering = (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+    navigate("/catering", { state: { fromButton: true } }); // Cambia aquí a 'fromButton'
+  };
+
+  const handleOpenDecoration = (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+    navigate("/decoracion", { state: { fromButton: true } }); // Cambia aquí a 'fromButton'
+  };
+
+  const handleOpenCrud = (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+    navigate("/crud", { state: { fromButton: true } }); // Cambia aquí a 'fromButton'
+  };
+
+
+
   const handleLogOut = () => {
     setLogueado(false);
     localStorage.removeItem("user");
@@ -89,17 +128,17 @@ function Navbar() {
             </a>
             <div className={`dropdown-menu ${open ? "show" : ""}`} aria-labelledby="navbarDropdown" style={{ backgroundColor: "black" }}>
               <a className="dropdown-item" href="/bodas" style={{ color: "white" }}>Bodas</a>
-              <a className="dropdown-item" href="/fiestasXv" style={{ color: "white" }}>Fiestas de XV</a>
-              <a className="dropdown-item" href="/FiestasCorp" style={{ color: "white" }}>Fiestas Corporativas</a>
-              <a className="dropdown-item" href="/FiestasEgre" style={{ color: "white" }}>Fiestas de Egresados</a>
+              <a className="dropdown-item" onClick={handleOpenXv} style={{ color: "white" }}>Fiestas de XV</a>
+              <a className="dropdown-item" onClick={handleOpenCorp} style={{ color: "white" }}>Fiestas Corporativas</a>
+              <a className="dropdown-item" onClick={handleOpenEgres} style={{ color: "white" }}>Fiestas de Egresados</a>
               <a className="dropdown-item" href="/bautismos" style={{ color: "white" }}>Bautismos</a>
             </div>
           </li>
           <li className="nav-item">
-            <a className="nav-link nav-button" href="/catering" style={{ color: "white" }}>Catering</a>
+            <a className="nav-link nav-button" onClick={handleOpenCatering} style={{ color: "white" }}>Catering</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link nav-button" href="/decoracion" style={{ color: "white" }}>Decoración</a>
+            <a className="nav-link nav-button" onClick={handleOpenDecoration} style={{ color: "white" }}>Decoración</a>
           </li>
         </ul>
       </div>
@@ -116,7 +155,7 @@ function Navbar() {
           {logueado ? (
             <>
               {loggedUser && loggedUser.roleId === 1 && (
-                <Link to="/crud" className="dropdown-item" style={{ color: "white" }}>
+                <Link to="" onClick={handleOpenCrud} className="dropdown-item" style={{ color: "white" }}>
                   Admin
                 </Link>
               )}
@@ -126,7 +165,7 @@ function Navbar() {
             </>
           ) : (
             <>
-              <Link to="/login" className="dropdown-item" style={{ color: "white" }}>
+              <Link to="" onClick={handleOpenLogin} className="dropdown-item" style={{ color: "white" }}>
                 Log-in
               </Link>
             </>
