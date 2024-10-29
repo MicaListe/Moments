@@ -5,6 +5,8 @@ import { getEvents } from "../../../Redux/actions";
 import Dorado from "../../ramaDorada/rama";
 import pareja from "../../../assets/pareja en salon.jpg";
 import Back from "../../button back/back";
+import { useLocation } from "react-router-dom";
+import dinosaurio from "../../../assets/dinosaurioError.png"
 
 export default function BodaEnSalon() {
     const dispatch = useDispatch();
@@ -15,6 +17,18 @@ export default function BodaEnSalon() {
     useEffect(() => {
         dispatch(getEvents());
     }, [dispatch]);
+
+    const location = useLocation();
+
+    const isAuthorized = location.state && location.state.fromButton;
+    if (!isAuthorized) {
+        return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
+        Error: No tienes permiso para acceder a esta página.
+        <div>
+          <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
+        </div>
+      </div>
+    }
 
     const bodas = allSalones.filter((e) => e.name === "Bodas");
     const bodasSalon = bodas.map(e => e.Lugars).flat().filter(salon => salon.type === "Salon");

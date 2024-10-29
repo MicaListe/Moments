@@ -5,6 +5,8 @@ import Salon from './Salon';
 import bautismoQtres from "../../../assets/bautismoQtres.jpg";
 import Dorado from "../../ramaDorada/rama";
 import Back from "../../button back/back";
+import { useLocation } from "react-router-dom";
+import dinosaurio from "../../../assets/dinosaurioError.png"
 
 export default function BautismoSalon() {
     const dispatch = useDispatch();
@@ -13,6 +15,18 @@ export default function BautismoSalon() {
     useEffect(() => {
         dispatch(getEvents());
     }, [dispatch]);
+
+    const location = useLocation();
+
+    const isAuthorized = location.state && location.state.fromButton;
+    if (!isAuthorized) {
+        return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
+        Error: No tienes permiso para acceder a esta página.
+        <div>
+          <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
+        </div>
+      </div>
+    }
 
     const eventos = useSelector((state) => state.filtered);
     const bsalon = eventos.filter((e) => e.name === "Bautismos");
