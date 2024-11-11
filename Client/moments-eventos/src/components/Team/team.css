@@ -1,0 +1,88 @@
+/* Estilos generales para el equipo */
+.card {
+  max-width: 250px; /* Establecer un ancho máximo para las cards */
+  margin: 0 auto; /* Centrar las cards */
+  padding: 10px; /* Ajustar el espaciado interno de la card */
+}
+
+.card img {
+  max-width: 100%; /* Hacer que la imagen se ajuste al contenedor */
+  height: auto;
+}
+
+
+.bg-light {
+    background-color: #f8f9fa;
+}
+  
+h2.display-5 {
+    font-size: 2.4rem;
+}
+
+.lead {
+    font-size: 1rem
+}
+  
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+}
+  
+  /* Para pantallas pequeñas */
+@media (max-width: 767px) {
+    .team-card {
+        text-align: center;
+    }
+  
+    .team-card img {
+      max-width: 100%;
+      height: auto;
+    }
+  
+    .team-section {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+  
+    .lead {
+      font-size: 0.5rem;
+    }
+    
+    /* Estilo para la alerta de error */
+    .alert {
+      margin-top: 30px;
+    }
+}
+  
+  /* Para pantallas medianas (tabletas) */
+@media (max-width: 991px) {
+    .team-section {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+  
+    .card-body p {
+      font-size: 1rem;
+    }
+  
+    .team-social-links a {
+      margin: 0 10px;
+    }
+}
+  
+  /* Para pantallas grandes */
+@media (min-width: 992px) {
+    .team-section {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+  
+    .team-description {
+      font-size: 1.25rem;
+    }
+  
+    .team-social-links a {
+      margin: 0 15px;
+    }
+}
+  

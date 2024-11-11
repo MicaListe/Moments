@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa'; // Importa los íconos de
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import dinosaurio from "../../assets/dinosaurioError.png";
-
+// import "../Team/team.css"
 
 export default function Team() {
 
@@ -32,7 +32,7 @@ export default function Team() {
                 <div className="row justify-content-md-center">
                     <div className="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
                         <h2 className="mb-4 display-5 text-center">Nuestro Equipo</h2>
-                        <p className="text-secondary mb-5 text-center lead fs-4">
+                        <p className="text-secondary mb-5 text-center description lead fs-4">
                         Somos dos desarrolladores juniors apasionados, llenos de energía y entusiasmo por aprender
                          y crecer en el mundo de la tecnología. Nuestra pasión y determinación nos permitirán aportar
                           nuevas perspectivas y soluciones innovadoras

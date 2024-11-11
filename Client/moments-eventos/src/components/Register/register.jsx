@@ -118,7 +118,7 @@ export default function Register() {
                 localStorage.setItem('registeredUsers', JSON.stringify(updatedUsers));
                 localStorage.setItem('user', JSON.stringify(users));
 
-                navigate('/login');
+                navigate('/login' , { state: { fromButton: true } });
             }
         }
     };

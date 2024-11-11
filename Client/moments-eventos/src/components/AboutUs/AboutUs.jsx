@@ -3,7 +3,7 @@ import { useEffect, useState} from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import sobreNosotros from '../../assets/sobreNosotros.jpg';
 import dinosaurio from "../../assets/dinosaurioError.png";
-
+// import "../AboutUs/aboutUs.css"
 function AboutUs () {
 
   const location = useLocation();
@@ -40,7 +40,7 @@ function AboutUs () {
             </div>
           </div>
           <div className="col-xs-12 col-md-8 px-4 mb-4">
-            <h2 className="mb-4 " style={{marginLeft:"370px", fontSize:"40px" ,marginTop:"80px"}} >Sobre Nosotros</h2>
+            <h2 className="mb-4 title " style={{marginLeft:"370px", fontSize:"40px" ,marginTop:"80px"}} >Sobre Nosotros</h2>
             <p style={{marginLeft:"200px"}} >
               Somos una empresa fundamental en la organización 
               de eventos a nivel nacional e internacional, con más de 5 años de experiencia. 

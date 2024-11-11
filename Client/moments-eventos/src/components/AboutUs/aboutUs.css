@@ -1,0 +1,29 @@
+/* AboutUs.css */
+
+.about-us-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    margin-top: 30px;
+  }
+h2, p{
+    text-align: center;
+}
+
+  /* Ajustes en pantallas pequeñas */
+  @media (max-width: 768px) {
+    .about-us-image-container {
+      margin-top: 20px; /* Menos espacio arriba en pantallas pequeñas */
+    }
+  
+    h2 {
+      font-size: 1.8rem; /* Reducir tamaño de la fuente en pantallas pequeñas */
+      
+    }
+  
+    p {
+      font-size: 0.9rem; /* Reducir tamaño de la fuente del párrafo en pantallas pequeñas */
+    }
+  }
+  
