@@ -2,14 +2,20 @@ import React, { useEffect } from 'react';
 import { InlineWidget } from 'react-calendly';
 import { useLocation } from 'react-router-dom';
 import dinosaurio from "../../assets/dinosaurioError.png"
+import { useNavigate } from 'react-router-dom';
 
 const Calendario = () => {
 
+  const navigate = useNavigate()
+  
   useEffect(() => {
     const handleEventScheduled = (e) => {
       if (e.data.event && e.data.event === 'calendly.event_scheduled') {
+        console.log("Evento programado, redirigiendo a '/formulario' con estado:", { fromButton: true });
+        navigate('/formulario', { state: { fromButton: true } });
+        
         // Redirige a la URL externa
-        window.location.href = 'https://moments-3oti.vercel.app/formulario';
+        // window.location.href = 'https://moments-3oti.vercel.app/formulario'; 
       }
     };
 
