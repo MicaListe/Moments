@@ -26,16 +26,15 @@ export default function Formulario({ setIsLoggedIn }) {
 
   const location = useLocation();
 
-    const isAuthorized = location.state && location.state.fromButton;
-    console.log(isAuthorized,"a")
-    if (!isAuthorized) {
-      return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
-        Error: No tienes permiso para acceder a esta página.
-        <div>
-          <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
-        </div>
+  const isAuthorized = location.state && location.state.fromButton;  
+  if (!isAuthorized) {
+    return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
+      Error: No tienes permiso para acceder a esta página.
+      <div>
+        <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
       </div>
-    }
+    </div>
+  }
 
   const [selectedEvent, setSelectedEvent] = useState("");
   const [selectedType, setSelectedType] = useState("");

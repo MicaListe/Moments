@@ -11,14 +11,13 @@ const Calendario = () => {
   useEffect(() => {
     const handleEventScheduled = (e) => {
       if (e.data.event && e.data.event === 'calendly.event_scheduled') {
-        console.log("Evento programado, redirigiendo a '/formulario' con estado:", { fromButton: true });
-        navigate('/formulario', { state: { fromButton: true } });
-        
-        // Redirige a la URL externa
-        // window.location.href = 'https://moments-3oti.vercel.app/formulario'; 
+        if (e.data.event && e.data.event === 'calendly.event_scheduled') {
+          console.log("Evento programado, redirigiendo a '/formulario' con estado:", { fromButton: true });
+          // Redirige al enlace externo
+          window.location.href = 'https://moments-3oti.vercel.app/formulario'; 
+        }
       }
     };
-
     // Escucha los eventos de Calendly
     window.addEventListener('message', handleEventScheduled);
 
@@ -30,15 +29,15 @@ const Calendario = () => {
 
   const location = useLocation();
 
-    const isAuthorized = location.state && location.state.fromButton;
-    if (!isAuthorized) {
-      return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
-        Error: No tienes permiso para acceder a esta página.
-        <div>
-          <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
-        </div>
+  const isAuthorized = location.state && location.state.fromButton;
+  if (!isAuthorized) {
+    return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
+      Error: No tienes permiso para acceder a esta página.
+      <div>
+        <img src={dinosaurio} alt="Dinosaurio" style={{ marginTop: '10px', maxWidth: '100%', height: 'auto' }} />
       </div>
-    }
+    </div>
+  }
 
   return (
     <div className="container mt-5">
