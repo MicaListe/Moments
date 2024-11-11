@@ -14,7 +14,8 @@ const Calendario = () => {
         if (e.data.event && e.data.event === 'calendly.event_scheduled') {
           console.log("Evento programado, redirigiendo a '/formulario' con estado:", { fromButton: true });
           // Redirige al enlace externo
-          window.location.href = 'https://moments-3oti.vercel.app/formulario'; 
+          // window.location.href = 'https://moments-3oti.vercel.app/formulario'; 
+          navigate("/formulario", { state: { fromButton: true } })
         }
       }
     };

@@ -26,7 +26,8 @@ export default function Formulario({ setIsLoggedIn }) {
 
   const location = useLocation();
 
-  const isAuthorized = location.state && location.state.fromButton;  
+  const isAuthorized = location.state && location.state.fromButton; 
+  console.log("a", isAuthorized) 
   if (!isAuthorized) {
     return <div className="alert alert-danger text-center" role="alert" style={{ marginTop: '20px', fontSize:"20px" }}>
       Error: No tienes permiso para acceder a esta página.
